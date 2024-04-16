@@ -8,11 +8,11 @@
 <body>
     <div class="create-user-container">
         <h2>Create NEW USER</h2>
-        <form action="" method="POST">
+        <form action=" {{ route('user.create') }}" method="POST">
             @csrf <!-- Laravel CSRF protection token -->
             <div class="form-group">
-                <label for="name">Username:</label>
-                <input type="text" id="name" name="name" required>
+                <label for="username">Username:</label>
+                <input type="text" id="username" name="username" required>
             </div>
             <br>
             <div class="form-group">
@@ -20,8 +20,18 @@
                 <input type="password" id="password" name="password" required>
             </div>
             <br>
+            <div class="form-group">
+                 <input type="hidden" name="is_admin" value="0"> <!-- Hidden input with value 0 -->
+                <label for="is_admin">Is Admin:</label>
+                <input type="checkbox" id="is_admin" name="is_admin" value="1"><br><br>
+
+            </div>
+            <br>
             <button type="submit">ADD</button>
         </form>
+        <br>
+        <br>
+        <a href="{{ route('admin.home') }}">Back to panel</a>
     </div>
 
 

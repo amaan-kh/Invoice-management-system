@@ -8,7 +8,7 @@
 <body>
     <div class="create-user-container">
         <h2>Create NEW INVOICE</h2>
-        <form action="" method="POST">
+        <form action="{{ route('user.create') }}" method="POST">
             @csrf <!-- Laravel CSRF protection token -->
             <div class="form-group">
                 <label for="title">Title:</label>
