@@ -8,7 +8,7 @@
 <body>
     <div class="create-user-container">
         <h2>Create NEW INVOICE</h2>
-        <form action="{{ route('user.create') }}" method="POST">
+        <form action="{{ route('invoice.create') }}" method="POST">
             @csrf <!-- Laravel CSRF protection token -->
             <div class="form-group">
                 <label for="title">Title:</label>
@@ -22,8 +22,9 @@
             <br>
             <button type="submit">ADD</button>
         </form>
+        <br>
+        <br>
+        <a href="{{ route('admin.home') }}">Back to panel</a>
     </div>
-
-
 </body>
 </html>

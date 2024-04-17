@@ -9,7 +9,9 @@ class UserController extends Controller
 {
     public function index()
     {
-        return view('auth.admin.readuser');
+        [$non_admin_users, $admin_users] = User::getUsers();
+
+        return view('auth.admin.readuser', compact('non_admin_users', 'admin_users'));
     }
 
     public function create()

@@ -54,4 +54,11 @@ class User extends Authenticatable
         $newUser->is_admin = $isa;
         $newUser->save();
     }
+
+    public static function getUsers() {
+        $non_admin_users = User::where('is_admin', 0)->get();
+        $admin_users = User::where('is_admin', 1)->get();
+         // dd($non_admin_users);
+        return [$non_admin_users, $admin_users];
+    }
 }
