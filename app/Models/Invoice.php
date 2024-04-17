@@ -22,4 +22,9 @@ class Invoice extends Model
         $invoices = Invoice::all();
         return $invoices;
     }
+
+    public function users()
+    {
+        return $this->belongsToMany(User::class);
+    }
 }

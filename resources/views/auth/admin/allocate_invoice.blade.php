@@ -7,7 +7,7 @@
 </head>
 <body>
     <h1>Invoice Form</h1>
-    <form action="/submit" method="POST">
+    <form action="{{ route('allocate') }}" method="POST">
         @csrf <!-- Laravel CSRF protection token -->
         <label for="name">Username:</label><br>
         <input type="text" id="name" name="name" required><br><br>

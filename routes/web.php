@@ -19,7 +19,8 @@ Route::get('/viewInvoices', [InvoiceController::class, 'index'])->name('invoice.
 
 
 
-Route::get('/taskAllocation', [AdminController::class, 'allocate'])->name('allocatIndex');
+Route::get('/taskAllocation', [AdminController::class, 'allocateView'])->name('allocatIndex');
+Route::post('/taskAllocation', [AdminController::class, 'allocate'])->name('allocate');
 
 
 
