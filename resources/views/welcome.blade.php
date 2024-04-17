@@ -25,7 +25,13 @@
             @csrf <!-- Laravel CSRF protection token -->
             <div class="form-group">
                 <label for="name">UserName:</label>
-                <input type="text" id="name" name="name" required>
+                <!-- <input type="text" id="name" name="name" required> -->
+                <input type="text" name="name" value="{{ old('name') }}" required>
+                @error('name')
+                <span class="invalid-feedback" role="alert">
+                    <strong>{{ $message }}</strong>
+                </span>
+                @enderror
             </div>
             <br>
             <div class="form-group">

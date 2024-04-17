@@ -6,6 +6,8 @@ use App\Http\Controllers\InvoiceController;
 use App\Http\Controllers\AdminController;
 
 Route::get('/', [AdminController::class, 'index'])->name('index');
+Route::post('/', [AdminController::class, 'login'])->name('login');
+ 
 Route::get('/adminHome', [AdminController::class, 'getDash'])->name('admin.home');
 Route::get('/userHome', [AdminController::class, 'getUserDash'])->name('user.home');
 
