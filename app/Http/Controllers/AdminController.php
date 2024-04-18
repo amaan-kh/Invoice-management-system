@@ -29,7 +29,11 @@ class AdminController extends Controller
             if($user->is_admin == 1) {
                 return redirect()->intended(route('admin.home'));
             }
-            return redirect()->intended(route('user.home'));
+            // $invoices = User::where('name', $user->name)->firstOrFail()->invoices();
+            $invoices = $user->invoices()->get();
+            // For debugging purposes
+            // dd($invoices);
+            return view('auth.normal_user.user_home', compact('invoices'));
         }
  
         return back()->withErrors([

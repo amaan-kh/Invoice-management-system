@@ -8,7 +8,16 @@
 <body>
 
 	<h1>User invoice account </h1>
-	<p> your invoices </p>
+
+	@if($invoices->isNotEmpty())
+    <ul>
+        @foreach($invoices as $invoice)
+            <li>{{ $invoice->title }} - {{ $invoice->description }}</li>
+        @endforeach
+    </ul>
+@else
+    <p>No invoices found.</p>
+@endif
 
 	<a href="{{ route('index') }}">LOGOUT</a>
 

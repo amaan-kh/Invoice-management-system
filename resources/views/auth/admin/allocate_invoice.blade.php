@@ -17,5 +17,8 @@
 
         <button type="submit">Submit</button>
     </form>
+    <br>
+    <br>
+    <a href="{{ route('admin.home') }}">Back to panel</a>
 </body>
 </html>

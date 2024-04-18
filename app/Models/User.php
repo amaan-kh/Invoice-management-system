@@ -62,8 +62,8 @@ class User extends Authenticatable
         return [$non_admin_users, $admin_users];
     }
 
-    public function Invoice()
+    public function invoices()
     {
-        return $this->belongsToMany(Invoice::class);
+        return $this->belongsToMany(Invoice::class, 'user__invoices', 'user_id', 'invoice_id');
     }
 }
