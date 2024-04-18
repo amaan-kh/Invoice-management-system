@@ -7,6 +7,8 @@ use Illuminate\Support\Facades\Auth;
 use App\Models\User;
 use App\Models\Invoice; 
 use App\Models\User_Invoice;
+use Illuminate\Support\Facades\Gate;    
+
 
 class AdminController extends Controller
 {
@@ -43,11 +45,24 @@ class AdminController extends Controller
         // \Log::info(json_encode($request->all()));
     }
 
+    public function logout(Request $request) {
+        Auth::logout();
+        $request->session()->invalidate();
+        $request->session()->regenerateToken();
+        return redirect('/');
+    }
+
     public function allocateView() {
+        if (!Gate::allows('isAdmin')) {
+            abort(403, 'Unauthorized');
+        }
         return view('auth.admin.allocate_invoice');
     }
 
     public function getDash(){
+         if (!Gate::allows('isAdmin')) {
+            abort(403, 'Unauthorized');
+        }
         return view('auth.admin.admin_panel');
     }
 
@@ -56,7 +71,12 @@ class AdminController extends Controller
     }
 
     public function allocate(Request $request) {
+        //--------------------------------------
+        if (!Gate::allows('isAdmin')) {
+            abort(403, 'Unauthorized');
+        }
         // \Log::info(json_encode($request->all()));
+        //--------------------------------------
     
         $username = $request->name;
         $titlename = $request->title;

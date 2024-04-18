@@ -19,7 +19,12 @@
     <p>No invoices found.</p>
 @endif
 
-	<a href="{{ route('index') }}">LOGOUT</a>
+	
+<form method="POST" action="{{ route('logout') }}">
+    @csrf
+    <button type="submit">Logout</button>
+</form>
+
 
 </body>
 </html>
