@@ -5,13 +5,115 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Invoice Form</title>
     <style >
-        #data{
-            display: flex;
-        }
-        .data{
-            padding: 15px;
+        
+        /* Resetting default margin and padding for all elements */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
 
-        }
+/* Body styles */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f0f0f0;
+    padding: 20px;
+}
+
+/* Heading styles */
+h1 {
+    color: #333;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+/* Form styles */
+form {
+    width: 300px;
+    margin: 0 auto;
+}
+
+/* Label styles */
+label {
+    color: #333;
+    font-weight: bold;
+}
+
+/* Input styles */
+input[type="text"],
+input[type="number"] {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+/* Button styles */
+button[type="submit"] {
+    width: 100%;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    padding: 10px 0;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+button[type="submit"]:hover {
+    background-color: #0056b3;
+}
+
+/* Error message styles */
+.alert {
+    background-color: #f8d7da;
+    color: #721c24;
+    padding: 10px;
+    border-radius: 5px;
+    margin-bottom: 20px;
+}
+
+/* Data section styles */
+#data {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+}
+
+/* Data container styles */
+.data {
+    padding: 15px;
+    background-color: #fff;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    margin: 0 10px;
+}
+
+/* Data heading styles */
+.data h4 {
+    color: #333;
+    margin-bottom: 10px;
+}
+
+/* Data list styles */
+.data ul {
+    list-style: none;
+    padding-left: 0;
+}
+
+/* Link styles */
+a {
+    display: block;
+    text-align: center;
+    margin-top: 20px;
+    color: #007bff;
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
     </style>
 </head>
 <body>

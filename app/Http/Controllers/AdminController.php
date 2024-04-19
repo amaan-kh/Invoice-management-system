@@ -88,10 +88,13 @@ class AdminController extends Controller
         $user = User::where('name', $username)->first();
         $invoice = Invoice::where('invoice_number', $invoice_no)->first();
 
+        $users = User::where('is_admin', 0)->get();
+        $invoices = Invoice::all();
+        
         if($user and $invoice) {
             if($user->is_admin == 1){
                 $err_message = 'user is an admin, does not require allocation';
-                return view('auth.admin.allocate_invoice')->with('err_message', $err_message);
+                return view('auth.admin.allocate_invoice', compact('users', 'invoices'))->with('err_message', $err_message);
             }
             $userId = $user->id;
             $invoiceId = $invoice->id;
@@ -99,12 +102,12 @@ class AdminController extends Controller
         }
         else{
             $err_message = 'user or invoice does not exist'; 
-            return view('auth.admin.allocate_invoice')->with('err_message', $err_message);
+            return view('auth.admin.allocate_invoice', compact('users', 'invoices'))->with('err_message', $err_message);
         }
         
 
             $err_message = "allocation successfull";
-        return view('auth.admin.allocate_invoice')->with('err_message', $err_message);
+        return view('auth.admin.allocate_invoice', compact('users', 'invoices'))->with('err_message', $err_message);
 
     }
 }
