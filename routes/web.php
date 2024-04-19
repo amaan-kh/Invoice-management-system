@@ -28,5 +28,8 @@ Route::get('/taskAllocation', [AdminController::class, 'allocateView'])->name('a
 Route::post('/taskAllocation', [AdminController::class, 'allocate'])->name('allocate');
 
 
+Route::get('/deleteUser', [UserController::class, 'deleteUserView'])->name('user.delete');
+Route::post('/deleteUser', [UserController::class, 'deleteUser'])->name('user.delete');
+
 
 

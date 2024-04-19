@@ -95,6 +95,7 @@ button[type="submit"]:hover {
 			<ul>
 				<li><a href="{{ route('user.index') }}">View Users</a></li>
 				<li><a href="{{ route('user.create') }}">Create User</a></li>
+				<li><a href="{{ route('user.delete') }}">Delete User(under development)</a></li>
 				<!-- Add links for updating and deleting users if needed -->
 			</ul>
 		</div>

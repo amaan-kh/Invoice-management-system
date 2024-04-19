@@ -38,5 +38,30 @@ class UserController extends Controller
 
         return view('auth.admin.createuser')->with('error_message', $message);
     }
+        public function deleteUserView(){
+             if (!Gate::allows('isAdmin')) {
+            abort(403, 'Unauthorized');
+        }
+            $users = User::where('is_admin', 0)->get();
+            return view('auth.admin.deleteuser', compact('users'));
+        }
+
+        public function deleteUser(Request $request){
+             if (!Gate::allows('isAdmin')) {
+            abort(403, 'Unauthorized');
+        }
+            \Log::info(json_encode($request->username));
+            $exist = User::where('name', $request->username)->first();
+            if($exist) {
+                $exist->delete();
+                $message = 'deleted successfully';
+                $users = User::where('is_admin', 0)->get();
+                return view('auth.admin.deleteuser', compact('users'))->with('error_message',$message);
+
+            }
+            $message = 'user does not exist ';
+            $users = User::where('is_admin', 0)->get();
+            return view('auth.admin.deleteuser', compact('users'))->with('error_message',$message);
+        }
     
 }

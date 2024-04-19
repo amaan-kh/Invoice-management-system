@@ -6,11 +6,11 @@
 	<title>create new user</title>
     <style type="text/css">
         /* Resetting default margin and padding for all elements */
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
 /* Body styles */
 body {
@@ -98,7 +98,7 @@ a:hover {
     text-decoration: underline;
 }
 
-    </style>
+</style>
 </head>
 <body>
     <div class="create-user-container">
@@ -116,24 +116,24 @@ a:hover {
             </div>
             <br>
             <div class="form-group">
-                 <input type="hidden" name="is_admin" value="0"> <!-- Hidden input with value 0 -->
-                <label for="is_admin">Is Admin:</label>
-                <input type="checkbox" id="is_admin" name="is_admin" value="1"><br><br>
+               <input type="hidden" name="is_admin" value="0"> <!-- Hidden input with value 0 -->
+               <label for="is_admin">Is Admin:</label>
+               <input type="checkbox" id="is_admin" name="is_admin" value="1"><br><br>
 
-            </div>
-            <br>
-            <button type="submit">ADD</button>
-        </form>
-        @if(isset($error_message))
-    <div class="alert alert-danger">
+           </div>
+           <br>
+           <button type="submit">ADD</button>
+       </form>
+       @if(isset($error_message))
+       <div class="alert alert-danger">
         {{ $error_message }}
     </div>
-@endif
+    @endif
 
-        <br>
-        <br>
-        <a href="{{ route('admin.home') }}">Back to panel</a>
-    </div>
+    <br>
+    <br>
+    <a href="{{ route('admin.home') }}">Back to panel</a>
+</div>
 
 
 </body>
