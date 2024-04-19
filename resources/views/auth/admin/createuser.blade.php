@@ -29,6 +29,12 @@
             <br>
             <button type="submit">ADD</button>
         </form>
+        @if(isset($error_message))
+    <div class="alert alert-danger">
+        {{ $error_message }}
+    </div>
+@endif
+
         <br>
         <br>
         <a href="{{ route('admin.home') }}">Back to panel</a>

@@ -31,6 +31,8 @@ class AdminController extends Controller
             if($user->is_admin == 1) {
                 return redirect()->intended(route('admin.home'));
             }
+
+            
             // $invoices = User::where('name', $user->name)->firstOrFail()->invoices();
             $invoices = $user->invoices()->get();
             // For debugging purposes
@@ -56,7 +58,9 @@ class AdminController extends Controller
         if (!Gate::allows('isAdmin')) {
             abort(403, 'Unauthorized');
         }
-        return view('auth.admin.allocate_invoice');
+        $users = User::where('is_admin', 0)->get();
+        $invoices = Invoice::all();
+        return view('auth.admin.allocate_invoice', compact('users', 'invoices'));
     }
 
     public function getDash(){
@@ -71,7 +75,7 @@ class AdminController extends Controller
     }
 
     public function allocate(Request $request) {
-        //--------------------------------------
+        //--------------------------------------    
         if (!Gate::allows('isAdmin')) {
             abort(403, 'Unauthorized');
         }
@@ -79,21 +83,28 @@ class AdminController extends Controller
         //--------------------------------------
     
         $username = $request->name;
-        $titlename = $request->title;
+        $invoice_no = $request->invoice_number;
 
         $user = User::where('name', $username)->first();
-        $invoice = Invoice::where('title', $titlename)->first();
+        $invoice = Invoice::where('invoice_number', $invoice_no)->first();
 
         if($user and $invoice) {
+            if($user->is_admin == 1){
+                $err_message = 'user is an admin, does not require allocation';
+                return view('auth.admin.allocate_invoice')->with('err_message', $err_message);
+            }
             $userId = $user->id;
             $invoiceId = $invoice->id;
             User_Invoice::createAllocation($userId, $invoiceId);
         }
         else{
-            $err_message = 'bad input'; 
+            $err_message = 'user or invoice does not exist'; 
+            return view('auth.admin.allocate_invoice')->with('err_message', $err_message);
         }
+        
 
-        return view('auth.admin.allocate_invoice');
+            $err_message = "allocation successfull";
+        return view('auth.admin.allocate_invoice')->with('err_message', $err_message);
 
     }
 }

@@ -13,8 +13,15 @@ return new class extends Migration
     {
         Schema::create('invoices', function (Blueprint $table) {
             $table->id();
-            $table->string('title');
-            $table->text('description');
+            $table->unsignedBigInteger('invoice_number')->unique();
+            $table->string('supplier_info');
+            $table->string('customer_info');
+            $table->date('invoice_date');
+            $table->date('due_date');
+            $table->text('itemized_list');
+            $table->decimal('subtotal', 10, 2);
+            $table->decimal('taxes', 10, 2);
+            $table->decimal('total_amount_due', 10, 2);
             $table->timestamps();
         });
     }

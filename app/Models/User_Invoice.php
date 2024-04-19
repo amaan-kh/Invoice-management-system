@@ -10,9 +10,17 @@ class User_Invoice extends Model
     use HasFactory;
 
     public static function createAllocation($userId, $invoiceId) {
-        $usIv = new User_Invoice;
-        $usIv->user_id = $userId;
-        $usIv->invoice_id = $invoiceId;
-        $usIv->save();
+
+        $existsAlready = User_Invoice::where('user_id', $userId)->where('invoice_id', $invoiceId)->first();
+
+
+
+        if(!$existsAlready){
+            $usIv = new User_Invoice;
+            $usIv->user_id = $userId;
+            $usIv->invoice_id = $invoiceId;
+            $usIv->save();
+        }
+        
     }
 }

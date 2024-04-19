@@ -13,12 +13,20 @@
 	<div class="invoice-list">
 	<ul>
 		@foreach ($invoices as $invoice) 
-		<li>
-			<p>title: {{ $invoice->title }}</p>
-			<p>description: {{ $invoice->description }}</p>
-			<br>
-
-		</li>
+		 <li>
+		 	<hr>
+		<p>Invoice Number: {{ $invoice->invoice_number}} </p>
+        <p>Supplier Information: {{ $invoice->supplier_info }}</p>
+        <p>Customer Information: {{ $invoice->customer_info }}</p>
+        <p>Invoice Date: {{ $invoice->invoice_date }}</p>
+        <p>Due Date: {{ $invoice->due_date }}</p>
+        <p>Itemized List: {{ $invoice->itemized_list }}</p>
+        <p>Subtotal: {{ $invoice->subtotal }}</p>
+        <p>Taxes: {{ $invoice->taxes }}</p>
+        <p>Total Amount Due: {{ $invoice->total_amount_due }}</p>
+        <br>
+        <hr>
+    </li>
 		@endforeach
 	</ul>
 	</div>

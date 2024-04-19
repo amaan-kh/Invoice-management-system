@@ -48,11 +48,21 @@ class User extends Authenticatable
 
 
     public static function createUser($name, $password, $isa) {
+
+        $exists = User::where('name',$name)->first();
+        if($exists) {
+            return 'user already exists';
+        }
+         
         $newUser = new User;
         $newUser->name = $name;
         $newUser->password = $password;
         $newUser->is_admin = $isa;
         $newUser->save();
+
+        return 'User created successfully.';
+        
+       
     }
 
     public static function getUsers() {

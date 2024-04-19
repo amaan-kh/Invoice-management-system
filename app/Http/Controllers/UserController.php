@@ -33,10 +33,10 @@ class UserController extends Controller
             abort(403, 'Unauthorized');
         }
         // \Log::info(json_encode($request->all()));
-        User::createUser($request->username, $request->password, $request->is_admin);
+        $message = User::createUser($request->username, $request->password, $request->is_admin);
 
 
-        return view('auth.admin.createuser');
+        return view('auth.admin.createuser')->with('error_message', $message);
     }
     
 }

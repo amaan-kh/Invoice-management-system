@@ -12,18 +12,30 @@
 	@if($invoices->isNotEmpty())
     <ul>
         @foreach($invoices as $invoice)
-            <li>{{ $invoice->title }} - {{ $invoice->description }}</li>
+        <li>
+            <hr>
+            <p>Invoice Number: {{ $invoice->invoice_number }}</p>
+            <p>Supplier Information: {{ $invoice->supplier_info }}</p>
+            <p>Customer Information: {{ $invoice->customer_info }}</p>
+            <p>Invoice Date: {{ $invoice->invoice_date }}</p>
+            <p>Due Date: {{ $invoice->due_date }}</p>
+            <p>Itemized List: {{ $invoice->itemized_list }}</p>
+            <p>Subtotal: {{ $invoice->subtotal }}</p>
+            <p>Taxes: {{ $invoice->taxes }}</p>
+            <p>Total Amount Due: {{ $invoice->total_amount_due }}</p>
+            <hr>
+        </li>
         @endforeach
     </ul>
-@else
+    @else
     <p>No invoices found.</p>
-@endif
+    @endif
 
-	
-<form method="POST" action="{{ route('logout') }}">
-    @csrf
-    <button type="submit">Logout</button>
-</form>
+
+    <form method="POST" action="{{ route('logout') }}">
+        @csrf
+        <button type="submit">Logout</button>
+    </form>
 
 
 </body>

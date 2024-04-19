@@ -9,12 +9,31 @@ class Invoice extends Model
 {
     use HasFactory;
 
-    public static function createInvoice($title, $description)             
+    public static function createInvoice($invoiceNo, $supplierInfo, $customerInfo, $invoiceDate, $dueDate, $itemizedList, 
+        $subtotal, $taxes, $totalAmountDue)         
     {    
+        $exists = Invoice::where('invoice_number', $invoiceNo)->first();
+
+        if($exists) {
+            return "Invoice number already exists";
+        }
+
+
+
         $invoice = new Invoice;
-        $invoice->title = $title;
-        $invoice->description = $description;
+        $invoice->invoice_number = $invoiceNo;
+        $invoice->supplier_info = $supplierInfo;
+        $invoice->customer_info = $customerInfo;
+        $invoice->invoice_date = $invoiceDate;
+        $invoice->due_date = $dueDate;
+        $invoice->itemized_list = $itemizedList;
+        $invoice->subtotal = $subtotal;
+        $invoice->taxes = $taxes;
+        $invoice->total_amount_due = $totalAmountDue;
         $invoice->save();
+
+        return "Invoice created successfully";
+
     }
 
     public static function getInvoices() 
