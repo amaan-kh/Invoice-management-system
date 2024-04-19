@@ -7,11 +7,11 @@
     <style >
         
         /* Resetting default margin and padding for all elements */
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
 /* Body styles */
 body {
@@ -114,7 +114,7 @@ a:hover {
     text-decoration: underline;
 }
 
-    </style>
+</style>
 </head>
 <body>
     <h1>Invoice Form</h1>
@@ -137,7 +137,7 @@ a:hover {
     </form>
     <br>
     <div id="data">
-     <div class="data">
+       <div class="data">
         <h4>List of Users</h4>
         <ul>
             @foreach ($users as $user)
@@ -146,8 +146,8 @@ a:hover {
         </ul>
     </div>
     <div class="data">
-       <h4>List of Invoices</h4>
-       <ul>
+     <h4>List of Invoices</h4>
+     <ul>
         @foreach ($invoices as $invoice)
         <li>{{ $invoice->invoice_number }}</li>
         @endforeach

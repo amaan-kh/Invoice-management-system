@@ -4,33 +4,7 @@
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<title>All Current Users</title>
-	<style>
-      /* /* .container {
-            display: flex;
-            justify-content: space-between;
-        }
-        .user-list {
-            /*border: 1px solid #ccc;
-            padding: 10px;
-            width: 45%;
-        	  margin-left: 20%;
-        }
-        .user-list h2 {
-            margin-bottom: 10px;
-        }
-        .user-list ul {
-        }
-        .user-list li {
-            margin-bottom: 5px;
-        }
-        .back-button {
-        	text-align: center;
-        }
-        #back {
-        	border: 2px solid black;
-        }*/
-*/
-        /* Resetting default margin and padding for all elements */
+	<style>/* Resetting default margin and padding for all elements */
 * {
     margin: 0;
     padding: 0;
@@ -39,16 +13,22 @@
 
 /* Body styles */
 body {
-    font-family: Arial, sans-serif;
-    background-color: #f0f0f0;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #f8f9fa; /* Light gray background */
     padding: 20px;
 }
 
 /* Heading styles */
-h1, h3 {
-    color: #333;
+h1 {
+    color: #343a40; /* Dark gray for headings */
     text-align: center;
-    margin-bottom: 10px;
+    margin-bottom: 20px; /* Increased margin for better spacing */
+}
+
+h3 {
+    color: #6c757d; /* Medium gray for subheadings */
+    text-align: center;
+    margin-bottom: 15px; /* Adjusted margin for better spacing */
 }
 
 p {
@@ -59,32 +39,35 @@ p {
 /* Container styles */
 .container {
     display: flex;
-    justify-content: space-between;
-    margin-top: 20px;
+    justify-content: center;
+    margin-top: 30px; /* Increased margin for better spacing */
 }
 
 /* User list styles */
 .user-list {
     width: 45%;
-    margin-left: 20%;
+    margin-left: 5%; /* Adjusted margin for better alignment */
+    background-color: #fff; /* White background for user lists */
+    border-radius: 10px; /* Rounded corners for better appearance */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Shadow for depth */
+    padding: 20px; /* Increased padding for better spacing */
 }
 
 /* List styles */
 ul {
     list-style: none;
-    margin-top: 0;
     padding-left: 0;
 }
 
 /* List item styles */
 .user-list li {
-    margin-bottom: 10px;
+    margin-bottom: 15px; /* Increased margin for better spacing */
 }
 
 /* Back button styles */
 .back-button {
     text-align: center;
-    margin-top: 20px;
+    margin-top: 30px; /* Increased margin for better spacing */
 }
 
 #back {
@@ -95,11 +78,13 @@ ul {
     text-decoration: none;
     border: 2px solid transparent;
     border-radius: 5px;
+    transition: background-color 0.3s ease; /* Smooth transition */
 }
 
 #back:hover {
-    background-color: #0056b3;
+    background-color: #0056b3; /* Darker blue on hover */
 }
+
 
     </style>
 </head>

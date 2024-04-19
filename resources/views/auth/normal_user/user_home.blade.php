@@ -70,7 +70,7 @@ button[type="submit"]:hover {
         @foreach($invoices as $invoice)
         <li>
             <hr>
-            <p>Invoice Number: {{ $invoice->invoice_number }}</p>
+            <p><b>Invoice Number: </b>{{ $invoice->invoice_number }}</p>
             <p>Supplier Information: {{ $invoice->supplier_info }}</p>
             <p>Customer Information: {{ $invoice->customer_info }}</p>
             <p>Invoice Date: {{ $invoice->invoice_date }}</p>
