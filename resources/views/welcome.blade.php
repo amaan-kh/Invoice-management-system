@@ -23,12 +23,21 @@
 body {
     font-family: 'figtree', sans-serif;
     background-color: #f0f0f0;
+/*
+    background-image: url('i1.jpg'); 
+    background-size: cover; 
+    background-repeat: no-repeat;*/
 }
 
 /* Heading styles */
-h1, h2 {
+h1 {
     text-align: center;
-    margin-top: 50px;
+    margin-top: 25px;
+    color: #333;
+}
+h2 {
+    text-align: center;
+    margin-top: 25px;
     color: #333;
 }
 
@@ -36,10 +45,10 @@ h1, h2 {
 .login-container {
     width: 300px;
     margin: 0 auto;
-    background-color: #fff;
+     background-color: rgba(255, 255, 255, 0.4);
     border-radius: 5px;
     padding: 20px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
     margin-top: 50px;
 }
 
@@ -47,6 +56,7 @@ h1, h2 {
 form {
     display: flex;
     flex-direction: column;
+    margin-top: 20px;
 }
 
 /* Form group styles */
@@ -67,6 +77,7 @@ input[type="password"] {
     padding: 10px;
     border: 1px solid #ccc;
     border-radius: 5px;
+    margin-top: 10px;
 }
 
 /* Error message styles */
@@ -76,16 +87,17 @@ input[type="password"] {
 
 /* Login button styles */
 button[type="submit"] {
-    background-color: #007bff;
-    color: #fff;
-    border: none;
+    background-color: #fff;
+    color: #007bff;
+    border: 2px solid;
     padding: 10px 20px;
     border-radius: 5px;
     cursor: pointer;
 }
 
 button[type="submit"]:hover {
-    background-color: #0056b3;
+    background-color: #007bff;
+    color:#fff;
 }
 
     </style>

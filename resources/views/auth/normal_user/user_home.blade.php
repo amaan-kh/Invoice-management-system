@@ -6,11 +6,11 @@
 	<title>User invoice account</title>
     <style>
         /* Resetting default margin and padding for all elements */
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
 /* Body styles */
 body {
@@ -37,11 +37,15 @@ ul li {
     margin-bottom: 20px;
 }
 
-/* Horizontal rule styles */
-hr {
-    border: 0;
-    border-top: 1px solid #ccc;
-    margin: 10px 0;
+.invoice-item {
+    background-color: #ffffff;
+    padding: 20px;
+    border-radius: 5px;
+    margin-bottom: 20px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+.invoice-item p {
+    margin: 5px 0;
 }
 
 /* Logout button styles */
@@ -59,30 +63,30 @@ button[type="submit"]:hover {
     background-color: #c82333;
 }
 
-    </style>
+</style>
 </head>
 <body>
 
 	<h1>User invoice account </h1>
 
 	@if($invoices->isNotEmpty())
-    <ul>
-        @foreach($invoices as $invoice)
-        <li>
-            <hr>
-            <p><b>Invoice Number: </b>{{ $invoice->invoice_number }}</p>
-            <p>Supplier Information: {{ $invoice->supplier_info }}</p>
-            <p>Customer Information: {{ $invoice->customer_info }}</p>
-            <p>Invoice Date: {{ $invoice->invoice_date }}</p>
-            <p>Due Date: {{ $invoice->due_date }}</p>
-            <p>Itemized List: {{ $invoice->itemized_list }}</p>
-            <p>Subtotal: {{ $invoice->subtotal }}</p>
-            <p>Taxes: {{ $invoice->taxes }}</p>
-            <p>Total Amount Due: {{ $invoice->total_amount_due }}</p>
-            <hr>
-        </li>
-        @endforeach
-    </ul>
+    <div class="invoice-list">
+        <ul>
+            @foreach ($invoices as $invoice)
+            <li class="invoice-item">
+                <p><b>Invoice Number:</b> {{ $invoice->invoice_number }}</p>
+                <p><b>Supplier Information:</b> {{ $invoice->supplier_info }}</p>
+                <p><b>Customer Information:</b> {{ $invoice->customer_info }}</p>
+                <p><b>Invoice Date:</b> {{ $invoice->invoice_date }}</p>
+                <p><b>Due Date:</b> {{ $invoice->due_date }}</p>
+                <p><b>Itemized List:</b> {{ $invoice->itemized_list }}</p>
+                <p><b>Subtotal:</b> {{ $invoice->subtotal }}</p>
+                <p><b>Taxes:</b> {{ $invoice->taxes }}</p>
+                <p><b>Total Amount Due:</b> {{ $invoice->total_amount_due }}</p>
+            </li>
+            @endforeach
+        </ul>
+    </div>
     @else
     <p>No invoices found.</p>
     @endif

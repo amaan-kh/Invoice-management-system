@@ -101,8 +101,9 @@ a:hover {
 </style>
 </head>
 <body>
+    <h2>Create NEW USER</h2>
     <div class="create-user-container">
-        <h2>Create NEW USER</h2>
+        
         <form action=" {{ route('user.create') }}" method="POST">
             @csrf <!-- Laravel CSRF protection token -->
             <div class="form-group">
@@ -121,19 +122,17 @@ a:hover {
                <input type="checkbox" id="is_admin" name="is_admin" value="1"><br><br>
 
            </div>
-           <br>
-           <button type="submit">ADD</button>
+     
+           <button type="submit">Create New User</button>
        </form>
        @if(isset($error_message))
        <div class="alert alert-danger">
         {{ $error_message }}
     </div>
     @endif
-
     <br>
-    <br>
-    <a href="{{ route('admin.home') }}">Back to panel</a>
 </div>
+<a href="{{ route('admin.home') }}">Back to panel</a>
 
 
 </body>
