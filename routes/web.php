@@ -11,25 +11,31 @@ Route::post('/', [AdminController::class, 'login'])->name('login');
  
 Route::get('/adminHome', [AdminController::class, 'getDash'])->name('admin.home');
 //Route::get('/userHome', [AdminController::class, 'getUserDash'])->name('user.home');
-
 Route::post('/logout', [AdminController::class, 'logout'])->name('logout');
+
 
 Route::get('/createUser', [UserController::class, 'create'])->name('user.create');
 Route::post('/createUser', [UserController::class, 'store'])->name('user.create');
+
 Route::get('/viewUsers', [UserController::class, 'index'])->name('user.index');
+
+Route::get('/deleteUser', [UserController::class, 'deleteUserView'])->name('user.delete');
+Route::post('/deleteUser', [UserController::class, 'deleteUser'])->name('user.delete');
+
+
+
 
 Route::get('/createInvoices', [InvoiceController::class, 'create'])->name('invoice.create');
 Route::post('/createInvoices', [InvoiceController::class, 'store'])->name('invoice.create');
+
 Route::get('/viewInvoices', [InvoiceController::class, 'index'])->name('invoice.index');
 
-
+Route::get('/deleteInvoice', [InvoiceController::class, 'deleteInvoiceView'])->name('invoice.delete');
+Route::post('/deleteInvoice', [InvoiceController::class, 'deleteInvoice'])->name('invoice.delete');
 
 Route::get('/taskAllocation', [AdminController::class, 'allocateView'])->name('allocatIndex');
 Route::post('/taskAllocation', [AdminController::class, 'allocate'])->name('allocate');
 
-
-Route::get('/deleteUser', [UserController::class, 'deleteUserView'])->name('user.delete');
-Route::post('/deleteUser', [UserController::class, 'deleteUser'])->name('user.delete');
 
 
 

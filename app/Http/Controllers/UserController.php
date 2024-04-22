@@ -50,7 +50,7 @@ class UserController extends Controller
              if (!Gate::allows('isAdmin')) {
             abort(403, 'Unauthorized');
         }
-            \Log::info(json_encode($request->username));
+            // \Log::info(json_encode($request->username));
             $exist = User::where('name', $request->username)->first();
             if($exist) {
                 $exist->delete();

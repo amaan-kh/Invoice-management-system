@@ -95,7 +95,7 @@ button[type="submit"]:hover {
 			<ul>
 				<li><a href="{{ route('user.index') }}">View Users</a></li>
 				<li><a href="{{ route('user.create') }}">Create User</a></li>
-				<li><a href="{{ route('user.delete') }}">Delete User(under development)</a></li>
+				<li><a href="{{ route('user.delete') }}">Delete User</a></li>
 				<!-- Add links for updating and deleting users if needed -->
 			</ul>
 		</div>
@@ -104,6 +104,7 @@ button[type="submit"]:hover {
 			<ul>
 				<li><a href="{{ route('invoice.index') }}">View Invoices</a></li>
 				<li><a href="{{ route('invoice.create') }}">Create Invoice</a></li>
+				<li><a href="{{ route('invoice.delete') }}">Delete Invoice</a></li>
 				<!-- Add links for updating and deleting invoices if needed -->
 			</ul>
 		</div>

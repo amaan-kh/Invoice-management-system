@@ -10,8 +10,8 @@ use Illuminate\Support\Facades\Gate;
 class InvoiceController extends Controller
 {
     //
-   public function create()
-   {
+ public function create()
+ {
     if (!Gate::allows('isAdmin')) {
         abort(403, 'Unauthorized');
     }
@@ -32,7 +32,7 @@ public function store(Request $request)
     if (!Gate::allows('isAdmin')) {
         abort(403, 'Unauthorized');
     }
-    \Log::info(json_encode($request->all()));
+    // \Log::info(json_encode($request->all()));
 
 
     $message = Invoice::createInvoice(
@@ -47,5 +47,31 @@ public function store(Request $request)
         $request->total_amount_due
     );
     return view('auth.admin.createinvoice')->with('err_message', $message);
+}
+
+public function deleteInvoiceView(){
+    if (!Gate::allows('isAdmin')) {
+        abort(403, 'Unauthorized');
+    }
+    $invoices = Invoice::getInvoices();
+    return view('auth.admin.deleteinvoice', compact('invoices'));
+}
+
+public function deleteInvoice(Request $request) {
+    if (!Gate::allows('isAdmin')) {
+        abort(403, 'Unauthorized');
+    }
+    // \Log::info(json_encode($request->invoice_no));
+    $exist = Invoice::where('invoice_number', $request->invoice_no)->first();
+    if($exist) {
+        $exist->delete();
+        $message = 'deleted successfully';
+        $invoices = Invoice::getInvoices();
+        return view('auth.admin.deleteinvoice', compact('invoices'))->with('error_message',$message);
+
+    }
+    $message = 'Invoice does not exist ';
+    $invoices = Invoice::getInvoices();
+    return view('auth.admin.deleteinvoice', compact('invoices'))->with('error_message', $message);
 }
 }
