@@ -21,8 +21,9 @@ body {
 
 /* Container styles */
 .create-user-container {
-    width: 300px;
+    width: 350px;
     margin: 0 auto;
+    margin-top: 50px;
     background-color: #fff;
     border-radius: 5px;
     padding: 20px;
@@ -31,6 +32,7 @@ body {
 
 /* Heading styles */
 h2 {
+    margin-top: 20px;
     text-align: center;
     margin-bottom: 20px;
 }
