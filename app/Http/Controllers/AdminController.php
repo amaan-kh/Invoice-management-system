@@ -56,7 +56,8 @@ class AdminController extends Controller
 
     public function allocateView() {
         if (!Gate::allows('isAdmin')) {
-            abort(403, 'Unauthorized');
+            // abort(403, 'Unauthorized');
+            return redirect()->route('index');
         }
         $users = User::where('is_admin', 0)->get();
         $invoices = Invoice::all();
@@ -65,7 +66,8 @@ class AdminController extends Controller
 
     public function getDash(){
          if (!Gate::allows('isAdmin')) {
-            abort(403, 'Unauthorized');
+            // abort(403, 'Unauthorized');
+            return redirect()->route('index');
         }
         return view('auth.admin.admin_panel');
     }
@@ -77,7 +79,8 @@ class AdminController extends Controller
     public function allocate(Request $request) {
         //--------------------------------------    
         if (!Gate::allows('isAdmin')) {
-            abort(403, 'Unauthorized');
+            // abort(403, 'Unauthorized');
+            return redirect()->route('index');
         }
         // \Log::info(json_encode($request->all()));
         //--------------------------------------

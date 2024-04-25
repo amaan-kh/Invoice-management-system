@@ -12,7 +12,8 @@ class UserController extends Controller
     public function index()
     {
          if (!Gate::allows('isAdmin')) {
-            abort(403, 'Unauthorized');
+            // abort(403, 'Unauthorized');
+            return redirect()->route('index');
         }
         [$non_admin_users, $admin_users] = User::getUsers();
 
@@ -22,7 +23,8 @@ class UserController extends Controller
     public function create()
     {   
         if (!Gate::allows('isAdmin')) {
-            abort(403, 'Unauthorized');
+            // abort(403, 'Unauthorized');
+            return redirect()->route('index');
         }
         return view('auth.admin.createuser');
     }
@@ -30,7 +32,8 @@ class UserController extends Controller
     public function store(Request $request)
     {   
         if (!Gate::allows('isAdmin')) {
-            abort(403, 'Unauthorized');
+            // abort(403, 'Unauthorized');
+            return redirect()->route('index');
         }
         // \Log::info(json_encode($request->all()));
         $message = User::createUser($request->username, $request->password, $request->is_admin);
@@ -40,7 +43,8 @@ class UserController extends Controller
     }
         public function deleteUserView(){
              if (!Gate::allows('isAdmin')) {
-            abort(403, 'Unauthorized');
+            // abort(403, 'Unauthorized');
+                return redirect()->route('index');
         }
             $users = User::where('is_admin', 0)->get();
             return view('auth.admin.deleteuser', compact('users'));
@@ -48,7 +52,8 @@ class UserController extends Controller
 
         public function deleteUser(Request $request){
              if (!Gate::allows('isAdmin')) {
-            abort(403, 'Unauthorized');
+            // abort(403, 'Unauthorized');
+                return redirect()->route('index');
         }
             // \Log::info(json_encode($request->username));
             $exist = User::where('name', $request->username)->first();

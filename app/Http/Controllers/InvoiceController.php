@@ -13,7 +13,8 @@ class InvoiceController extends Controller
  public function create()
  {
     if (!Gate::allows('isAdmin')) {
-        abort(403, 'Unauthorized');
+        // abort(403, 'Unauthorized');
+        return redirect()->route('index');
     }
     return view('auth.admin.createinvoice');
 }
@@ -21,7 +22,8 @@ class InvoiceController extends Controller
 public function index() 
 {   
     if (!Gate::allows('isAdmin')) {
-        abort(403, 'Unauthorized');
+        // abort(403, 'Unauthorized');
+        return redirect()->route('index');
     }
     $invoices = Invoice::getInvoices();
     return view('auth.admin.readinvoice', compact('invoices'));
@@ -30,7 +32,8 @@ public function index()
 public function store(Request $request) 
 {
     if (!Gate::allows('isAdmin')) {
-        abort(403, 'Unauthorized');
+        // abort(403, 'Unauthorized');
+        return redirect()->route('index');
     }
     // \Log::info(json_encode($request->all()));
 
@@ -51,7 +54,8 @@ public function store(Request $request)
 
 public function deleteInvoiceView(){
     if (!Gate::allows('isAdmin')) {
-        abort(403, 'Unauthorized');
+        // abort(403, 'Unauthorized');
+        return redirect()->route('index');
     }
     $invoices = Invoice::getInvoices();
     return view('auth.admin.deleteinvoice', compact('invoices'));
@@ -59,7 +63,8 @@ public function deleteInvoiceView(){
 
 public function deleteInvoice(Request $request) {
     if (!Gate::allows('isAdmin')) {
-        abort(403, 'Unauthorized');
+        // abort(403, 'Unauthorized');
+        return redirect()->route('index');
     }
     // \Log::info(json_encode($request->invoice_no));
     $exist = Invoice::where('invoice_number', $request->invoice_no)->first();
