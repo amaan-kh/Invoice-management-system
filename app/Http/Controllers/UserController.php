@@ -55,6 +55,7 @@ class UserController extends Controller
             // abort(403, 'Unauthorized');
                 return redirect()->route('index');
         }
+            
             // \Log::info(json_encode($request->username));
             $exist = User::where('name', $request->username)->first();
             if($exist) {

@@ -105,7 +105,7 @@ button[type="submit"]:hover {
 </style>
 </head>
 <body>
-	<h1>admin dashboard</h1>
+	<h1>Admin Dashboard</h1>
 	<div class="crud-links">
 		<div class="column">
 			<h3>User Actions</h3>

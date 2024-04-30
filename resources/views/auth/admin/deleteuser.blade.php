@@ -80,6 +80,39 @@ a:hover {
     text-decoration: underline;
 }
 
+/* Select styles */
+select {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background-color: #fff;
+    font-size: 14px;
+    color: #333;
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M7 10l5 5 5-5H7z' fill='%23333'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 10px center;
+    background-size: 12px;
+    cursor: pointer;
+}
+
+/* Select hover styles */
+select:hover {
+    border-color: #007bff;
+}
+
+/* Select focus styles */
+select:focus {
+    outline: none;
+    border-color: #007bff;
+    box-shadow: 0 0 0 2px rgba(0, 123, 255, 0.2);
+}
+
+
     </style>
     
 </head>
@@ -89,7 +122,13 @@ a:hover {
     <form action="{{ route('user.delete') }}" method="POST">
         @csrf
         <label for="username"><b>Enter the name of the user to delete:</b></label><br>
-        <input type="text" id="username" name="username" required><br><br>
+        <!-- <input type="text" id="username" name="username" required><br><br> -->
+        <select id="username" name="username" required>
+                <option disabled selected>Select User name</option>
+                @foreach ($users as $user)
+                    <option value="{{ $user->name }}">{{ $user->name }}</option>
+                @endforeach
+            </select><br><br>
         <button type="submit">Remove</button>
     </form>
     <br>
@@ -100,7 +139,7 @@ a:hover {
     @endif
 <div id="data">
        <div class="data">
-        <h4>List of Users</h4>
+        <h4>All Users</h4>
         <ul>
             @foreach ($users as $user)
             <li>{{ $user->name }}</li>

@@ -4,14 +4,13 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Invoice Form</title>
-    <style >
-        
-        /* Resetting default margin and padding for all elements */
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+    <style type="text/css">
+  /* General reset and default styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
 
 /* Body styles */
 body {
@@ -27,7 +26,8 @@ h1 {
     margin-bottom: 20px;
 }
 
-.container{
+/* Container styles */
+.container {
     width: 400px;
     margin: 0 auto;
     background-color: #fff;
@@ -38,24 +38,40 @@ h1 {
 
 /* Form styles */
 form {
-    width: 300px;
-    margin: 0 auto;
+    width: 100%;
 }
 
 /* Label styles */
 label {
     color: #333;
     font-weight: bold;
+    margin-bottom: 5px;
 }
 
-/* Input styles */
+/* Input and select styles */
 input[type="text"],
-input[type="number"] {
+input[type="number"],
+select {
     width: 100%;
     padding: 10px;
     margin-bottom: 10px;
     border: 1px solid #ccc;
     border-radius: 5px;
+    background-color: #fff;
+    font-size: 14px;
+    color: #333;
+}
+
+/* Select styles */
+select {
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M7 10l5 5 5-5H7z' fill='%23333'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 10px center;
+    background-size: 12px;
+    cursor: pointer;
 }
 
 /* Button styles */
@@ -67,6 +83,7 @@ button[type="submit"] {
     padding: 10px 0;
     border-radius: 5px;
     cursor: pointer;
+    transition: background-color 0.3s ease;
 }
 
 button[type="submit"]:hover {
@@ -82,61 +99,39 @@ button[type="submit"]:hover {
     margin-bottom: 20px;
 }
 
-/* Data section styles */
-#data {
-    display: flex;
-    justify-content: center;
-    margin-top: 20px;
-}
 
-/* Data container styles */
-.data {
-    padding: 15px;
-    background-color: #fff;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    margin: 0 10px;
-}
-
-/* Data heading styles */
-.data h4 {
-    color: #333;
-    margin-bottom: 10px;
-}
-
-/* Data list styles */
-.data ul {
-    list-style: none;
-    padding-left: 0;
-}
-
-/* Link styles */
-a {
-    display: block;
-    text-align: center;
-    margin-top: 20px;
-    color: #007bff;
-    text-decoration: none;
-}
-
-a:hover {
-    text-decoration: underline;
-}
-
-</style>
+    </style>
 </head>
 <body>
     <h1>Invoice Sharing</h1>
     <div class="container">
+        <div class="data">
         <form action="{{ route('allocate') }}" method="POST">
             @csrf
-            <label for="name">Username:</label><br>
-            <input type="text" id="name" name="name" required><br><br>
-
-            <label for="invoice_number">Invoice Number:</label><br>
-            <input type="number" id="invoice_number" name="invoice_number" required>
-            <br>
-            <span>@if(isset($err_message))
+            <div class="userdata">
+           <label for="name">Username:</label><br>
+               <!--   <input type="text" id="name" name="name" > -->
+                <select id="dropdown-select-name" onchange="updateInput1()" required>
+                    <option disabled selected>Select a username</option>
+                   @foreach ($users as $user)
+                   <option value="{{ $user->name }}">{{ $user->name }}</option>
+                   @endforeach
+               </select>
+                <br><br>
+               <!-- Hidden input field to store the selected value -->
+               <input type="hidden" id="selected-value-name" name="name" >
+               
+               <label for="invoice_number">Invoice Number:</label><br>
+               <select id="dropdown-select-number" onchange="updateInput2()" required>
+                <option disabled selected>Select an invoice number</option>
+                   @foreach ($invoices as $invoice)
+                   <option value="{{ $invoice->invoice_number }}">{{ $invoice->invoice_number }}</option>
+                   @endforeach
+               </select>
+               <input type="hidden" id="selected-value-number" name="invoice_number" >
+               <!-- <input type="number" id="invoice_number" name="invoice_number" required> -->
+               <br>
+               <span>@if(isset($err_message))
                 <div class="alert alert-danger">
                     {{ $err_message }}
                 </div>
@@ -144,29 +139,47 @@ a:hover {
             </span>
             <br>    
             <button type="submit">Submit</button>
+            </div>
         </form>
+    </div>
         <br>
-        <div id="data">
-         <div class="data">
+        <!-- <div id="data">
+            <div class="data">
             <h4>List of Users</h4>
             <ul>
                 @foreach ($users as $user)
                 <li>{{ $user->name }}</li>
                 @endforeach
             </ul>
+            Dropdown select element
+
         </div>
         <div class="data">
-           <h4>List of Invoices</h4>
-           <ul>
+         <h4>List of Invoices</h4>
+         <ul>
             @foreach ($invoices as $invoice)
             <li>{{ $invoice->invoice_number }}</li>
             @endforeach
         </ul>
-    </div>
+    </div> -->
+
 </div>
+ <a href="{{ route('admin.home') }}">Back to panel</a>
 <br>
 <br>
 </div>
-<a href="{{ route('admin.home') }}">Back to panel</a>
+
+
+<script>
+    // Function to update the hidden input field with the selected value
+    function updateInput1() {
+        var selectedValue = document.getElementById('dropdown-select-name').value;
+        document.getElementById('selected-value-name').value = selectedValue;
+    }
+    function updateInput2() {
+        var selectedValue2 = document.getElementById('dropdown-select-number').value;
+        document.getElementById('selected-value-number').value = selectedValue2;
+    }
+</script>
 </body>
 </html>

@@ -82,7 +82,7 @@ class AdminController extends Controller
             // abort(403, 'Unauthorized');
             return redirect()->route('index');
         }
-        // \Log::info(json_encode($request->all()));
+         \Log::info(json_encode($request->all()));
         //--------------------------------------
     
         $username = $request->name;

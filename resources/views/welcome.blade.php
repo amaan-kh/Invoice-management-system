@@ -9,9 +9,11 @@
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.bunny.net">
     <link href="https://fonts.bunny.net/css?family=figtree:400,600&display=swap" rel="stylesheet" />
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
 
     <!-- Styles -->
     <style>
+
         /* Resetting default margin and padding for all elements */
 * {
     margin: 0;
@@ -130,5 +132,7 @@ button[type="submit"]:hover {
         </form>
 
     </div>
+    
+
 </body>
 </html>
