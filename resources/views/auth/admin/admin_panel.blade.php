@@ -129,6 +129,7 @@ button[type="submit"]:hover {
 			<h3>Allocate Invoices</h3>
 			<ul>
 				<li><a href="{{ route('allocatIndex') }}">Allocate Invoices</a></li>
+				<li><a href="{{ route('allocatViews') }}">View Allocations</a></li>
 			</ul>
 		</div>
 	</div>

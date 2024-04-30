@@ -89,6 +89,12 @@ button[type="submit"] {
 button[type="submit"]:hover {
     background-color: #0056b3;
 }
+a {
+    display: block;
+    text-align: center;
+    text-decoration: none;
+    color: #007bff;
+}
 
 /* Error message styles */
 .alert {
@@ -162,9 +168,9 @@ button[type="submit"]:hover {
             @endforeach
         </ul>
     </div> -->
-
+<a href="{{ route('admin.home') }}">Back to panel</a>
 </div>
- <a href="{{ route('admin.home') }}">Back to panel</a>
+
 <br>
 <br>
 </div>

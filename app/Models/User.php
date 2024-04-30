@@ -72,6 +72,11 @@ class User extends Authenticatable
         return [$non_admin_users, $admin_users];
     }
 
+    public static function getAllocatedUsers() {
+        $users = User::where('is_admin', 0)->get();
+        return [$users];
+    }
+
     public function invoices()
     {
         return $this->belongsToMany(Invoice::class, 'user__invoices', 'user_id', 'invoice_id');

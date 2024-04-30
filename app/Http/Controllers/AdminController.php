@@ -76,13 +76,35 @@ class AdminController extends Controller
         return view('auth.normal_user.user_home');
     }
 
+    public function taskView() {
+         if (!Gate::allows('isAdmin')) {
+            // abort(403, 'Unauthorized');
+            return redirect()->route('index');
+        }
+        $dataArray = [];
+        [$peeps] = User::getAllocatedUsers();
+
+        foreach($peeps as $user){
+            $ivarray = [];
+            $invoices = $user->invoices()->get();
+            foreach($invoices as $invoice){
+                $ivarray[] = $invoice;
+            }
+            $dataArray[$user->name] = $ivarray;
+            $ivarray = [];
+        }
+
+        
+        return view('auth.admin.readallocations', compact('dataArray'));
+    }
+
     public function allocate(Request $request) {
         //--------------------------------------    
         if (!Gate::allows('isAdmin')) {
             // abort(403, 'Unauthorized');
             return redirect()->route('index');
         }
-         \Log::info(json_encode($request->all()));
+         // \Log::info(json_encode($request->all()));
         //--------------------------------------
     
         $username = $request->name;
