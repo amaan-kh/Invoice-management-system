@@ -5,6 +5,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Invoice List</title>
+    <script src="https://unpkg.com/htmx.org@1.9.12" integrity="sha384-ujb1lZYygJmzgSwoxRggbCHcjc0rB2XoQrxeTUQyRjrOnlCoYta87iKBWq3EsdM2" crossorigin="anonymous"></script>
+
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -23,20 +25,25 @@
         }
         .invoice-item {
             background-color: #ffffff;
-            padding: 20px;
+            padding: 1px;
             border-radius: 5px;
-            margin-bottom: 20px;
+            margin-bottom: 5px;
             box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
         }
         .invoice-item p {
             margin: 5px 0;
         }
+         .invoice-details {
+        display: flex;
+        align-items: center;
+        margin-right: 10px;
+    }
         .back-link {
             display: block;
             text-align: center;
             margin-top: 20px;
         }
-         .back-link {
+        .back-link {
             display: block;
             text-align: center;
             position: fixed;
@@ -57,31 +64,32 @@
 </head>
 <body>
 
-<div class="container">
+    <!-- <div class="container"> -->
 
-    <h1>All Issued Invoices</h1>
+        <h1>All Issued Invoices</h1>
 
-    <div class="invoice-list">
-        <ul>
-            @foreach ($invoices as $invoice)
+        <!-- <div class="invoice-list"> -->
+            <ul>
+                @foreach ($invoices as $invoice)
                 <li class="invoice-item">
-                    <p><b>Invoice Number:</b> {{ $invoice->invoice_number }}</p>
-                    <p><b>Supplier Information:</b> {{ $invoice->supplier_info }}</p>
-                    <p><b>Customer Information:</b> {{ $invoice->customer_info }}</p>
-                    <p><b>Invoice Date:</b> {{ $invoice->invoice_date }}</p>
-                    <p><b>Due Date:</b> {{ $invoice->due_date }}</p>
-                    <p><b>Itemized List:</b> {{ $invoice->itemized_list }}</p>
-                    <p><b>Subtotal:</b> {{ $invoice->subtotal }}</p>
-                    <p><b>Taxes:</b> {{ $invoice->taxes }}</p>
-                    <p><b>Total Amount Due:</b> {{ $invoice->total_amount_due }}</p>
+                    <div class="invoice-details">
+                    <p><b>Invoice Number:</b> {{ $invoice->invoice_number }} &nbsp </p>
+                    <form action="{{ route('invoicePage') }}" method="POST">
+                        @csrf <!-- CSRF protection token -->
+                        <!-- Hidden input to store the desired data value -->
+                        <input type="hidden" name="key" value="{{ $invoice->invoice_number}}">
+                        <!-- Button to submit the form -->
+                        <button type="submit">View</button>
+                    </form>
+                    </div>
                 </li>
-            @endforeach
-        </ul>
-    </div>
+                @endforeach
+            </ul>
+        <!-- </div> -->
 
-    <a href="{{ route('admin.home') }}" class="back-link">BACK</a>
+        <a href="{{ route('admin.home') }}" class="back-link">BACK</a>
 
-</div>
+    <!-- </div> -->
 
 </body>
 </html>

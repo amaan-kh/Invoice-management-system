@@ -98,9 +98,9 @@
         }
         .invoice-item {
             background-color: #f1f1f1; /* Light gray background */
-            padding: 20px;
+            padding: 5px;
             border-radius: 5px;
-            margin-bottom: 20px;
+            margin-bottom: 5px;
             box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3); /* Lighter shadow */
         }
         .invoice-item p {
@@ -138,12 +138,12 @@
                 <ul>
                     @foreach($dataArray as $key => $values)
                     <li class="invoice-item">
-                        <p>User: {{ $key }} -</p>
-                        <ul>
+                        <span><b>User:</b> {{ $key }} -
+                            <b>Invoice:</b>
                             @foreach($values as $value)
-                            <li>Invoice Number: {{ $value }}</li>
+                            <span>{{ $value }}</span>
                             @endforeach
-                        </ul>
+                        </span>
                     </li>
                     @endforeach
                 </ul>   

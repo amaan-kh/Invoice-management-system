@@ -14,7 +14,7 @@
         .container {
             max-width: 800px;
             margin: 0 auto;
-            padding: 20px;
+            padding: 15px;
         }
         h1 {
             text-align: center;
@@ -22,16 +22,16 @@
         }
         .user-list {
             background-color: #ffffff; /* White background */
-            padding: 20px;
+            padding: 15px ;
             border-radius: 5px;
-            margin-bottom: 20px;
+            margin-bottom: 2px;
             box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3); /* Box shadow for depth */
         }
         h3 {
             margin-top: 0;
         }
         .user-list p {
-            margin: 5px 0;
+            margin:  0;
         }
         .back-button {
             text-align: center;

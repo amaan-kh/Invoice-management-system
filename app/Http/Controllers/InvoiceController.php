@@ -29,6 +29,23 @@ public function index()
     return view('auth.admin.readinvoice', compact('invoices'));
 }
 
+public function page(Request $request) {
+    if (!Gate::allows('isAdmin')) {
+        // abort(403, 'Unauthorized');
+        return redirect()->route('index');
+    }
+    // dd($request->key);
+    $invoice = Invoice::where('invoice_number', $request->key)->first();
+    return view('auth.admin.singleinvoice', compact('invoice')); 
+}
+public function pageView() {
+     if (!Gate::allows('isAdmin')) {
+        // abort(403, 'Unauthorized');
+        return redirect()->route('index');
+    }
+    return redirect()->route('invoice.index');
+}
+
 public function store(Request $request) 
 {
     if (!Gate::allows('isAdmin')) {
@@ -49,7 +66,45 @@ public function store(Request $request)
         $request->taxes,
         $request->total_amount_due
     );
+    // \Log::info(json_encode($message));
     return view('auth.admin.createinvoice')->with('err_message', $message);
+}
+
+public function updateView(){
+     if (!Gate::allows('isAdmin')) {
+        // abort(403, 'Unauthorized');
+        return redirect()->route('index');
+    }
+    $invoices = Invoice::getInvoices();
+    return view('auth.admin.updateinvoice', compact('invoices'));
+}
+
+public function update(Request $request) {
+     if (!Gate::allows('isAdmin')) {
+        // abort(403, 'Unauthorized');
+        return redirect()->route('index');
+    }
+    \Log::info(json_encode($request->all()));
+    $message = Invoice::updateInvoice( $request->invoice_no,
+        $request->supplier_info,
+        $request->customer_info,
+        $request->invoice_date,
+        $request->due_date,
+        $request->itemized_list,
+        $request->subtotal,
+        $request->taxes,
+        $request->total_amount_due
+    );
+    $invoices = Invoice::getInvoices();
+    return view('auth.admin.updateinvoice', compact('invoices'))->with('err_message', $message);
+}
+
+public function getInvoiceData(Request $request) {
+    
+    \Log::info(json_encode($request->all()));
+    $invoices = Invoice::getInvoices();
+    return view('auth.admin.updateinvoice', compact('invoices'));
+    
 }
 
 public function deleteInvoiceView(){
