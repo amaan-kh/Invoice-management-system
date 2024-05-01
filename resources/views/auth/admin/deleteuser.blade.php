@@ -111,17 +111,21 @@ select:focus {
     border-color: #007bff;
     box-shadow: 0 0 0 2px rgba(0, 123, 255, 0.2);
 }
+.required {
+    color: red;
+    font-size: 18px; /* Adjust the size as needed */
+}
 
 
     </style>
     
 </head>
 <body>
-    <h2>Delete User</h2>
+    <h2>Delete USER</h2>
 <div class="container">
     <form action="{{ route('user.delete') }}" method="POST">
         @csrf
-        <label for="username"><b>Enter the name of the user to delete:</b></label><br>
+        <label for="username"><b>Enter the name of the user to delete<span class="required">*</span>:</b></label><br>
         <!-- <input type="text" id="username" name="username" required><br><br> -->
         <select id="username" name="username" required>
                 <option disabled selected>Select User name</option>

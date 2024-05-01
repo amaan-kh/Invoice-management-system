@@ -110,17 +110,21 @@ select#invoice_no:focus {
     border-color: #007bff;
     box-shadow: 0 0 0 2px rgba(0, 123, 255, 0.2);
 }
+.required {
+    color: red;
+    font-size: 18px; /* Adjust the size as needed */
+}
 
 
     </style>
     
 </head>
 <body>
-    <h2>Delete Invoice</h2>
+    <h2>Delete INVOICE</h2>
 <div class="container">
     <form action="{{ route('invoice.delete') }}" method="POST">
         @csrf
-        <label for="invoice_no"><b>Enter the Invoice number of the invoice to delete:</b></label><br>
+        <label for="invoice_no"><b>Enter the Invoice number of the invoice to delete<span class="required">*</span>:</b></label><br>
         <!-- <input type="number" id="invoice_no" name="invoice_no" required><br><br> -->
         <select id="invoice_no" name="invoice_no" required>
                 <option disabled selected>Select Invoice number</option>

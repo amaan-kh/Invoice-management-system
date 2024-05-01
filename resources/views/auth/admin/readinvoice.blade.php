@@ -36,6 +36,23 @@
             text-align: center;
             margin-top: 20px;
         }
+         .back-link {
+            display: block;
+            text-align: center;
+            position: fixed;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            padding: 10px 20px;
+            background-color: #007bff; /* Blue color for the link background */
+            color: #fff; /* White color for the link text */
+            text-decoration: none; /* Remove underline */
+            border-radius: 5px; /* Rounded corners */
+            transition: background-color 0.3s ease; /* Smooth transition for hover effect */
+        }
+        .back-link:hover {
+            background-color: #0056b3; /* Darker blue color on hover */
+        }
     </style>
 </head>
 <body>

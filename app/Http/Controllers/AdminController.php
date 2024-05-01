@@ -39,7 +39,7 @@ class AdminController extends Controller
             // dd($invoices);
             return view('auth.normal_user.user_home', compact('invoices'));
         }
- 
+        
         return back()->withErrors([
             'name' => 'The provided credentials do not match our records.',
         ])->onlyInput('name');
@@ -65,74 +65,80 @@ class AdminController extends Controller
     }
 
     public function getDash(){
-         if (!Gate::allows('isAdmin')) {
+       if (!Gate::allows('isAdmin')) {
             // abort(403, 'Unauthorized');
-            return redirect()->route('index');
-        }
-        return view('auth.admin.admin_panel');
+        return redirect()->route('index');
     }
+    return view('auth.admin.admin_panel');
+}
 
-    public function getUserDash(){
-        return view('auth.normal_user.user_home');
-    }
+public function getUserDash(){
+    return view('auth.normal_user.user_home');
+}
 
-    public function taskView() {
-         if (!Gate::allows('isAdmin')) {
+public function taskView() {
+   if (!Gate::allows('isAdmin')) {
             // abort(403, 'Unauthorized');
-            return redirect()->route('index');
-        }
-        $dataArray = [];
-        [$peeps] = User::getAllocatedUsers();
+    return redirect()->route('index');
+}
+$dataArray = [];
+[$users] = User::getAllocatedUsers();
 
-        foreach($peeps as $user){
-            $ivarray = [];
-            $invoices = $user->invoices()->get();
-            foreach($invoices as $invoice){
-                $ivarray[] = $invoice;
-            }
-            $dataArray[$user->name] = $ivarray;
-            $ivarray = [];
-        }
-
+foreach($users as $user){
+    $ivarray = [];
+    $invoices = $user->invoices()->get();
+            // \Log::info(json_encode($invoices));
+    foreach($invoices as $invoice){
+        $ivarray[] = $invoice->invoice_number;
         
-        return view('auth.admin.readallocations', compact('dataArray'));
     }
+    if (empty($ivarray)) {
+        continue;
+    }
+    
+    $dataArray[$user->name] = $ivarray;
+}
 
-    public function allocate(Request $request) {
+        //\Log::info(json_encode($dataArray));
+
+return view('auth.admin.readallocations', compact('dataArray'));
+}
+
+public function allocate(Request $request) {
         //--------------------------------------    
-        if (!Gate::allows('isAdmin')) {
+    if (!Gate::allows('isAdmin')) {
             // abort(403, 'Unauthorized');
-            return redirect()->route('index');
-        }
+        return redirect()->route('index');
+    }
          // \Log::info(json_encode($request->all()));
         //--------------------------------------
     
-        $username = $request->name;
-        $invoice_no = $request->invoice_number;
+    $username = $request->name;
+    $invoice_no = $request->invoice_number;
 
-        $user = User::where('name', $username)->first();
-        $invoice = Invoice::where('invoice_number', $invoice_no)->first();
+    $user = User::where('name', $username)->first();
+    $invoice = Invoice::where('invoice_number', $invoice_no)->first();
 
-        $users = User::where('is_admin', 0)->get();
-        $invoices = Invoice::all();
-        
-        if($user and $invoice) {
-            if($user->is_admin == 1){
-                $err_message = 'user is an admin, does not require allocation';
-                return view('auth.admin.allocate_invoice', compact('users', 'invoices'))->with('err_message', $err_message);
-            }
-            $userId = $user->id;
-            $invoiceId = $invoice->id;
-            User_Invoice::createAllocation($userId, $invoiceId);
-        }
-        else{
-            $err_message = 'user or invoice does not exist'; 
+    $users = User::where('is_admin', 0)->get();
+    $invoices = Invoice::all();
+    
+    if($user and $invoice) {
+        if($user->is_admin == 1){
+            $err_message = 'user is an admin, does not require allocation';
             return view('auth.admin.allocate_invoice', compact('users', 'invoices'))->with('err_message', $err_message);
         }
-        
-
-            $err_message = "allocation successfull";
-        return view('auth.admin.allocate_invoice', compact('users', 'invoices'))->with('err_message', $err_message);
-
+        $userId = $user->id;
+        $invoiceId = $invoice->id;
+        User_Invoice::createAllocation($userId, $invoiceId);
     }
+    else{
+        $err_message = 'user or invoice does not exist'; 
+        return view('auth.admin.allocate_invoice', compact('users', 'invoices'))->with('err_message', $err_message);
+    }
+    
+
+    $err_message = "allocation successfull";
+    return view('auth.admin.allocate_invoice', compact('users', 'invoices'))->with('err_message', $err_message);
+
+}
 }

@@ -12,6 +12,7 @@
             box-sizing: border-box;
         }
 
+
 /* Body styles */
 body {
     font-family: Arial, sans-serif;
@@ -99,6 +100,11 @@ a {
 a:hover {
     text-decoration: underline;
 }
+.required {
+    color: red;
+    font-size: 18px; /* Adjust the size as needed */
+}
+
 
 </style>
 </head>
@@ -109,12 +115,12 @@ a:hover {
         <form action=" {{ route('user.create') }}" method="POST">
             @csrf <!-- Laravel CSRF protection token -->
             <div class="form-group">
-                <label for="username">Username:</label>
+                <label for="username">Username<span class="required">*</span>:</label>
                 <input type="text" id="username" name="username" required>
             </div>
             <br>
             <div class="form-group">
-                <label for="password">Password:</label>
+                <label for="password">Password<span class="required">*</span>:</label>
                 <input type="password" id="password" name="password" required>
             </div>
             <br>

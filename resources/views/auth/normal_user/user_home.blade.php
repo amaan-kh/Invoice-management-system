@@ -62,6 +62,23 @@ button[type="submit"] {
 button[type="submit"]:hover {
     background-color: #c82333;
 }
+form {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+        }
+ #logout {
+            padding: 10px 20px;
+            background-color: #f52525; /* Blue color for the button background */
+            color: #fff; /* White color for the button text */
+            border: none;
+            border-radius: 5px; /* Rounded corners */
+            cursor: pointer;
+            transition: background-color 0.3s ease; /* Smooth transition for hover effect */
+        }
+        #logout:hover {
+            background-color: #910000; /* Darker blue color on hover */
+        }
 
 </style>
 </head>
@@ -94,7 +111,7 @@ button[type="submit"]:hover {
 
     <form method="POST" action="{{ route('logout') }}">
         @csrf
-        <button type="submit">Logout</button>
+        <button type="submit" id="logout">Logout</button>
     </form>
 
 

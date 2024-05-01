@@ -5,12 +5,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Invoice Form</title>
     <style type="text/css">
-  /* General reset and default styles */
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
+      /* General reset and default styles */
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+    }
 
 /* Body styles */
 body {
@@ -104,76 +104,64 @@ a {
     border-radius: 5px;
     margin-bottom: 20px;
 }
+.required {
+    color: red;
+    font-size: 18px; /* Adjust the size as needed */
+}
 
 
-    </style>
+</style>
 </head>
 <body>
     <h1>Invoice Sharing</h1>
     <div class="container">
         <div class="data">
-        <form action="{{ route('allocate') }}" method="POST">
-            @csrf
-            <div class="userdata">
-           <label for="name">Username:</label><br>
-               <!--   <input type="text" id="name" name="name" > -->
-                <select id="dropdown-select-name" onchange="updateInput1()" required>
+            <form action="{{ route('allocate') }}" method="POST">
+                @csrf
+                <div class="userdata">
+                 <label for="name">Username<span class="required">*</span>:</label><br>
+                 <!--   <input type="text" id="name" name="name" > -->
+                 <select id="dropdown-select-name" onchange="updateInput1()" required>
                     <option disabled selected>Select a username</option>
-                   @foreach ($users as $user)
-                   <option value="{{ $user->name }}">{{ $user->name }}</option>
-                   @endforeach
-               </select>
+                    @foreach ($users as $user)
+                    <option value="{{ $user->name }}">{{ $user->name }}</option>
+                    @endforeach
+                </select>
                 <br><br>
-               <!-- Hidden input field to store the selected value -->
-               <input type="hidden" id="selected-value-name" name="name" >
-               
-               <label for="invoice_number">Invoice Number:</label><br>
-               <select id="dropdown-select-number" onchange="updateInput2()" required>
-                <option disabled selected>Select an invoice number</option>
-                   @foreach ($invoices as $invoice)
-                   <option value="{{ $invoice->invoice_number }}">{{ $invoice->invoice_number }}</option>
-                   @endforeach
-               </select>
-               <input type="hidden" id="selected-value-number" name="invoice_number" >
-               <!-- <input type="number" id="invoice_number" name="invoice_number" required> -->
-               <br>
-               <span>@if(isset($err_message))
-                <div class="alert alert-danger">
-                    {{ $err_message }}
+                <!-- Hidden input field to store the selected value -->
+                <input type="hidden" id="selected-value-name" name="name" >
+
+                <label for="invoice_number">Invoice Number<span class="required">*</span>:</label><br>
+                <select id="dropdown-select-number" onchange="updateInput2()" required>
+                    <option disabled selected>Select an invoice number</option>
+                    @foreach ($invoices as $invoice)
+                    <option value="{{ $invoice->invoice_number }}">{{ $invoice->invoice_number }}</option>
+                    @endforeach
+                </select>
+                <input type="hidden" id="selected-value-number" name="invoice_number" >
+                <!-- <input type="number" id="invoice_number" name="invoice_number" required> -->
+                <br>
+                <span>@if(isset($err_message))
+                    <div class="alert alert-danger">
+                        {{ $err_message }}
+                    </div>
+                    @endif
+                </span>
+                <br>    
+                <button type="submit">Submit</button>
                 </div>
-                @endif
-            </span>
-            <br>    
-            <button type="submit">Submit</button>
-            </div>
-        </form>
-    </div>
-        <br>
-        <!-- <div id="data">
-            <div class="data">
-            <h4>List of Users</h4>
-            <ul>
-                @foreach ($users as $user)
-                <li>{{ $user->name }}</li>
-                @endforeach
-            </ul>
-            Dropdown select element
-
+            </form>
         </div>
-        <div class="data">
-         <h4>List of Invoices</h4>
-         <ul>
-            @foreach ($invoices as $invoice)
-            <li>{{ $invoice->invoice_number }}</li>
-            @endforeach
-        </ul>
-    </div> -->
-<a href="{{ route('admin.home') }}">Back to panel</a>
-</div>
+        <br>
+        
+<br>
+<br>
+  
+    <a href="{{ route('admin.home') }}" id="back">Back to panel</a>
 
-<br>
-<br>
-</div>
+    </div>
+
+    
 
 
 <script>

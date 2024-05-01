@@ -37,6 +37,19 @@
             text-align: center;
             margin-top: 20px;
         }
+
+         #back {
+            padding: 10px 20px;
+            background-color: #007bff; /* Blue color for the button background */
+            color: #fff; /* White color for the button text */
+            text-decoration: none; /* Remove underline */
+            border-radius: 5px; /* Rounded corners */
+            transition: background-color 0.3s ease; /* Smooth transition for hover effect */
+        }
+        #back:hover {
+            background-color: #0056b3; /* Darker blue color on hover */
+        }
+        
     </style>
 </head>
 <body>
