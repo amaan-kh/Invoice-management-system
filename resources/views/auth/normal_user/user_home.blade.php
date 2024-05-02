@@ -20,7 +20,7 @@ body {
 }
 
 /* Heading styles */
-h1 {
+h1,h4 {
     color: #333;
     text-align: center;
     margin-bottom: 20px;
@@ -39,9 +39,9 @@ ul li {
 
 .invoice-item {
     background-color: #ffffff;
-    padding: 20px;
+    padding: 5px;
     border-radius: 5px;
-    margin-bottom: 20px;
+    margin-bottom: 5px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
 }
 .invoice-item p {
@@ -63,57 +63,66 @@ button[type="submit"]:hover {
     background-color: #c82333;
 }
 form {
-            position: fixed;
-            bottom: 30px;
-            right: 30px;
-        }
- #logout {
-            padding: 10px 20px;
-            background-color: #f52525; /* Blue color for the button background */
-            color: #fff; /* White color for the button text */
-            border: none;
-            border-radius: 5px; /* Rounded corners */
-            cursor: pointer;
-            transition: background-color 0.3s ease; /* Smooth transition for hover effect */
-        }
-        #logout:hover {
-            background-color: #910000; /* Darker blue color on hover */
-        }
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+}
+#logout {
+    padding: 10px 20px;
+    background-color: #f52525; /* Blue color for the button background */
+    color: #fff; /* White color for the button text */
+    border: none;
+    border-radius: 5px; /* Rounded corners */
+    cursor: pointer;
+    transition: background-color 0.3s ease; /* Smooth transition for hover effect */
+}
+#logout:hover {
+    background-color: #910000; /* Darker blue color on hover */
+}
+.invoice-details {
+        display: flex;
+        align-items: center;
+        margin-right: 10px;
+    }
 
 </style>
 </head>
 <body>
 
 	<h1>User invoice account </h1>
+    <h3> Welcome {{$name}} </h3>
 
-	@if($invoices->isNotEmpty())
-    <div class="invoice-list">
+
+    @if($invoices->isNotEmpty())
+    <h4>All Issued Invoices</h4>
+
+@if(session('error'))
+    <div class="alert alert-danger">
+        {{ session('error') }}
+    </div>
+@endif
+    <!-- <div class="invoice-list"> -->
         <ul>
             @foreach ($invoices as $invoice)
             <li class="invoice-item">
-                <p><b>Invoice Number:</b> {{ $invoice->invoice_number }}</p>
-                <!-- <p><b>Supplier Information:</b> {{ $invoice->supplier_info }}</p>
-                <p><b>Customer Information:</b> {{ $invoice->customer_info }}</p>
-                <p><b>Invoice Date:</b> {{ $invoice->invoice_date }}</p>
-                <p><b>Due Date:</b> {{ $invoice->due_date }}</p>
-                <p><b>Itemized List:</b> {{ $invoice->itemized_list }}</p>
-                <p><b>Subtotal:</b> {{ $invoice->subtotal }}</p>
-                <p><b>Taxes:</b> {{ $invoice->taxes }}</p>
-                <p><b>Total Amount Due:</b> {{ $invoice->total_amount_due }}</p> -->
+                <div class="invoice-details">
+                    <p><b>Invoice Number:</b> {{ $invoice->invoice_number }} &nbsp </p>
+                    <a href="{{ route('invoicePageViewUser', ['id' => $invoice->invoice_number, 'name' => $name]) }}">View</a>
+
+                </div>
             </li>
             @endforeach
         </ul>
-    </div>
+        <!-- </div> -->
     @else
     <p>No invoices found.</p>
-    @endif
+    @endif 
+
+        <form method="POST" action="{{ route('logout') }}">
+            @csrf
+            <button type="submit" id="logout">Logout</button>
+        </form>
 
 
-    <form method="POST" action="{{ route('logout') }}">
-        @csrf
-        <button type="submit" id="logout">Logout</button>
-    </form>
-
-
-</body>
-</html>
+    </body>
+    </html>

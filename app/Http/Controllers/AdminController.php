@@ -31,7 +31,9 @@ class AdminController extends Controller
             if($user->is_admin == 1) {
                 return redirect()->intended(route('admin.home'));
             }
-            
+
+            return redirect()->intended(route('user.home', ['name' => $request->name]));
+
             // $invoices = User::where('name', $user->name)->firstOrFail()->invoices();
             $invoices = $user->invoices()->get();
             // For debugging purposes
@@ -64,19 +66,30 @@ class AdminController extends Controller
     }
 
     public function getDash(){
-       if (!Gate::allows('isAdmin')) {
+     if (!Gate::allows('isAdmin')) {
             // abort(403, 'Unauthorized');
         return redirect()->route('index');
     }
     return view('auth.admin.admin_panel');
 }
 
-public function getUserDash(){
-    return view('auth.normal_user.user_home');
+public function getUserDash($name){
+    //TODO: add protection here
+    if (Gate::allows('isUserName', $name)) {
+        $user = User::where('name', $name)->first();
+        $invoices = $user->invoices()->get();
+        return view('auth.normal_user.user_home', compact('name', 'invoices'));
+    } else {
+            // Unauthorized action
+        return redirect()->back()->with('error', 'You are not authorized to view this page.');
+        return redirect()->route('index');
+             //abort(403); // Or handle the unauthorized access in another way
+    }
+    
 }
 
 public function taskView() {
-   if (!Gate::allows('isAdmin')) {
+ if (!Gate::allows('isAdmin')) {
             // abort(403, 'Unauthorized');
     return redirect()->route('index');
 }

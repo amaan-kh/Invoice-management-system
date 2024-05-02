@@ -123,6 +123,11 @@
         .back-link:hover {
             text-decoration: underline; /* Underline on hover */
         }
+        .list-items {
+        display: flex;
+        align-items: center;
+        margin-right: 10px;
+    }
     </style>
 </head>
 <body>
@@ -138,12 +143,12 @@
                 <ul>
                     @foreach($dataArray as $key => $values)
                     <li class="invoice-item">
-                        <span><b>User:</b> {{ $key }} -
-                            <b>Invoice:</b>
+                        <div class="list-items"><b>User:</b> {{ $key }}     
+                            <b> &nbsp Invoice:</b>
                             @foreach($values as $value)
-                            <span>{{ $value }}</span>
+                            <span>{{ $value }} &nbsp</span>
                             @endforeach
-                        </span>
+                        </div>
                     </li>
                     @endforeach
                 </ul>   

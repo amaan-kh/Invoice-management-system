@@ -45,8 +45,24 @@ public function page($id) {
         return redirect()->route('index');
     }
     $invoice = Invoice::where('invoice_number', $id)->first();
+    if (!$invoice) {
+        return redirect()->back()->with('error', 'Invoice not found');
+    }
     return view('auth.admin.singleinvoice', compact('invoice'));
 }
+
+public function pageUser($id, $name) {
+     if (Gate::allows('isUserName', $name) && Gate::allows('belongsToUser', $id)) {
+             $invoice = Invoice::where('invoice_number', $id)->first();
+        return view('auth.normal_user.user_singleinvoice', compact('invoice', 'name'));
+           
+        } else {
+            // Unauthorized action
+            return redirect()->back()->with('error', 'You are not authorized to view that page.');
+            //abort(403); // Or handle the unauthorized access in another way
+        }
+}
+
 public function pageView() {
      if (!Gate::allows('isAdmin')) {
         // abort(403, 'Unauthorized');

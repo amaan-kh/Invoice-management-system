@@ -10,7 +10,7 @@ Route::get('/', [AdminController::class, 'index'])->name('index');
 Route::post('/', [AdminController::class, 'login'])->name('login');
  
 Route::get('/adminHome', [AdminController::class, 'getDash'])->name('admin.home');
-//Route::get('/userHome', [AdminController::class, 'getUserDash'])->name('user.home');
+Route::get('/userHome/{name}', [AdminController::class, 'getUserDash'])->name('user.home');
 Route::post('/logout', [AdminController::class, 'logout'])->name('logout');
 
 
@@ -36,6 +36,9 @@ Route::get('/viewInvoices', [InvoiceController::class, 'index'])->name('invoice.
 Route::get('/Invoice', [InvoiceController::class, 'pageView'])->name('invoicePage');
 // Route::post('/Invoice', [InvoiceController::class, 'page'])->name('invoicePageView');
 Route::get('/Invoice/{id}', [InvoiceController::class, 'page'])->name('invoicePageView');
+Route::get('/InvoiceUser/{id}/{name}', [InvoiceController::class, 'pageUser'])->name('invoicePageViewUser');
+
+
 
 Route::get('/deleteInvoice', [InvoiceController::class, 'deleteInvoiceView'])->name('invoice.delete');
 Route::post('/deleteInvoice', [InvoiceController::class, 'deleteInvoice'])->name('invoice.delete');
