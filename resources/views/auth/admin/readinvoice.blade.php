@@ -74,13 +74,13 @@
                 <li class="invoice-item">
                     <div class="invoice-details">
                     <p><b>Invoice Number:</b> {{ $invoice->invoice_number }} &nbsp </p>
-                    <form action="{{ route('invoicePage') }}" method="POST">
-                        @csrf <!-- CSRF protection token -->
-                        <!-- Hidden input to store the desired data value -->
+                    <!-- <form action="{{ route('invoicePage') }}" method="POST">
+                        @csrf 
                         <input type="hidden" name="key" value="{{ $invoice->invoice_number}}">
-                        <!-- Button to submit the form -->
                         <button type="submit">View</button>
-                    </form>
+                    </form> -->
+                    <a href="{{ route('invoicePageView', ['id' => $invoice->invoice_number]) }}">View</a>
+
                     </div>
                 </li>
                 @endforeach

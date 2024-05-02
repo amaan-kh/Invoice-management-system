@@ -31,7 +31,6 @@ class AdminController extends Controller
             if($user->is_admin == 1) {
                 return redirect()->intended(route('admin.home'));
             }
-
             
             // $invoices = User::where('name', $user->name)->firstOrFail()->invoices();
             $invoices = $user->invoices()->get();

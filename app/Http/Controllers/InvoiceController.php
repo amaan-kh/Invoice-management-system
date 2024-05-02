@@ -29,14 +29,23 @@ public function index()
     return view('auth.admin.readinvoice', compact('invoices'));
 }
 
-public function page(Request $request) {
+// public function page(Request $request) {
+//     if (!Gate::allows('isAdmin')) {
+//         // abort(403, 'Unauthorized');
+//         return redirect()->route('index');
+//     }
+//     // dd($request->key);
+//     $invoice = Invoice::where('invoice_number', $request->key)->first();
+//     return view('auth.admin.singleinvoice', compact('invoice')); 
+// }
+
+public function page($id) {
     if (!Gate::allows('isAdmin')) {
         // abort(403, 'Unauthorized');
         return redirect()->route('index');
     }
-    // dd($request->key);
-    $invoice = Invoice::where('invoice_number', $request->key)->first();
-    return view('auth.admin.singleinvoice', compact('invoice')); 
+    $invoice = Invoice::where('invoice_number', $id)->first();
+    return view('auth.admin.singleinvoice', compact('invoice'));
 }
 public function pageView() {
      if (!Gate::allows('isAdmin')) {

@@ -92,14 +92,14 @@ form {
             @foreach ($invoices as $invoice)
             <li class="invoice-item">
                 <p><b>Invoice Number:</b> {{ $invoice->invoice_number }}</p>
-                <p><b>Supplier Information:</b> {{ $invoice->supplier_info }}</p>
+                <!-- <p><b>Supplier Information:</b> {{ $invoice->supplier_info }}</p>
                 <p><b>Customer Information:</b> {{ $invoice->customer_info }}</p>
                 <p><b>Invoice Date:</b> {{ $invoice->invoice_date }}</p>
                 <p><b>Due Date:</b> {{ $invoice->due_date }}</p>
                 <p><b>Itemized List:</b> {{ $invoice->itemized_list }}</p>
                 <p><b>Subtotal:</b> {{ $invoice->subtotal }}</p>
                 <p><b>Taxes:</b> {{ $invoice->taxes }}</p>
-                <p><b>Total Amount Due:</b> {{ $invoice->total_amount_due }}</p>
+                <p><b>Total Amount Due:</b> {{ $invoice->total_amount_due }}</p> -->
             </li>
             @endforeach
         </ul>
