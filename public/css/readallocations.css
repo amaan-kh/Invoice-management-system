@@ -1,0 +1,52 @@
+body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f8f9fa;
+            color: #333; /* Dark text color for better readability */
+        }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #fff; /* White background for the container */
+            border-radius: 10px; /* Rounded corners */
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.2); /* Soft shadow effect */
+        }
+        h1 {
+            text-align: center;
+            margin-bottom: 20px;
+            color: #181947; /* Blue color for the heading */
+        }
+        .invoice-item {
+            background-color: #f1f1f1; /* Light gray background */
+            padding: 5px;
+            border-radius: 5px;
+            margin-bottom: 5px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3); /* Lighter shadow */
+        }
+        .invoice-item p {
+            margin: 5px 0;
+        }
+        .invoice-list {
+            list-style-type: none; /* Remove bullet points */
+            padding: 0;
+        }
+        .user-list {
+            margin-bottom: 30px; /* Add some space between user lists */
+        }
+        .back-link {
+            display: block;
+            text-align: center;
+            margin-top: 20px;
+            color: #007bff; /* Blue color for the link */
+            text-decoration: none; /* Remove underline */
+        }
+        .back-link:hover {
+            text-decoration: underline; /* Underline on hover */
+        }
+        .list-items {
+        display: flex;
+        align-items: center;
+        margin-right: 10px;
+    }
