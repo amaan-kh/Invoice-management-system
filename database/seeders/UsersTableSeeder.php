@@ -13,10 +13,12 @@ class UsersTableSeeder extends Seeder
      */
     public function run(): void
     {
+        if (!User::where('name', 'admin')->exists()) {
          User::create([
             'name' => 'admin',
             'password' => bcrypt('password'),
             'is_admin' => true,
         ]);
+        }
     }
 }
