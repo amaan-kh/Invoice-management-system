@@ -68,6 +68,7 @@ class AdminController extends Controller
     public function getDash(){
      if (!Gate::allows('isAdmin')) {
             // abort(403, 'Unauthorized');
+        return redirect()->back()->with('error', 'You are not authorized to view that page.');
         return redirect()->route('index');
     }
     return view('auth.admin.admin_panel');
@@ -81,8 +82,8 @@ public function getUserDash($name){
         return view('auth.normal_user.user_home', compact('name', 'invoices'));
     } else {
             // Unauthorized action
-        return redirect()->back()->with('error', 'You are not authorized to view this page.');
-        return redirect()->route('index');
+        return redirect()->back()->with('error', 'You are not authorized to view that page.');
+        // return redirect()->route('index');
              //abort(403); // Or handle the unauthorized access in another way
     }
     

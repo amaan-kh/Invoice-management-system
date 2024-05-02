@@ -23,8 +23,6 @@ Route::get('/deleteUser', [UserController::class, 'deleteUserView'])->name('user
 Route::post('/deleteUser', [UserController::class, 'deleteUser'])->name('user.delete');
 
 
-
-
 Route::get('/createInvoices', [InvoiceController::class, 'create'])->name('invoice.create');
 Route::post('/createInvoices', [InvoiceController::class, 'store'])->name('invoice.create');
 
