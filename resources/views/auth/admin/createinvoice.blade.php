@@ -74,6 +74,21 @@
 </div>
 </div>
 <a href="{{ route('admin.home') }}">Back to panel</a>
+<script>
+    // Function to calculate total amount due
+    function calculateTotalAmountDue() {
+        var subtotal = parseFloat(document.getElementById("subtotal").value);
+        var taxPercentage = parseFloat(document.getElementById("taxes").value);
+        var totalAmountDue = subtotal + (subtotal * (taxPercentage / 100));
+        document.getElementById("total_amount_due").value = totalAmountDue.toFixed(2);
+    }
+
+    // Event listener to recalculate total amount due on input change
+    document.addEventListener("DOMContentLoaded", function() {
+        document.getElementById("subtotal").addEventListener("input", calculateTotalAmountDue);
+        document.getElementById("taxes").addEventListener("input", calculateTotalAmountDue);
+    });
+</script>
 </body>
 </html>
 
