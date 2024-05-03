@@ -33,6 +33,7 @@
 			<ul>
 				<li><a href="{{ route('allocatIndex') }}">Allocate Invoices</a></li>
 				<li><a href="{{ route('allocatViews') }}">View Allocations</a></li>
+				<li><a href="{{ route('revokeAllocation') }}">Revoke Access</a></li>
 			</ul>
 		</div>
 	</div>

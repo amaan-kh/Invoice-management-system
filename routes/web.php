@@ -45,6 +45,8 @@ Route::post('/deleteInvoice', [InvoiceController::class, 'deleteInvoice'])->name
 Route::get('/taskAllocation', [AdminController::class, 'allocateView'])->name('allocatIndex');
 Route::post('/taskAllocation', [AdminController::class, 'allocate'])->name('allocate');
 Route::get('/taskView', [AdminController::class, 'taskView'])->name('allocatViews');
+Route::get('/revokeAllocation', [AdminController::class, 'revokeAllocationView'])->name('revokeAllocation');
+Route::post('/revokeAllocation', [AdminController::class, 'deallocate'])->name('deallocate');
 
 
 

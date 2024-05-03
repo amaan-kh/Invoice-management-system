@@ -124,7 +124,6 @@ public function allocate(Request $request) {
         return redirect()->route('index');
     }
          // \Log::info(json_encode($request->all()));
-        //--------------------------------------
     
     $username = $request->name;
     $invoice_no = $request->invoice_number;
@@ -154,4 +153,36 @@ public function allocate(Request $request) {
     return view('auth.admin.allocate_invoice', compact('users', 'invoices'))->with('err_message', $err_message);
 
 }
+public function revokeAllocationView(){
+ if (!Gate::allows('isAdmin')) {
+            // abort(403, 'Unauthorized');
+            return redirect()->route('index');
+        }
+        $users = User::where('is_admin', 0)->get();
+        $invoices = Invoice::all();
+        return view('auth.admin.deleteallocations', compact('users', 'invoices'));
+}
+
+public function deallocate(Request $request) {
+    if (!Gate::allows('isAdmin')) {
+            // abort(403, 'Unauthorized');
+            return redirect()->route('index');
+        }
+        $users = User::where('is_admin', 0)->get();
+        $invoices = Invoice::all();
+        $user = User::where('name', $request->name)->first();
+        $invoice = Invoice::where('invoice_number', $request->invoice_number)->first();
+        
+        if($user && $invoice){
+            //dd([$user->id, $invoice->id]);
+            User_Invoice::deleteAllocation($user->id, $invoice->id);
+
+        }
+        else{
+        $err_message = 'some error occured'; 
+        return view('auth.admin.deleteallocations', compact('users', 'invoices'))->with('err_message', $err_message);
+         }
+        $err_message = "de-allocation successfull";
+    return view('auth.admin.deleteallocations', compact('users', 'invoices'))->with('err_message', $err_message);
+    }
 }
