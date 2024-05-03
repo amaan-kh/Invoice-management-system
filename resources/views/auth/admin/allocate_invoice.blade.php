@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Invoice Form</title>
+    <title>INVOICE SHARING</title>
     <link rel="stylesheet" type="text/css" href="{{ asset('css/allocateinvoice.css')}}">
 </head>
 <body>
@@ -23,7 +23,7 @@
                 </select>
                 <br><br>
                 <!-- Hidden input field to store the selected value -->
-                <input type="hidden" id="selected-value-name" name="name" >
+                <input type="hidden" id="selected-value-name" name="name" required>
 
                 <label for="invoice_number">Invoice Number<span class="required">*</span>:</label><br>
                 <select id="dropdown-select-number" onchange="updateInput2()" required>
@@ -32,7 +32,7 @@
                     <option value="{{ $invoice->invoice_number }}">{{ $invoice->invoice_number }}</option>
                     @endforeach
                 </select>
-                <input type="hidden" id="selected-value-number" name="invoice_number" >
+                <input type="hidden" id="selected-value-number" name="invoice_number" required>
                 <!-- <input type="number" id="invoice_number" name="invoice_number" required> -->
                 <br>
                 <span>@if(isset($err_message))
@@ -42,7 +42,7 @@
                     @endif
                 </span>
                 <br>    
-                <button type="submit">Submit</button>
+                <button type="submit">Share </button>
                 </div>
             </form>
         </div>

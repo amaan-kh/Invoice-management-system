@@ -3,11 +3,11 @@
 <head>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<title>create new user</title>
+	<title>NEW USER</title>
     <link rel="stylesheet" href="{{ asset('css/createuser.css') }}">
 </head>
 <body>
-    <h2>Create NEW USER</h2>
+    <h2>Create New User</h2>
     <div class="create-user-container">
         
         <form action=" {{ route('user.create') }}" method="POST">

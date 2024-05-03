@@ -3,13 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Delete Invoice</title>
+    <title>DELETE INVOICE</title>
     <link rel="stylesheet" href="{{ asset('css/deleteinvoice.css') }}">
     
     
 </head>
 <body>
-    <h2>Delete INVOICE</h2>
+    <h2>Delete Invoice</h2>
 <div class="container">
     <form action="{{ route('invoice.delete') }}" method="POST">
         @csrf

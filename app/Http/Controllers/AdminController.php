@@ -179,10 +179,10 @@ public function deallocate(Request $request) {
 
         }
         else{
-        $err_message = 'some error occured'; 
+        $err_message = 'user or invoice does not exist'; 
         return view('auth.admin.deleteallocations', compact('users', 'invoices'))->with('err_message', $err_message);
          }
-        $err_message = "de-allocation successfull";
+        $err_message = "invoice revoked from user";
     return view('auth.admin.deleteallocations', compact('users', 'invoices'))->with('err_message', $err_message);
     }
 }

@@ -3,7 +3,7 @@
 <head>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<title>create new INVOICE</title>
+	<title>NEW INVOICE</title>
     <link rel="stylesheet" href="{{ asset('css/createinvoice.css') }}">
     <style type="text/css">
         
@@ -11,7 +11,7 @@
 </style>
 </head>
 <body>
-   <h2>Create NEW INVOICE</h2>
+   <h2>Create New Invoice</h2>
    <div class="create-user-container">
 
     <span>

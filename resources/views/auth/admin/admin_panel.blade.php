@@ -3,8 +3,9 @@
 <head>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<title>admin panel</title>
+	<title>ADMIN PANEL</title>
 	<link rel="stylesheet" href="{{ asset('css/adminpanel.css')}}">
+	 
 </head>
 <body>
 	<h1>Admin Dashboard</h1>
@@ -15,7 +16,6 @@
 				<li><a href="{{ route('user.index') }}">View Users</a></li>
 				<li><a href="{{ route('user.create') }}">Create User</a></li>
 				<li><a href="{{ route('user.delete') }}">Delete User</a></li>
-				<!-- Add links for updating and deleting users if needed -->
 			</ul>
 		</div>
 		<div class="column">
@@ -25,12 +25,11 @@
 				<li><a href="{{ route('invoice.create') }}">Create Invoice</a></li>
 				<li><a href="{{ route('invoice.delete') }}">Delete Invoice</a></li>
 				<li><a href="{{ route('invoice.update') }}">Update Invoice</a></li>
-				<!-- Add links for updating and deleting invoices if needed -->
 			</ul>
 		</div>
 		<div class="column">
 			<h3>Allocate Invoices</h3>
-			<ul>
+			<ul >
 				<li><a href="{{ route('allocatIndex') }}">Allocate Invoices</a></li>
 				<li><a href="{{ route('allocatViews') }}">View Allocations</a></li>
 				<li><a href="{{ route('revokeAllocation') }}">Revoke Access</a></li>

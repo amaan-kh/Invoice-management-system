@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>REVOKE USER ACCESS</title>
+    <title>REVOKE ACCESS</title>
     <link rel="stylesheet" type="text/css" href="{{ asset('css/allocateinvoice.css')}}">
 </head>
 <body>
@@ -42,7 +42,7 @@
                     @endif
                 </span>
                 <br>    
-                <button type="submit">Submit</button>
+                <button type="submit" id="revoke-button">Revoke</button>
                 </div>
             </form>
         </div>
