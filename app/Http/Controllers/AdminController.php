@@ -69,7 +69,7 @@ class AdminController extends Controller
      if (!Gate::allows('isAdmin')) {
             // abort(403, 'Unauthorized');
         return redirect()->back()->with('error', 'You are not authorized to view that page.');
-        return redirect()->route('index');
+        //return redirect()->route('index');
     }
     return view('auth.admin.admin_panel');
 }

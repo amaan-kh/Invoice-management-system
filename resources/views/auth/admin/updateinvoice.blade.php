@@ -27,10 +27,10 @@
                 <div class="form-group">
                     <label for="invoice_no">Invoice Number<span class="required">*</span>:</label>
                     <select id="invoice_no" name="invoice_no" required >
-                    <option disabled selected>Select Invoice number</option>
-                    @foreach ($invoices as $invoice)
-                    <option value="{{ $invoice->invoice_number }}">{{ $invoice->invoice_number }}</option>
-                    @endforeach
+                        <option disabled selected>Select Invoice number</option>
+                        @foreach ($invoices as $invoice)
+                        <option value="{{ $invoice->invoice_number }}">{{ $invoice->invoice_number }}</option>
+                        @endforeach
                     </select><br><br>
                 </div>
                 <div class="form-group">
@@ -69,10 +69,56 @@
                 </div>
             </div>
         </div>
-         <button type="submit">Update</button>
+        <button type="submit">Update</button>
     </form>
     <br>
 </div>
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        const invoiceSelect = document.getElementById('invoice_no');
+        
+
+        invoiceSelect.addEventListener('change', function() {
+            const selectedInvoiceNumber = invoiceSelect.value;
+            findInvoice(selectedInvoiceNumber);
+        });
+
+        function findInvoice(invoiceNumber) {
+            // Construct the URL for fetching invoice data from your server
+            const url = `/invoices/${invoiceNumber}`;
+            return fetch(url)   
+            .then(response => {
+            // Check if the response is successful
+                if (!response.ok) {
+                    throw new Error('Failed to fetch invoice data');
+                }
+            // Parse the JSON response
+                return response.json();
+            })
+            .then(data => {
+            // Return the fetched invoice data
+            document.getElementById('supplier_info').value = data.supplier_info;
+            document.getElementById('customer_info').value = data.customer_info;
+            document.getElementById('invoice_date').value = data.invoice_date;
+            document.getElementById('due_date').value = data.due_date;
+            document.getElementById('itemized_list').value = data.itemized_list;
+            document.getElementById('subtotal').value = data.subtotal;
+            document.getElementById('taxes').value = data.taxes;
+            document.getElementById('total_amount_due').value = data.total_amount_due;
+                
+                            console.log(data);
+
+        })
+                
+         
+            .catch(error => {
+            // Handle errors
+                console.error('Error fetching invoice data:', error);
+                return null;
+            });
+        }
+    });
+</script>
 </div>
 <a href="{{ route('admin.home') }}">Back to panel</a>
 </body>

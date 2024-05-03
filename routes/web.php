@@ -29,6 +29,7 @@ Route::post('/createInvoices', [InvoiceController::class, 'store'])->name('invoi
 Route::get('/updateInvoices', [InvoiceController::class, 'updateView'])->name('invoice.update');
 Route::post('/updateInvoices', [InvoiceController::class, 'update'])->name('invoice.update');
 Route::post('/getInvoiceData', [InvoiceController::class, 'getInvoiceData'])->name('getinvoicedata');
+Route::get('/invoices/{id}', [InvoiceController::class, 'show'])->name('apigetinvoicedata');
 
 Route::get('/viewInvoices', [InvoiceController::class, 'index'])->name('invoice.index');
 Route::get('/Invoice', [InvoiceController::class, 'pageView'])->name('invoicePage');

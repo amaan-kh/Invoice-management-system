@@ -10,8 +10,8 @@ use Illuminate\Support\Facades\Gate;
 class InvoiceController extends Controller
 {
     //
- public function create()
- {
+   public function create()
+   {
     if (!Gate::allows('isAdmin')) {
         // abort(403, 'Unauthorized');
         return redirect()->route('index');
@@ -42,23 +42,23 @@ public function page($id) {
 }
 
 public function pageUser($id, $name) {
-     if (Gate::allows('isUserName', $name) && Gate::allows('belongsToUser', $id)) {
-             $invoice = Invoice::where('invoice_number', $id)->first();
-        return view('auth.normal_user.user_singleinvoice', compact('invoice', 'name'));
-           
-        } else {
+   if (Gate::allows('isUserName', $name) && Gate::allows('belongsToUser', $id)) {
+       $invoice = Invoice::where('invoice_number', $id)->first();
+       return view('auth.normal_user.user_singleinvoice', compact('invoice', 'name'));
+
+   } else {
             // Unauthorized action
-            return redirect()->back()->with('error', 'You are not authorized to view that page.');
+    return redirect()->back()->with('error', 'You are not authorized to view that page.');
             //abort(403); // Or handle the unauthorized access in another way
-        }
+}
 }
 
 public function pageView() {
-     if (!Gate::allows('isAdmin')) {
+   if (!Gate::allows('isAdmin')) {
         // abort(403, 'Unauthorized');
-        return redirect()->route('index');
-    }
-    return redirect()->route('invoice.index');
+    return redirect()->route('index');
+}
+return redirect()->route('invoice.index');
 }
 
 public function store(Request $request) 
@@ -86,40 +86,53 @@ public function store(Request $request)
 }
 
 public function updateView(){
-     if (!Gate::allows('isAdmin')) {
+   if (!Gate::allows('isAdmin')) {
         // abort(403, 'Unauthorized');
-        return redirect()->route('index');
-    }
-    $invoices = Invoice::getInvoices();
-    return view('auth.admin.updateinvoice', compact('invoices'));
+    return redirect()->route('index');
+}
+$invoices = Invoice::getInvoices();
+return view('auth.admin.updateinvoice', compact('invoices'));
 }
 
 public function update(Request $request) {
-     if (!Gate::allows('isAdmin')) {
+   if (!Gate::allows('isAdmin')) {
         // abort(403, 'Unauthorized');
-        return redirect()->route('index');
-    }
-    \Log::info(json_encode($request->all()));
-    $message = Invoice::updateInvoice( $request->invoice_no,
-        $request->supplier_info,
-        $request->customer_info,
-        $request->invoice_date,
-        $request->due_date,
-        $request->itemized_list,
-        $request->subtotal,
-        $request->taxes,
-        $request->total_amount_due
-    );
-    $invoices = Invoice::getInvoices();
-    return view('auth.admin.updateinvoice', compact('invoices'))->with('err_message', $message);
+    return redirect()->route('index');
+}
+\Log::info(json_encode($request->all()));
+$message = Invoice::updateInvoice( $request->invoice_no,
+    $request->supplier_info,
+    $request->customer_info,
+    $request->invoice_date,
+    $request->due_date,
+    $request->itemized_list,
+    $request->subtotal,
+    $request->taxes,
+    $request->total_amount_due
+);
+$invoices = Invoice::getInvoices();
+return view('auth.admin.updateinvoice', compact('invoices'))->with('err_message', $message);
 }
 
 public function getInvoiceData(Request $request) {
-    
+
     \Log::info(json_encode($request->all()));
     $invoices = Invoice::getInvoices();
     return view('auth.admin.updateinvoice', compact('invoices'));
     
+}
+
+public function show($id) {
+    if (!Gate::allows('isAdmin')) {
+        // abort(403, 'Unauthorized');
+        return redirect()->route('index');
+    }
+    $invoice = Invoice::where('invoice_number', $id)->first();
+    if ($invoice) {
+        return response()->json($invoice);
+    } else {
+        return response()->json(['error' => 'Invoice not found'], 404);
+    }
 }
 
 public function deleteInvoiceView(){
