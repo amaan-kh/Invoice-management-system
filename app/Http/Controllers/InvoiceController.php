@@ -81,8 +81,16 @@ public function store(Request $request)
         $request->taxes,
         $request->total_amount_due
     );
-    // \Log::info(json_encode($message));
-    return view('auth.admin.createinvoice')->with('err_message', $message);
+
+    // Check if the invoice was created successfully
+    if ($message === "Invoice created successfully") {
+            
+            // If successful, redirect to a success page or perform other actions
+        return redirect()->back()->with('err_message', $message);
+    } else {
+        session()->flash('err_message', $message);
+        return redirect()->back()->withInput();
+    }
 }
 
 public function updateView(){

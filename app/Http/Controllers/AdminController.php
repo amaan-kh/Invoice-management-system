@@ -12,13 +12,14 @@ use Illuminate\Support\Facades\Gate;
 
 class AdminController extends Controller
 {
-    //
+    //returns main view of app
     public function index(){
         return view('welcome');
     }
 
+    //auth and routing to admin/user views
     public function login(Request $request){
-        //check if exists?? route acc to admin or not (admin panel/userpanel )
+
         $credentials = $request->validate([
             'name' => ['required'],
             'password' => ['required'],
@@ -34,7 +35,6 @@ class AdminController extends Controller
 
             return redirect()->intended(route('user.home', ['name' => $request->name]));
 
-            // $invoices = User::where('name', $user->name)->firstOrFail()->invoices();
             $invoices = $user->invoices()->get();
             // For debugging purposes
             // dd($invoices);
