@@ -70,18 +70,63 @@ public function store(Request $request)
     // \Log::info(json_encode($request->all()));
 
 
-    $message = Invoice::createInvoice(
-        $request->invoice_no,
-        $request->supplier_info,
-        $request->customer_info,
-        $request->invoice_date,
-        $request->due_date,
-        $request->itemized_list,
-        $request->subtotal,
-        $request->taxes,
-        $request->total_amount_due
-    );
+    // $message = Invoice::createInvoice(
+    //     $request->invoice_no,
+    //     $request->supplier_info,
+    //     $request->customer_info,
+    //     $request->invoice_date,
+    //     $request->due_date,
+    //     $request->itemized_list,
+    //     $request->subtotal,
+    //     $request->taxes,
+    //     $request->total_amount_due
+    // );
+        $data = [
+    'invoice_number' => $request->invoice_number,
+    'currency_type' => $request->currency_type,
+    'conversion_rate' => $request->conversions_rate,
+    'period_from' => $request->period_from,
+    'period_to' => $request->period_to,
+    'invoice_date' => $request->invoice_date,
+    'invoice_type' => $request->invoice_type,
+    'bill_to_company_name' => $request->bill_to_company_name,
+    'bill_to_company_address' => $request->bill_to_company_address,
+    'bill_to_company_gstin' => $request->bill_to_company_gstin,
+    'company_tax_number_id' => $request->company_tax_number_id,
+    'address' => $request->address,
+    'gstin' => $request->gstin,
+    'description' => $request->description,
+    'taxable_amount' => $request->taxable_amount,
+    'gst_type' => $request->gst_type,
+    'tax_amount' => $request->tax_amount,
+    'roundup_amount' => $request->roundup_amount,
+    'total_amount' => $request->total_amount,
+    'bank_name' => $request->bank_name,
+    'bank_branch_name' => $request->bank_branch_name,
+    'bank_account_number' => $request->bank_account_number,
+    'bank_ifsc_code' => $request->bank_ifsc_code,
+    'note' => $request->note,
+    'status' => $request->status,
+    'created_by' => auth()->user()->id, // Assuming you have authentication
+    // 'updated_by' => $request->updated_by, // Uncomment if needed
+    ];
 
+
+
+     
+    $exists = Invoice::where('invoice_number', $data['invoice_number'])->first();
+    if ($exists) {
+        $message = "Invoice number already exists";
+    }
+    else {
+        $invoice = new Invoice;
+        $invoice->fill($data);
+        $invoice->save();
+
+    $message =  "Invoice created successfully";
+
+    }
+    
     // Check if the invoice was created successfully
     if ($message === "Invoice created successfully") {
             
