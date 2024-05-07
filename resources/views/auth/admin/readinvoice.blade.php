@@ -9,12 +9,24 @@
 </head>
 <body>
         <h1>All Issued Invoices</h1>
+        @if(session()->has('err_message'))
+    <div class="alert alert-danger">
+        {{ session('err_message') }}
+    </div>
+    @endif
             <ol>
                 @foreach ($invoices as $invoice)
                 <li class="invoice-item">
                     <div class="invoice-details">
                     <p><b>Invoice Number:</b> {{ $invoice->invoice_number }} &nbsp </p>
                     <a href="{{ route('invoicePageView', ['id' => $invoice->invoice_number]) }}">View</a>
+                     &nbsp
+                      <a href="{{ route('invoice.updateget', ['id' => $invoice->invoice_number]) }}">Update</a>&nbsp 
+                      <form action="{{ route('invoice.delete') }}" method="POST">
+                        @csrf
+                        <input type="hidden" name="invoice_no" value="{{ $invoice->invoice_number }}">
+                        <button type="submit">Remove</button>
+                        </form>
                     </div>
                 </li>
                 @endforeach
@@ -22,3 +34,5 @@
         <a href="{{ route('admin.home') }}" class="back-link">BACK</a>
 </body>
 </html>
+
+

@@ -26,7 +26,7 @@ Route::post('/deleteUser', [UserController::class, 'deleteUser'])->name('user.de
 Route::get('/createInvoices', [InvoiceController::class, 'create'])->name('invoice.create');
 Route::post('/createInvoices', [InvoiceController::class, 'store'])->name('invoice.create');
 
-Route::get('/updateInvoices', [InvoiceController::class, 'updateView'])->name('invoice.update');
+Route::get('/updateInvoices/{id}', [InvoiceController::class, 'updateView'])->name('invoice.updateget');
 Route::post('/updateInvoices', [InvoiceController::class, 'update'])->name('invoice.update');
 Route::post('/getInvoiceData', [InvoiceController::class, 'getInvoiceData'])->name('getinvoicedata');
 Route::get('/invoices/{id}', [InvoiceController::class, 'show'])->name('apigetinvoicedata');

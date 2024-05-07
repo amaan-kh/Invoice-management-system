@@ -119,4 +119,10 @@ class Invoice extends Model
     {            
         return $this->belongsToMany(User::class, 'user__invoices', 'user_id', 'invoice_id');
     }
+
+    public function invoiceItems()
+{
+    return $this->hasMany(InvoiceItem::class);
+}
+
 }

@@ -61,11 +61,13 @@ class UserController extends Controller
             if($exist) {
                 $exist->delete();
                 $message = 'deleted successfully';
+                return redirect()->route('user.index')->with('error_message',$message);
                 $users = User::where('is_admin', 0)->get();
                 return view('auth.admin.deleteuser', compact('users'))->with('error_message',$message);
 
             }
             $message = 'user does not exist ';
+            return redirect()->route('user.index')->with('error_message',$message);
             $users = User::where('is_admin', 0)->get();
             return view('auth.admin.deleteuser', compact('users'))->with('error_message',$message);
         }

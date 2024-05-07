@@ -15,6 +15,7 @@
                 @foreach ($admin_users as $user)
                 <li>
                     <p>{{ $user->name }}</p>
+                    
                 </li>
                 @endforeach
             </ul>
@@ -25,6 +26,12 @@
                 @foreach($non_admin_users as $user)
                 <li>
                     <p>{{ $user->name }}</p>
+                    &nbsp 
+                      <form action="{{ route('user.delete') }}" method="POST">
+                        @csrf
+                        <input type="hidden" name="username" value="{{ $user->name }}">
+                        <button type="submit">Remove</button>
+                        </form>
                 </li>
                 @endforeach
             </ul>	

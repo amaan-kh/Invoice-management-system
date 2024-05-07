@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Invoice;
 use Illuminate\Support\Facades\Gate;    
+use Illuminate\Support\Facades\Session;
 
 
 class InvoiceController extends Controller
@@ -15,9 +16,9 @@ class InvoiceController extends Controller
     if (!Gate::allows('isAdmin')) {
         // abort(403, 'Unauthorized');
         return redirect()->route('index');
-    }
+        }
     return view('auth.admin.createinvoice');
-}
+    }
 
 public function index() 
 {   
@@ -26,7 +27,11 @@ public function index()
         return redirect()->route('index');
     }
     $invoices = Invoice::getInvoices();
-    return view('auth.admin.readinvoice', compact('invoices'));
+    $message = Session::get('error_message');
+        session()->flash('error_message', $message);
+
+
+    return view('auth.admin.readinvoice', compact('invoices'))->with('error_message', $message);
 }
 
 public function page($id) {
@@ -129,7 +134,6 @@ public function store(Request $request)
     
     // Check if the invoice was created successfully
     if ($message === "Invoice created successfully") {
-            
             // If successful, redirect to a success page or perform other actions
         return redirect()->back()->with('err_message', $message);
     } else {
@@ -138,13 +142,13 @@ public function store(Request $request)
     }
 }
 
-public function updateView(){
+public function updateView($id){
    if (!Gate::allows('isAdmin')) {
         // abort(403, 'Unauthorized');
     return redirect()->route('index');
 }
-$invoices = Invoice::getInvoices();
-return view('auth.admin.updateinvoice', compact('invoices'));
+$invoice = Invoice::where('invoice_number', $id)->first();
+return view('auth.admin.updateinvoice', compact('invoice'));
 }
 
 public function update(Request $request) {
@@ -199,7 +203,7 @@ $data = [
         
 
 $invoices = Invoice::getInvoices();
-return view('auth.admin.updateinvoice', compact('invoices'))->with('err_message', $message);
+return view('auth.admin.readinvoice', compact('invoices'))->with('err_message', $message);
 }
 
 public function getInvoiceData(Request $request) {
@@ -232,6 +236,26 @@ public function deleteInvoiceView(){
     return view('auth.admin.deleteinvoice', compact('invoices'));
 }
 
+// public function deleteInvoice(Request $request) {
+//     if (!Gate::allows('isAdmin')) {
+//         // abort(403, 'Unauthorized');
+//         return redirect()->route('index');
+//     }
+//     // \Log::info(json_encode($request->invoice_no));
+//     $exist = Invoice::where('invoice_number', $request->invoice_no)->first();
+//     if($exist) {
+//         $exist->delete();
+//         $message = 'deleted successfully';
+//         $invoices = Invoice::getInvoices();
+//         return view('auth.admin.deleteinvoice', compact('invoices'))->with('error_message',$message);
+
+//     }
+//     $message = 'Invoice does not exist ';
+//     $invoices = Invoice::getInvoices();
+//     return view('auth.admin.deleteinvoice', compact('invoices'))->with('error_message', $message);
+// }
+
+
 public function deleteInvoice(Request $request) {
     if (!Gate::allows('isAdmin')) {
         // abort(403, 'Unauthorized');
@@ -243,11 +267,18 @@ public function deleteInvoice(Request $request) {
         $exist->delete();
         $message = 'deleted successfully';
         $invoices = Invoice::getInvoices();
-        return view('auth.admin.deleteinvoice', compact('invoices'))->with('error_message',$message);
-
+            session()->flash('error_message', $message);
+            return redirect()->route('invoice.index')->with('error_message', $message);
     }
     $message = 'Invoice does not exist ';
     $invoices = Invoice::getInvoices();
-    return view('auth.admin.deleteinvoice', compact('invoices'))->with('error_message', $message);
+    session()->flash('error_message', $message);
+    return redirect()->route('invoice.index')->with('error_message', $message);
 }
+
+
 }
+
+
+
+// auth.admin.readinvoice

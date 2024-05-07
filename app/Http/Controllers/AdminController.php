@@ -135,10 +135,6 @@ public function allocate(Request $request) {
     $invoices = Invoice::all();
     
     if($user and $invoice) {
-        if($user->is_admin == 1){
-            $err_message = 'user is an admin, does not require allocation';
-            return view('auth.admin.allocate_invoice', compact('users', 'invoices'))->with('err_message', $err_message);
-        }
         $userId = $user->id;
         $invoiceId = $invoice->id;
         User_Invoice::createAllocation($userId, $invoiceId);

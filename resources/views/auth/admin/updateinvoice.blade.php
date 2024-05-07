@@ -25,10 +25,9 @@
          <!-- Invoice Number -->
                         <div class="form-group">
                             <select id="invoice_no" name="invoice_no" required >
-                        <option disabled selected>Select Invoice number</option>
-                        @foreach ($invoices as $invoice)
+                        <!-- <option disabled selected>Select Invoice number</option> -->
+                        
                         <option value="{{ $invoice->invoice_number }}">{{ $invoice->invoice_number }}</option>
-                        @endforeach
                     </select><br><br>
                         </div>
 
@@ -184,12 +183,12 @@
 </div>
 <script>
     document.addEventListener("DOMContentLoaded", function() {
-        const invoiceSelect = document.getElementById('invoice_no');
-        
-
-        invoiceSelect.addEventListener('change', function() {
+         const invoiceSelect = document.getElementById('invoice_no');
             const selectedInvoiceNumber = invoiceSelect.value;
             findInvoice(selectedInvoiceNumber);
+
+        invoiceSelect.addEventListener('change', function() {
+            
         });
 
         function findInvoice(invoiceNumber) {
@@ -265,7 +264,7 @@
     
 </script>
 </div>
-<a href="{{ route('admin.home') }}">Back to panel</a>
+<a href="{{ route('invoice.index') }}">Back to panel</a>
 </body>
 </html>
 

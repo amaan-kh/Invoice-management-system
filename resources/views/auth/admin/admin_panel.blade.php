@@ -13,18 +13,18 @@
 		<div class="column">
 			<h3>User Actions</h3>
 			<ul>
-				<li><a href="{{ route('user.index') }}">View Users</a></li>
+				<li><a href="{{ route('user.index') }}">Users Actions</a></li>
 				<li><a href="{{ route('user.create') }}">Create User</a></li>
-				<li><a href="{{ route('user.delete') }}">Delete User</a></li>
+				<!-- <li><a href="{{ route('user.delete') }}">Delete User</a></li> -->
 			</ul>
 		</div>
 		<div class="column">
 			<h3>Invoice Actions</h3>
 			<ul>
-				<li><a href="{{ route('invoice.index') }}">View Invoices</a></li>
+				<li><a href="{{ route('invoice.index') }}">Manage Invoice</a></li>
 				<li><a href="{{ route('invoice.create') }}">Create Invoice</a></li>
-				<li><a href="{{ route('invoice.delete') }}">Delete Invoice</a></li>
-				<li><a href="{{ route('invoice.update') }}">Update Invoice</a></li>
+				<!-- <li><a href="{{ route('invoice.delete') }}">Delete Invoice</a></li> -->
+				<!-- <li><a href="{{ route('invoice.update') }}">Update Invoice</a></li> -->
 			</ul>
 		</div>
 		<div class="column">
