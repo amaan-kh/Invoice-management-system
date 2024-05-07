@@ -55,15 +55,30 @@ class AdminController extends Controller
         return redirect('/');
     }
 
-    public function allocateView() {
+    // public function allocateView($id) {
+    //     if (!Gate::allows('isAdmin')) {
+    //         // abort(403, 'Unauthorized');
+    //         return redirect()->route('index');
+    //     }
+    //     $users = User::where('is_admin', 0)->get();
+    //     $invoices = Invoice::all();
+    //     return view('auth.admin.allocate_invoice', compact('users', 'invoices'));
+    // }
+
+    public function allocateView($id) {
         if (!Gate::allows('isAdmin')) {
             // abort(403, 'Unauthorized');
             return redirect()->route('index');
         }
         $users = User::where('is_admin', 0)->get();
-        $invoices = Invoice::all();
-        return view('auth.admin.allocate_invoice', compact('users', 'invoices'));
+        $invoice = Invoice::where('invoice_number', $id)->first();
+        if (is_null($users) || is_null($invoice)) {
+        return redirect()->back()->with('error_message', 'Invoice or user not found.');
     }
+
+        return view('auth.admin.allocate_invoice', compact('users', 'invoice'));
+    }
+
 
     public function getDash(){
      if (!Gate::allows('isAdmin')) {
@@ -125,6 +140,7 @@ public function allocate(Request $request) {
     }
          // \Log::info(json_encode($request->all()));
     
+    //dd($request->all());
     $username = $request->name;
     $invoice_no = $request->invoice_number;
 
@@ -141,12 +157,15 @@ public function allocate(Request $request) {
     }
     else{
         $err_message = 'user or invoice does not exist'; 
-        return view('auth.admin.allocate_invoice', compact('users', 'invoices'))->with('err_message', $err_message);
+        return redirect()->route('allocatIndex',['id' => $invoice_no])->with('err_message', $err_message);
+        return view('auth.admin.allocate_invoice', compact('users', 'invoice'))->with('err_message', $err_message);
     }
     
 
     $err_message = "allocation successfull";
-    return view('auth.admin.allocate_invoice', compact('users', 'invoices'))->with('err_message', $err_message);
+    return redirect()->route('allocatIndex',['id' => $invoice_no])->with('err_message', $err_message);
+
+    return view('auth.admin.allocate_invoice', compact('users', 'invoice'))->with('err_message', $err_message);
 
 }
 public function revokeAllocationView(){

@@ -22,6 +22,7 @@
                     <a href="{{ route('invoicePageView', ['id' => $invoice->invoice_number]) }}">View</a>
                      &nbsp
                       <a href="{{ route('invoice.updateget', ['id' => $invoice->invoice_number]) }}">Update</a>&nbsp 
+                      <a href="{{ route('allocatIndex', ['id' => $invoice->invoice_number]) }}">Allocate</a>&nbsp 
                       <form action="{{ route('invoice.delete') }}" method="POST">
                         @csrf
                         <input type="hidden" name="invoice_no" value="{{ $invoice->invoice_number }}">

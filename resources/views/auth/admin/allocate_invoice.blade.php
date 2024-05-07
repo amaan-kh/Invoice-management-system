@@ -14,25 +14,18 @@
                 @csrf
                 <div class="userdata">
                  <label for="name">Username<span class="required">*</span>:</label><br>
-                 <!--   <input type="text" id="name" name="name" > -->
                  <select id="dropdown-select-name" onchange="updateInput1()" required>
                     <option disabled selected>Select a username</option>
                     @foreach ($users as $user)
                     <option value="{{ $user->name }}">{{ $user->name }}</option>
                     @endforeach
                 </select>
-                <br><br>
-                <!-- Hidden input field to store the selected value -->
                 <input type="hidden" id="selected-value-name" name="name" required>
+                <br><br>
+                
+                <label for="invoice_number">Invoice Number<span class="required">*</span>:{{$invoice->invoice_number}}</label><br>
 
-                <label for="invoice_number">Invoice Number<span class="required">*</span>:</label><br>
-                <select id="dropdown-select-number" onchange="updateInput2()" required>
-                    <option disabled selected>Select an invoice number</option>
-                    @foreach ($invoices as $invoice)
-                    <option value="{{ $invoice->invoice_number }}">{{ $invoice->invoice_number }}</option>
-                    @endforeach
-                </select>
-                <input type="hidden" id="selected-value-number" name="invoice_number" required>
+                <input type="hidden" id="selected-value-number" name="invoice_number" value="{{$invoice->invoice_number}}"required>
                 <!-- <input type="number" id="invoice_number" name="invoice_number" required> -->
                 <br>
                 <span>@if(isset($err_message))
@@ -51,7 +44,7 @@
 <br>
 <br>
   
-    <a href="{{ route('admin.home') }}" id="back">Back to panel</a>
+    <a href="{{ route('invoice.index') }}" id="back">Back to panel</a>
 
     </div>
 

@@ -13,7 +13,7 @@
 		<div class="column">
 			<h3>User Actions</h3>
 			<ul>
-				<li><a href="{{ route('user.index') }}">Users Actions</a></li>
+				<li><a href="{{ route('user.index') }}"> Manage User</a></li>
 				<li><a href="{{ route('user.create') }}">Create User</a></li>
 				<!-- <li><a href="{{ route('user.delete') }}">Delete User</a></li> -->
 			</ul>
@@ -30,7 +30,7 @@
 		<div class="column">
 			<h3>Allocate Invoices</h3>
 			<ul >
-				<li><a href="{{ route('allocatIndex') }}">Allocate Invoices</a></li>
+				
 				<li><a href="{{ route('allocatViews') }}">View Allocations</a></li>
 				<li><a href="{{ route('revokeAllocation') }}">Revoke Access</a></li>
 			</ul>

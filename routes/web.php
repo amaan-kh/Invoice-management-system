@@ -42,7 +42,7 @@ Route::get('/InvoiceUser/{id}/{name}', [InvoiceController::class, 'pageUser'])->
 Route::get('/deleteInvoice', [InvoiceController::class, 'deleteInvoiceView'])->name('invoice.delete');
 Route::post('/deleteInvoice', [InvoiceController::class, 'deleteInvoice'])->name('invoice.delete');
 
-Route::get('/taskAllocation', [AdminController::class, 'allocateView'])->name('allocatIndex');
+Route::get('/taskAllocation/{id}', [AdminController::class, 'allocateView'])->name('allocatIndex');
 Route::post('/taskAllocation', [AdminController::class, 'allocate'])->name('allocate');
 Route::get('/taskView', [AdminController::class, 'taskView'])->name('allocatViews');
 Route::get('/revokeAllocation', [AdminController::class, 'revokeAllocationView'])->name('revokeAllocation');
