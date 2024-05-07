@@ -152,17 +152,52 @@ public function update(Request $request) {
         // abort(403, 'Unauthorized');
     return redirect()->route('index');
 }
-\Log::info(json_encode($request->all()));
-$message = Invoice::updateInvoice( $request->invoice_no,
-    $request->supplier_info,
-    $request->customer_info,
-    $request->invoice_date,
-    $request->due_date,
-    $request->itemized_list,
-    $request->subtotal,
-    $request->taxes,
-    $request->total_amount_due
-);
+$data = [
+    'invoice_number' => $request->invoice_no,
+    'currency_type' => $request->currency_type,
+    'conversion_rate' => $request->conversions_rate,
+    'period_from' => $request->period_from,
+    'period_to' => $request->period_to,
+    'invoice_date' => $request->invoice_date,
+    'invoice_type' => $request->invoice_type,
+    'bill_to_company_name' => $request->bill_to_company_name,
+    'bill_to_company_address' => $request->bill_to_company_address,
+    'bill_to_company_gstin' => $request->bill_to_company_gstin,
+    'company_tax_number_id' => $request->company_tax_number_id,
+    'address' => $request->address,
+    'gstin' => $request->gstin,
+    'description' => $request->description,
+    'taxable_amount' => $request->taxable_amount,
+    'gst_type' => $request->gst_type,
+    'tax_amount' => $request->tax_amount,
+    'roundup_amount' => $request->roundup_amount,
+    'total_amount' => $request->total_amount,
+    'bank_name' => $request->bank_name,
+    'bank_branch_name' => $request->bank_branch_name,
+    'bank_account_number' => $request->bank_account_number,
+    'bank_ifsc_code' => $request->bank_ifsc_code,
+    'note' => $request->note,
+    'status' => $request->status,
+    //'created_by' => auth()->user()->id, // Assuming you have authentication
+    'updated_by' => auth()->user()->id, // Uncomment if needed
+    ];
+
+
+    $invoice = Invoice::where('invoice_number', $request->invoice_no)->first();
+    $message = "";   
+
+        if (!$invoice) {
+        // Handle the error, such as returning an error message
+            $message = 'Invoice not found';
+        }
+        else{
+            $invoice->fill($data);
+            $invoice->save();
+            $message =  "Invoice updated successfully";
+        }
+            
+        
+
 $invoices = Invoice::getInvoices();
 return view('auth.admin.updateinvoice', compact('invoices'))->with('err_message', $message);
 }

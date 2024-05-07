@@ -20,7 +20,7 @@
                 @foreach ($invoices as $invoice)
                     <option value="{{ $invoice->invoice_number }}">{{ $invoice->invoice_number }}</option>
                 @endforeach
-            </select><br><br>
+        </select><br><br>
         <button type="submit">Remove</button>
     </form>
     <br>
