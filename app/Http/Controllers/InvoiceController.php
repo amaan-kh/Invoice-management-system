@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\Invoice;
 use Illuminate\Support\Facades\Gate;    
 use Illuminate\Support\Facades\Session;
+use App\Models\InvoiceItem;
 
 
 class InvoiceController extends Controller
@@ -43,13 +44,16 @@ public function page($id) {
     if (!$invoice) {
         return redirect()->back()->with('error', 'Invoice not found');
     }
-    return view('auth.admin.singleinvoice', compact('invoice'));
+    $invoiceItems = $invoice->invoiceItems()->get();
+    
+    return view('auth.admin.singleinvoice', compact('invoice', 'invoiceItems'));
 }
 
 public function pageUser($id, $name) {
    if (Gate::allows('isUserName', $name) && Gate::allows('belongsToUser', $id)) {
        $invoice = Invoice::where('invoice_number', $id)->first();
-       return view('auth.normal_user.user_singleinvoice', compact('invoice', 'name'));
+       $invoiceItems = $invoice->invoiceItems()->get();
+       return view('auth.normal_user.user_singleinvoice', compact('invoice', 'name', 'invoiceItems'));
 
    } else {
             // Unauthorized action
@@ -276,6 +280,55 @@ public function deleteInvoice(Request $request) {
     return redirect()->route('invoice.index')->with('error_message', $message);
 }
 
+public function addItemView($id) {
+    if (!Gate::allows('isAdmin')) {
+        // abort(403, 'Unauthorized');
+    return redirect()->route('index');
+    }
+
+    $invoice = Invoice::where('invoice_number', $id)->first();
+
+    if (!$invoice) {
+        return redirect()->back()->with('error', 'Invoice not found.');
+    }
+
+    $invoiceId = $invoice->id;
+    $invoice_number = $invoice->invoice_number;
+
+    return view('auth.admin.addInvoiceItem', ['invoice_id' => $invoiceId, 'invoice_number' => $invoice_number]);
+}
+
+public function addItemPost(Request $request) {
+    if (!Gate::allows('isAdmin')) {
+        // abort(403, 'Unauthorized');
+    return redirect()->route('index');
+    }
+
+    // dd($request->all());
+     // Create an associative array with the request data
+    $data = [
+        'invoice_id' => $request->input('invoice_id'),
+        'asset_tag' => $request->input('asset_tag'),
+        'part_number' => $request->input('part_number'),
+        'serial_number' => $request->input('serial_number'),
+        'hsn_code' => $request->input('hsn_code'),
+        'sac_code' => $request->input('sac_code'),
+        'description' => $request->input('description'),
+        'gst_percent' => $request->input('gst_percent'),
+        'taxable_amount' => $request->input('taxable_amount'),
+        'cgst' => $request->input('cgst'),
+        'sgst' => $request->input('sgst'),
+        'igst' => $request->input('igst'),
+        'tax_amount' => $request->input('tax_amount'),
+        'total_amount' => $request->input('total_amount'),
+    ];
+
+    // Insert data into your table using Eloquent
+    InvoiceItem::create($data);
+
+    // Redirect the user to a success page or wherever needed
+    return redirect()->route('invoice.index');
+}
 
 }
 

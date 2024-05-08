@@ -39,6 +39,28 @@
      @if ($invoice->updated_by)
         <p><b>Updated By:</b> {{ $invoice->updated_by }}</p>
     @endif
+     @if(isset($invoiceItems) && count($invoiceItems) > 0)
+    <h3>Invoice Items </h3>
+    @foreach ($invoiceItems as $item)
+    <div>
+      
+        <p>Asset Tag: {{ $item->asset_tag }}</p>
+        <p>Part Number: {{ $item->part_number }}</p>
+        <p>Serial Number: {{ $item->serial_number }}</p>
+        <p>HSN Code: {{ $item->hsn_code }}</p>
+        <p>SAC Code: {{ $item->sac_code }}</p>
+        <p>Description: {{ $item->description }}</p>
+        <p>GST Percent: {{ $item->gst_percent }}</p>
+        <p>Taxable Amount: {{ $item->taxable_amount }}</p>
+        <p>CGST: {{ $item->cgst }}</p>
+        <p>SGST: {{ $item->sgst }}</p>
+        <p>IGST: {{ $item->igst }}</p>
+        <p>Tax Amount: {{ $item->tax_amount }}</p>
+        <p>Total Amount: {{ $item->total_amount }}</p>
+    </div>
+    <hr> <!-- Optional: Add a horizontal line between items for clarity -->
+@endforeach
+   @endif
          </div>        
      </div>
 
