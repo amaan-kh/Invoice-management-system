@@ -1,16 +1,15 @@
-<!DOCTYPE html>
-<html>
-<head>
-	<meta charset="utf-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<title>NEW INVOICE</title>
-    <link rel="stylesheet" href="{{ asset('css/createinvoice.css') }}">
-    <style type="text/css">
-        
+@extends('layouts.adminlayout')
 
-</style>
-</head>
-<body>
+@section('title')
+	NEW INVOICE
+@endsection
+
+@section('style')
+    <link rel="stylesheet" href="{{ asset('css/createinvoice.css') }}">
+@endsection
+
+
+@section('maincontent')
    <h2>Create New Invoice</h2>
    <div class="create-user-container">
 
@@ -177,12 +176,12 @@
                             </select>
                         </div>
 
-                        <button type="submit" class="btn btn-primary">Create Invoice</button>
+                        <button type="submit" id="createbtn" class="btn btn-primary">Create Invoice</button>
     </form>
     <br>
 </div>
 </div>
-<a href="{{ route('admin.home') }}">Back to panel</a>
+<a id="backbtn" href="{{ route('admin.home') }}">Back to panel</a>
 <script>
     // Function to calculate total amount due
     function calculateTotalAmountDue() {
@@ -198,7 +197,6 @@
         document.getElementById("taxes").addEventListener("input", calculateTotalAmountDue);
     });
 </script>
-</body>
-</html>
+@endsection
 
 

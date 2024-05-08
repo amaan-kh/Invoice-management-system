@@ -1,13 +1,15 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SHARED INVOICES</title>
+@extends('layouts.adminlayout')
+
+@section('title')
+    SHARED INVOICES
+@endsection
+
+@section('style')
     <link rel="stylesheet" href="{{ asset('css/readallocations.css') }}">
-</head>
-<body>
-    <h1>All Shared Invoices</h1>
+@endsection
+
+@section('maincontent')
+    <h3>All Shared Invoices</h3>
     <div class="container">
         <div class="invoice-list">
             <div class="user-list">
@@ -26,7 +28,6 @@
             </ol>   
         </div>          
     </div>
-    <a href="{{ route('admin.home') }}" class="back-link">Back to Panel</a>
 </div>
-</body>
-</html>
+<a href="{{ route('admin.home') }}" class="back-link">Back to Panel</a>
+@endsection

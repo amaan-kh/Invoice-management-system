@@ -1,45 +1,44 @@
-<!DOCTYPE html>
-<html>
-<head>
-	<meta charset="utf-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<title>ADMIN PANEL</title>
-	<link rel="stylesheet" href="{{ asset('css/adminpanel.css')}}">
-	 
-</head>
-<body>
-	<h1>Admin Dashboard</h1>
-	<div class="crud-links">
-		<div class="column">
-			<h3>User Actions</h3>
-			<ul>
-				<li><a href="{{ route('user.index') }}"> Manage User</a></li>
-				<li><a href="{{ route('user.create') }}">Create User</a></li>
-				<!-- <li><a href="{{ route('user.delete') }}">Delete User</a></li> -->
-			</ul>
-		</div>
-		<div class="column">
-			<h3>Invoice Actions</h3>
-			<ul>
-				<li><a href="{{ route('invoice.index') }}">Manage Invoice</a></li>
-				<li><a href="{{ route('invoice.create') }}">Create Invoice</a></li>
-				<!-- <li><a href="{{ route('invoice.delete') }}">Delete Invoice</a></li> -->
-				<!-- <li><a href="{{ route('invoice.update') }}">Update Invoice</a></li> -->
-			</ul>
-		</div>
-		<div class="column">
-			<h3>Allocate Invoices</h3>
-			<ul >
-				
-				<li><a href="{{ route('allocatViews') }}">View Allocations</a></li>
-				<li><a href="{{ route('revokeAllocation') }}">Revoke Access</a></li>
-			</ul>
-		</div>
-	</div>
-	<form method="POST" action="{{ route('logout') }}">
-		@csrf
-		<button type="submit">Logout</button>
-	</form>
+@extends('layouts.adminlayout')
+@section('title')
+IMS
+@endsection
+@section('maincontent')
+<div class="main-panel">
+  <div class="content-wrapper">
+    <div class="row">
+      <div class="col-sm-12">
+        <div class="home-tab">
 
-</body>
-</html>
+          <div class="tab-content tab-content-basic">
+            <div class="tab-pane fade show active" id="overview" role="tabpanel" aria-labelledby="overview">
+              <div class="row">
+                <div class="col-sm-12">
+                  <div class="statistics-details d-flex align-items-center justify-content-around">
+                    <div>
+                      <p class="statistics-title">Total Users Added</p>
+                      <h3 class="rate-percentage">50</h3>
+                      <p class="text-danger d-flex"><i class="mdi mdi-menu-down"></i><span>-0.5%</span></p>
+                    </div>
+                    <div>
+                      <p class="statistics-title">Total Invoices Created</p>
+                      <h3 class="rate-percentage">7,682</h3>
+                      <p class="text-success d-flex"><i class="mdi mdi-menu-up"></i><span>+0.1%</span></p>
+                    </div>
+                    <div>
+                      <p class="statistics-title">Total Invoices Shared</p>
+                      <h3 class="rate-percentage">68.8</h3>
+                      <p class="text-danger d-flex"><i class="mdi mdi-menu-down"></i><span>68.8</span></p>
+                    </div>
+
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+@endsection
+

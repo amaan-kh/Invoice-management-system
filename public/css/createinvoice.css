@@ -1,17 +1,5 @@
-/* Resetting default margin and padding for all elements */
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
 
-/* Body styles */
-body {
-    font-family: Arial, sans-serif;
-    background-color: #f0f0f0;
-    padding: 20px;
-}
-
+    
 /* Container styles */
 .create-user-container {
 /*    width: 400px;*/
@@ -45,14 +33,11 @@ form {
 }
 
 /* Form group styles */
-.form-group {
+/*.form-group {
     margin-bottom: 20px;
 }
+*/
 
-.container2 {
-    display: flex;
-    justify-content: space-around;
-}
 
 /* Label styles */
 label {
@@ -65,14 +50,14 @@ input[type="text"],
 input[type="date"],
 input[type="number"],
 textarea {
-    width: 100%;
+    width: 40%;
     padding: 10px;
     border: 1px solid #ccc;
     border-radius: 5px;
 }
 
 /* Button styles */
-button[type="submit"] {
+#createbtn {
     background-color: #007bff;
     color: #fff;
     border: none;
@@ -86,12 +71,12 @@ button[type="submit"] {
 
 }
 
-button[type="submit"]:hover {
+#createbtn:hover {
     background-color: #0056b3;
 }
 
 /* Link styles */
-a {
+#backbtn{
     display: block;
     text-align: center;
     margin-top: 20px;
@@ -99,15 +84,11 @@ a {
     text-decoration: none;
 }
 
-a:hover {
+#backbtn:hover {
     text-decoration: underline;
 }
 
-#itemized_list{
-    height: 150px; 
-    overflow-y: auto;
-    resize: none;
-}
+
 .required {
     color: red;
     font-size: 18px; /* Adjust the size as needed */

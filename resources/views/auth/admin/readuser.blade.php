@@ -1,12 +1,15 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ALL USERS</title>
+@extends('layouts.adminlayout')
+
+
+@section('title')
+ALL USERS
+@endsection
+
+@section('style')
     <link rel="stylesheet" href="{{ asset('css/readuser.css') }}">
-</head>
-<body>
+@endsection
+
+@section('maincontent')
     <div class="container">
         <h1>All Current Users</h1>
         <div class="user-list">
@@ -40,5 +43,4 @@
             <a href="{{ route('admin.home') }}" id="back">BACK</a>
         </div>
     </div>
-</body>
-</html>
+@endsection

@@ -1,12 +1,15 @@
-<!DOCTYPE html>
-<html lang="en">
-<head> 
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>INVOICE</title>
+@extends('layouts.adminlayout')
+
+@section('title')
+INVOICE
+@endsection
+
+@section('style')
     <link rel="stylesheet" href="{{ asset('css/singleinvoice.css') }}">
-</head>
-<body>
+@endsection
+
+
+@section('maincontent')
 <div class="container">
 
 <div class="invoice-list">
@@ -71,9 +74,9 @@
           
 </div>
 
-<a href="{{ route('invoice.index') }}" class="back-link">BACK</a>
+
 
 </div>
+<a href="{{ route('invoice.index') }}" class="back-link">BACK</a>
 
-</body>
-</html>
+@endsection

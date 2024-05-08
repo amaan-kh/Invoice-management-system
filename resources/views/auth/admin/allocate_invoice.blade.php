@@ -1,13 +1,16 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>INVOICE SHARING</title>
+@extends('layouts.adminlayout')
+
+@section('title')
+INVOICE SHARING
+@endsection
+
+@section('style')
     <link rel="stylesheet" type="text/css" href="{{ asset('css/allocateinvoice.css')}}">
-</head>
-<body>
-    <h1>Invoice Sharing</h1>
+@endsection
+
+
+@section('maincontent')
+    <h3>Invoice Sharing</h3>
     <div class="container">
         <div class="data">
             <form action="{{ route('allocate') }}" method="POST">
@@ -43,14 +46,12 @@
         
 <br>
 <br>
-  
-    <a href="{{ route('invoice.index') }}" id="back">Back to panel</a>
-
     </div>
+    <a href="{{ route('invoice.index') }}" id="back">Back to panel</a>
+@endsection
 
-    
 
-
+@section('script')
 <script>
     // Function to update the hidden input field with the selected value
     function updateInput1() {
@@ -62,5 +63,5 @@
         document.getElementById('selected-value-number').value = selectedValue2;
     }
 </script>
-</body>
-</html>
+@endsection
+

@@ -1,12 +1,14 @@
-<!DOCTYPE html>
-<html>
-<head>
-	<meta charset="utf-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<title>NEW USER</title>
+@extends('layouts.adminlayout')
+
+@section('title')
+	NEW USER
+@endsection
+
+@section('style')
     <link rel="stylesheet" href="{{ asset('css/createuser.css') }}">
-</head>
-<body>
+@endsection
+
+@section('maincontent')
     <h2>Create New User</h2>
     <div class="create-user-container">
         
@@ -38,8 +40,6 @@
     @endif
     <br>
 </div>
-<a href="{{ route('admin.home') }}">Back to panel</a>
+<a id="backbtn" href="{{ route('admin.home') }}">Back to panel</a>
 
-
-</body>
-</html>
+@endsection

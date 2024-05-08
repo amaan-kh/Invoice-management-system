@@ -1,16 +1,14 @@
-<!DOCTYPE html>
-<html>
-<head>
-	<meta charset="utf-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<title>NEW INVOICE</title>
-    <link rel="stylesheet" href="{{ asset('css/createinvoice.css') }}">
-    <style type="text/css">
-        
+@extends('layouts.adminlayout')
 
-</style>
-</head>
-<body>
+@section('title')
+NEW INVOICE
+@endsection
+
+@section('style')
+    <link rel="stylesheet" href="{{ asset('css/createinvoice.css') }}">
+@endsection
+
+@section('maincontent')
    <h2>Create New Invoice</h2>
    <div class="create-user-container">
 
@@ -74,10 +72,5 @@
 </div>
 </div>
 <a href="{{ route('invoice.index') }}">Back to panel</a>
-<script>
-    
-</script>
-</body>
-</html>
-
+@endsection
 
