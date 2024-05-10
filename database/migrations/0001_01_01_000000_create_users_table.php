@@ -16,7 +16,9 @@ return new class extends Migration
             $table->string('name')->unique();
             $table->string('password');
             $table->integer('is_admin');
+            
             $table->timestamps();
+
         });
 
        

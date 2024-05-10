@@ -38,12 +38,12 @@ Revoke Access
             <input type="hidden" id="selected-value-number" name="invoice_number" >
             <!-- <input type="number" id="invoice_number" name="invoice_number" required> -->
             <br>
-            <span>@if(isset($err_message))
-                <div class="alert alert-danger">
-                    {{ $err_message }}
-                </div>
-                @endif
-            </span>
+            
+            @if(session()->has('err_message'))
+    <div class="alert alert-danger">
+        {{ session('err_message') }}
+    </div>
+    @endif
             <br>    
             <button type="submit" id="revoke-button">Revoke</button>
         </div>

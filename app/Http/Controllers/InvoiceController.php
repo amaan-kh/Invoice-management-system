@@ -7,6 +7,8 @@ use App\Models\Invoice;
 use Illuminate\Support\Facades\Gate;    
 use Illuminate\Support\Facades\Session;
 use App\Models\InvoiceItem;
+use Illuminate\Pagination\Paginator;
+
 
 
 class InvoiceController extends Controller
@@ -27,7 +29,8 @@ public function index()
         // abort(403, 'Unauthorized');
         return redirect()->route('index');
     }
-    $invoices = Invoice::getInvoices();
+    // $invoices = Invoice::getInvoices();
+    $invoices = Invoice::paginate(3);
     $message = Session::get('error_message');
         session()->flash('error_message', $message);
 

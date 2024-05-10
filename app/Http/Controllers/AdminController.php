@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Auth;
 use App\Models\User;
 use App\Models\Invoice; 
 use App\Models\User_Invoice;
+use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Gate;    
 
 
@@ -73,20 +74,20 @@ class AdminController extends Controller
         $users = User::where('is_admin', 0)->get();
         $invoice = Invoice::where('invoice_number', $id)->first();
         if (is_null($users) || is_null($invoice)) {
-        return redirect()->back()->with('error_message', 'Invoice or user not found.');
-    }
+            return redirect()->back()->with('error_message', 'Invoice or user not found.');
+        }
 
         return view('auth.admin.allocate_invoice', compact('users', 'invoice'));
     }
 
 
     public function getDash(){
-     if (!Gate::allows('isAdmin')) {
+       if (!Gate::allows('isAdmin')) {
             // abort(403, 'Unauthorized');
         return redirect()->back()->with('error', 'You are not authorized to view that page.');
         //return redirect()->route('index');
     }
-     $userCount = User::count();
+    $userCount = User::count();
     $invoiceCount = Invoice::count();
     $allocateCount = User_Invoice::count();
     return view('auth.admin.admin_panel', compact('userCount', 'invoiceCount', 'allocateCount'));
@@ -108,7 +109,7 @@ public function getUserDash($name){
 }
 
 public function taskView() {
- if (!Gate::allows('isAdmin')) {
+   if (!Gate::allows('isAdmin')) {
             // abort(403, 'Unauthorized');
     return redirect()->route('index');
 }
@@ -141,9 +142,7 @@ public function allocate(Request $request) {
             // abort(403, 'Unauthorized');
         return redirect()->route('index');
     }
-         // \Log::info(json_encode($request->all()));
     
-    //dd($request->all());
     $username = $request->name;
     $invoice_no = $request->invoice_number;
 
@@ -159,56 +158,64 @@ public function allocate(Request $request) {
         User_Invoice::createAllocation($userId, $invoiceId);
     }
     else{
+        
         $err_message = 'user or invoice does not exist'; 
-        return redirect()->route('allocatIndex',['id' => $invoice_no])->with('err_message', $err_message);
-        return view('auth.admin.allocate_invoice', compact('users', 'invoice'))->with('err_message', $err_message);
+        session()->flash('err_message', $err_message);
+        return redirect()->back()->with('err_message', $err_message);
     }
     
 
     $err_message = "allocation successfull";
-    return redirect()->route('allocatIndex',['id' => $invoice_no])->with('err_message', $err_message);
-
-    return view('auth.admin.allocate_invoice', compact('users', 'invoice'))->with('err_message', $err_message);
+    session()->flash('err_message', $err_message);
+    return redirect()->back()->with('err_message', 'Allocation was successfull');
 
 }
 public function revokeAllocationView(){
- if (!Gate::allows('isAdmin')) {
+   if (!Gate::allows('isAdmin')) {
             // abort(403, 'Unauthorized');
-            return redirect()->route('index');
-        }
-        $users = User::where('is_admin', 0)->get();
-        $invoices = Invoice::all();
-        return view('auth.admin.deleteallocations', compact('users', 'invoices'));
+    return redirect()->route('index');
+}
+$users = User::where('is_admin', 0)->get();
+$invoices = Invoice::all();
+return view('auth.admin.deleteallocations', compact('users', 'invoices'));
 }
 
 public function deallocate(Request $request) {
     if (!Gate::allows('isAdmin')) {
             // abort(403, 'Unauthorized');
-            return redirect()->route('index');
-        }
-        $users = User::where('is_admin', 0)->get();
-        $invoices = Invoice::all();
-        $user = User::where('name', $request->name)->first();
-        $invoice = Invoice::where('invoice_number', $request->invoice_number)->first();
-        
-        if($user && $invoice){
-            //dd([$user->id, $invoice->id]);
-            User_Invoice::deleteAllocation($user->id, $invoice->id);
-
-        }
-        else{
-        $err_message = 'user or invoice does not exist'; 
-        return view('auth.admin.deleteallocations', compact('users', 'invoices'))->with('err_message', $err_message);
-         }
-        $err_message = "invoice revoked from user";
-    return view('auth.admin.deleteallocations', compact('users', 'invoices'))->with('err_message', $err_message);
+        return redirect()->route('index');
     }
+    $users = User::where('is_admin', 0)->get();
+    $invoices = Invoice::all();
+    $user = User::where('name', $request->name)->first();
+    $invoice = Invoice::where('invoice_number', $request->invoice_number)->first();
+    $err_message = "invoice revoked from user";
+    if($user && $invoice){
+            //dd([$user->id, $invoice->id]);
+        User_Invoice::deleteAllocation($user->id, $invoice->id);
+
+    }
+    else{
+        $err_message = 'user or invoice does not exist'; 
+
+    }
+    session()->flash('err_message', $err_message);
+    session()->flash('users', $users);
+    session()->flash('invoices', $invoices);
+
+// Redirect back with flash data
+    return redirect()->back()->with([
+        'err_message' => $err_message,
+        'users' => $users,
+        'invoices' => $invoices,
+    ]);
+}
 
 public function getDashData() {
     if (!Gate::allows('isAdmin')) {
             // abort(403, 'Unauthorized');
-            return redirect()->route('index');
-        }
+        return redirect()->route('index');
+    }
     $userCount = User::count();
     $invoiceCount = Invoice::count();
     $allocateCount = User_Invoice::count();

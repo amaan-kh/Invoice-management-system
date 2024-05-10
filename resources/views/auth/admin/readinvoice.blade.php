@@ -6,6 +6,8 @@ ALL INVOICES
 
 @section('style')
     <link rel="stylesheet" type="text/css" href="{{ asset('css/readinvoice.css')}}">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+
 @endsection
 
 @section('maincontent')
@@ -34,5 +36,10 @@ ALL INVOICES
                 </li>
                 @endforeach
             </ol>
+
+
+    <!-- Display Pagination Links -->
+    {{ $invoices->links() }}
+
         <a href="{{ route('admin.home') }}" class="back-link">BACK</a>
 @endsection
