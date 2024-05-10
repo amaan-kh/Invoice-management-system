@@ -23,12 +23,10 @@ UPDATE INVOICE
         @csrf <!-- Laravel CSRF protection token -->
         <!-- Invoice Number -->
         <div class="form-group">
-            <select id="invoice_no" name="invoice_no" required >
-                <!-- <option disabled selected>Select Invoice number</option> -->
-
-                <option value="{{ $invoice->invoice_number }}">{{ $invoice->invoice_number }}</option>
-            </select><br><br>
+             <label for="invoice_number">Invoice Number: {{ $invoice->invoice_number }}</label>
+             <input hidden type="number" id="invoice_no" name="invoice_no" value="{{ $invoice->invoice_number }}">
         </div>
+        
 
         <!-- Currency Type -->
         <div class="form-group">
@@ -176,13 +174,13 @@ UPDATE INVOICE
             </select>
         </div>
 
-        <button type="submit" class="btn btn-primary">Create Invoice</button>
+        <button type="submit" class="btn btn-primary" id="updateBtn">Update </button>
     </form>
     <br>
 </div>
 
 </div>
-<a href="{{ route('invoice.index') }}">Back to panel</a>
+<a href="{{ route('invoice.index') }}" id="backBtn">Back to panel</a>
 @endsection
 
 @section('scripts')

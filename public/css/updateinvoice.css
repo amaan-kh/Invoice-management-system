@@ -59,7 +59,7 @@ textarea {
 }
 
 /* Button styles */
-button[type="submit"] {
+#updateBtn{
     background-color: #007bff;
     color: #fff;
     border: none;
@@ -73,12 +73,12 @@ button[type="submit"] {
 
 }
 
-button[type="submit"]:hover {
+#updateBtn:hover {
     background-color: #0056b3;
 }
 
 /* Link styles */
-a {
+#backBtn {
     display: block;
     text-align: center;
     margin-top: 20px;
@@ -86,7 +86,7 @@ a {
     text-decoration: none;
 }
 
-a:hover {
+#backBtn:hover {
     text-decoration: underline;
 }
 

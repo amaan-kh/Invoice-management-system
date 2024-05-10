@@ -9,7 +9,7 @@ NEW INVOICE
 @endsection
 
 @section('maincontent')
-   <h2>Create New Invoice</h2>
+   <h2>Add Invoice Item</h2>
    <div class="create-user-container">
 
 
@@ -23,7 +23,7 @@ NEW INVOICE
 <div class="container"> 
    <form action="{{ route('addItemPost') }}" method="POST" >
     @csrf
-    <label for="invoice_id">Invoice Number: {{$invoice_number}}</label><br>
+    <label for="invoice_id">For Invoice Number: {{$invoice_number}}</label><br>
     <input hidden type="number" id="invoice_id" name="invoice_id" value="{{$invoice_id}}" required><br>
 
     <label for="asset_tag">Asset Tag:</label><br>
@@ -65,7 +65,7 @@ NEW INVOICE
     <label for="total_amount">Total Amount:</label><br>
     <input type="number" id="total_amount" name="total_amount" step="0.01" required><br>
 
-    <input type="submit" value="Submit">
+    <input type="submit" id="addBtn" value="Add">
 </form>
 
     <br>

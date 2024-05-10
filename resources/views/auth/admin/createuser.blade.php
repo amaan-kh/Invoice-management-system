@@ -31,7 +31,7 @@
 
            </div>
      
-           <button type="submit">Create New User</button>
+           <button type="submit">Create </button>
        </form>
        @if(isset($error_message))
        <div class="alert alert-danger">

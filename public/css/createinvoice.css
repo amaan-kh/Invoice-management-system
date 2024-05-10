@@ -93,3 +93,8 @@ textarea {
     color: red;
     font-size: 18px; /* Adjust the size as needed */
 }
+
+#addBtn {
+    width: 10%;
+    align-self: center;
+}

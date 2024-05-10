@@ -85,7 +85,7 @@
                         <!-- Company Tax Number ID -->
                         <div class="form-group">
                             <label for="company_tax_number_id">Company Tax Number ID</label>
-                            <input type="number" name="company_tax_number_id" class="form-control" value="{{ old('company_tax_number_id') }}"required>
+                            <input type="number" name="company_tax_number_id" class="form-control" value="{{ old('company_tax_number_id') }}" min="0" required>
                         </div>
 
                         <!-- Address -->
@@ -176,27 +176,12 @@
                             </select>
                         </div>
 
-                        <button type="submit" id="createbtn" class="btn btn-primary">Create Invoice</button>
+                        <button type="submit" id="createbtn" class="btn btn-primary">Create </button>
     </form>
     <br>
 </div>
 </div>
 <a id="backbtn" href="{{ route('admin.home') }}">Back to panel</a>
-<script>
-    // Function to calculate total amount due
-    function calculateTotalAmountDue() {
-        var subtotal = parseFloat(document.getElementById("subtotal").value);
-        var taxPercentage = parseFloat(document.getElementById("taxes").value);
-        var totalAmountDue = subtotal + (subtotal * (taxPercentage / 100));
-        document.getElementById("total_amount_due").value = totalAmountDue.toFixed(2);
-    }
-
-    // Event listener to recalculate total amount due on input change
-    document.addEventListener("DOMContentLoaded", function() {
-        document.getElementById("subtotal").addEventListener("input", calculateTotalAmountDue);
-        document.getElementById("taxes").addEventListener("input", calculateTotalAmountDue);
-    });
-</script>
 @endsection
 
 

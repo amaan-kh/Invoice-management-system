@@ -51,5 +51,4 @@ Route::get('/taskView', [AdminController::class, 'taskView'])->name('allocatView
 Route::get('/revokeAllocation', [AdminController::class, 'revokeAllocationView'])->name('revokeAllocation');
 Route::post('/revokeAllocation', [AdminController::class, 'deallocate'])->name('deallocate');
 
-
-
+Route::get('/dashData', [AdminController::class, 'getDashData'])->name('dashData');

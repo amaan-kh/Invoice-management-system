@@ -25,11 +25,14 @@
   <!-- endinject -->
   <link rel="shortcut icon" href="{{ asset('assets/images/favicon.png') }}" />
   @yield('style')
+
+
   <style type="text/css">
     .main-panel .content-wrapper {
       background-color: white;
     }
   </style>
+  <link rel="stylesheet" type="text/css" href="{{ asset('css/adminpanel.css') }}">
 
 </head>
 
@@ -41,16 +44,16 @@
   <div class="container-scroller">
 
     <!-- partial:partials/_navbar.html -->
-    <nav class="navbar default-layout col-lg-12 col-12 p-0 fixed-top d-flex align-items-top flex-row">
-      <div class="text-center navbar-brand-wrapper d-flex align-items-center justify-content-start">
+    <nav class=" navbar default-layout col-lg-12 col-12 p-0 fixed-top d-flex align-items-top flex-row">
+      <div class="text-center navbar-brand-wrapper d-flex align-items-center justify-content-start" id="bgBlueColor">
         <div class="me-3">
           <button class="navbar-toggler navbar-toggler align-self-center" type="button" data-bs-toggle="minimize">
             <span class="icon-menu"></span>
           </button>
         </div>
-        <div> Invoice Mgmt </div>
+        <div> <a href="{{ route('admin.home')}}"> Invoice Mgmt </a></div>
       </div>
-      <div class="navbar-menu-wrapper d-flex align-items-top">
+      <div class="navbar-menu-wrapper d-flex align-items-top " id="blueColor">
         <ul class="navbar-nav ms-auto" >
           <li class="nav-item fw-semibold d-none d-lg-block ms-0">
             <h1 class="welcome-text">@auth

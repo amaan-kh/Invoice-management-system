@@ -11,9 +11,9 @@ ALL USERS
 
 @section('maincontent')
     <div class="container">
-        <h1>All Current Users</h1>
+        <h4>All Current Users</h4>
         <div class="user-list">
-            <h3>Admins</h3>
+            <h5>Admins</h5>
             <ul>
                 @foreach ($admin_users as $user)
                 <li>
@@ -24,18 +24,24 @@ ALL USERS
             </ul>
         </div>
         <div class="user-list">
-            <h3>Users</h3>
+            <h5>Users</h5>
             <ul>
                 @foreach($non_admin_users as $user)
                 <li>
-                    <p>{{ $user->name }}</p>
-                    &nbsp 
+        
+                   
+                   
+                   
                       <form action="{{ route('user.delete') }}" method="POST">
                         @csrf
+                        <label> {{ $user->name }} </label> &nbsp &nbsp
                         <input type="hidden" name="username" value="{{ $user->name }}">
-                        <button type="submit">Remove</button>
+                         <button type="submit">Remove</button>
                         </form>
+                
+
                 </li>
+
                 @endforeach
             </ul>	
         </div>	

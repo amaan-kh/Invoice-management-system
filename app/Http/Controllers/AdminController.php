@@ -86,7 +86,10 @@ class AdminController extends Controller
         return redirect()->back()->with('error', 'You are not authorized to view that page.');
         //return redirect()->route('index');
     }
-    return view('auth.admin.admin_panel');
+     $userCount = User::count();
+    $invoiceCount = Invoice::count();
+    $allocateCount = User_Invoice::count();
+    return view('auth.admin.admin_panel', compact('userCount', 'invoiceCount', 'allocateCount'));
 }
 
 public function getUserDash($name){
@@ -200,4 +203,17 @@ public function deallocate(Request $request) {
         $err_message = "invoice revoked from user";
     return view('auth.admin.deleteallocations', compact('users', 'invoices'))->with('err_message', $err_message);
     }
+
+public function getDashData() {
+    if (!Gate::allows('isAdmin')) {
+            // abort(403, 'Unauthorized');
+            return redirect()->route('index');
+        }
+    $userCount = User::count();
+    $invoiceCount = Invoice::count();
+    $allocateCount = User_Invoice::count();
+
+    return compact('userCount', 'invoiceCount', 'allocateCount');
+
+}
 }

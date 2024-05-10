@@ -16,18 +16,18 @@ IMS
                   <div class="statistics-details d-flex align-items-center justify-content-around">
                     <div>
                       <p class="statistics-title">Total Users Added</p>
-                      <h3 class="rate-percentage">50</h3>
-                      <p class="text-danger d-flex"><i class="mdi mdi-menu-down"></i><span>-0.5%</span></p>
+                      <h3 id="userCount" class="rate-percentage">{{$userCount}}</h3>
+                      <!-- <p class="text-danger d-flex"><i class="mdi mdi-menu-down"></i><span>-0.5%</span></p> -->
                     </div>
                     <div>
                       <p class="statistics-title">Total Invoices Created</p>
-                      <h3 class="rate-percentage">7,682</h3>
-                      <p class="text-success d-flex"><i class="mdi mdi-menu-up"></i><span>+0.1%</span></p>
+                      <h3 id="invoiceCount" class="rate-percentage">{{$invoiceCount}}</h3>
+                      <!-- <p class="text-success d-flex"><i class="mdi mdi-menu-up"></i><span>+0.1%</span></p> -->
                     </div>
                     <div>
                       <p class="statistics-title">Total Invoices Shared</p>
-                      <h3 class="rate-percentage">68.8</h3>
-                      <p class="text-danger d-flex"><i class="mdi mdi-menu-down"></i><span>68.8</span></p>
+                      <h3 id="allocateCount" class="rate-percentage">{{$allocateCount}}</h3>
+                      <!-- <p class="text-danger d-flex"><i class="mdi mdi-menu-down"></i><span>68.8</span></p> -->
                     </div>
 
                   </div>
@@ -41,4 +41,6 @@ IMS
   </div>
 </div>
 @endsection
+
+
 
