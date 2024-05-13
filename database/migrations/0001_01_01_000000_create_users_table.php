@@ -16,6 +16,9 @@ return new class extends Migration
             $table->string('name')->unique();
             $table->string('password');
             $table->integer('is_admin');
+            $table->string('fullname');
+            $table->string('phone')->nullable(); // Add phone field, allowing null values
+            $table->string('address')->nullable();
             
             $table->timestamps();
 

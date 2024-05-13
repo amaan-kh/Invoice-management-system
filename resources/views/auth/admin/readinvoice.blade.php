@@ -35,7 +35,10 @@ ALL INVOICES
                 </li>
                 @endforeach
             </ol>
+
+{{ $invoices->links('vendor.pagination.bootstrap-4') }}
     <a href="{{ route('admin.home') }}" class="back-link">BACK</a>
+
 @endsection
 
 @section('scripts')

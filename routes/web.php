@@ -18,6 +18,8 @@ Route::get('/createUser', [UserController::class, 'create'])->name('user.create'
 Route::post('/createUser', [UserController::class, 'store'])->name('user.create');
 
 Route::get('/viewUsers', [UserController::class, 'index'])->name('user.index');
+Route::get('/updateUser/{name}', [UserController::class, 'updateGet'])->name('user.update');
+Route::post('/updateUser', [UserController::class, 'update'])->name('updateUser');
 
 Route::get('/deleteUser', [UserController::class, 'deleteUserView'])->name('user.delete');
 Route::post('/deleteUser', [UserController::class, 'deleteUser'])->name('user.delete');

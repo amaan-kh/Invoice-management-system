@@ -21,6 +21,7 @@ class User extends Authenticatable
         'name',
         'password',
         'is_admin',
+        'fullname', 'phone', 'address',
     ];
 
     /**
@@ -47,17 +48,20 @@ class User extends Authenticatable
     }
 
 
-    public static function createUser($name, $password, $isa) {
+    public static function createUser($name, $password, $isa, $fullname, $phone, $address) {
 
         $exists = User::where('name',$name)->first();
         if($exists) {
-            return 'user already exists';
+            return 'username already taken try something else';
         }
          
         $newUser = new User;
         $newUser->name = $name;
         $newUser->password = $password;
         $newUser->is_admin = $isa;
+        $newUser->phone = $phone;
+        $newUser->address = $address;
+        $newUser->fullname = $fullname;
         $newUser->save();
 
         return 'User created successfully.';

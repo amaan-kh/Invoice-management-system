@@ -10,7 +10,7 @@
 
 
 @section('maincontent')
-   <h2>Create New Invoice</h2>
+   <h4 id="heading">Create New Invoice</h4>
    <div class="create-user-container">
 
 

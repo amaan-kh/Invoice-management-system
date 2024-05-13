@@ -1,7 +1,4 @@
 /* Resetting default margin and padding for all elements */
-   
-
-
 /* Container styles */
 .create-user-container {
     width: 350px;
@@ -9,15 +6,13 @@
     margin-top: 50px;
     background-color: #fff;
     border-radius: 5px;
-    padding: 20px;
+    padding: 15px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
 /* Heading styles */
-h2 {
- 
+#heading {
     text-align: center;
-   
 }
 
 /* Form styles */
@@ -40,7 +35,8 @@ label {
 /* Input styles */
 input[type="text"],
 input[type="password"],
-input[type="checkbox"] {
+input[type="checkbox"],
+textarea {
     width: 100%;
     padding: 10px;
     border: 1px solid #ccc;
@@ -48,8 +44,6 @@ input[type="checkbox"] {
 }
 
 /* Button styles */
-
-
 
 /* Error message styles */
 .alert {
@@ -72,6 +66,7 @@ input[type="checkbox"] {
 #backbtn:hover {
     text-decoration: underline;
 }
+
 .required {
     color: red;
     font-size: 18px; /* Adjust the size as needed */

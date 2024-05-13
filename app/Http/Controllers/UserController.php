@@ -29,17 +29,55 @@ class UserController extends Controller
         return view('auth.admin.createuser');
     }
 
+    public function updateGet($name) {
+        if (!Gate::allows('isAdmin')) {
+            // abort(403, 'Unauthorized');
+            return redirect()->route('index');
+        }
+        $user = User::where('name', $name)->first();
+        return view('auth.admin.updateuser', compact('user'));
+    }
     public function store(Request $request)
     {   
         if (!Gate::allows('isAdmin')) {
             // abort(403, 'Unauthorized');
             return redirect()->route('index');
         }
+        // dd($request->all());
         // \Log::info(json_encode($request->all()));
-        $message = User::createUser($request->username, $request->password, $request->is_admin);
+        $message = User::createUser($request->username, $request->password, $request->is_admin, $request->fullname, $request->phone, $request->address);
 
 
         return view('auth.admin.createuser')->with('error_message', $message);
+    }
+    public function update(Request $request) {
+
+        if (!Gate::allows('isAdmin')) {
+            // abort(403, 'Unauthorized');
+            return redirect()->route('index');
+        }
+         // dd($request->all());
+         $data = [
+            'fullname' => $request->fullname,
+            'phone' => $request->phone,
+            'address' => $request->address,
+            'is_admin' => $request->is_admin,
+         ];
+         $user = User::where('name', $request->username)->first();
+         if (!$user) {
+        // Handle the error, such as returning an error message
+            $message = 'Invoice not found';
+        }
+        else{
+            $user->fill($data);
+            $user->save();
+            $message =  "user updated successfully";
+        }
+
+        [$non_admin_users, $admin_users] = User::getUsers();
+
+        return view('auth.admin.readuser', compact('non_admin_users', 'admin_users'));
+
     }
         public function deleteUserView(){
              if (!Gate::allows('isAdmin')) {

@@ -18,6 +18,9 @@ class UsersTableSeeder extends Seeder
             'name' => 'admin',
             'password' => bcrypt('password'),
             'is_admin' => true,
+            'phone' => '1234567890',
+            'address' => 'this place',
+            'fullname' => 'administrator',
         ]);
         }
     }

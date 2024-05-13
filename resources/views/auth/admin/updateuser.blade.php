@@ -1,7 +1,7 @@
 @extends('layouts.adminlayout')
 
 @section('title')
-	NEW USER
+	UPDATE USER
 @endsection
 
 @section('style')
@@ -9,7 +9,7 @@
 @endsection
 
 @section('maincontent')
-    <h4 id="heading">Create New User</h4>
+    <h2 id="heading">Update User</h2>
     <div class="create-user-container">
         @if(isset($error_message))
        <div class="alert alert-danger">
@@ -18,31 +18,27 @@
     @endif
     <br>
         
-        <form action=" {{ route('user.create') }}" method="POST">
+        <form id="upUForm" action=" {{ route('updateUser') }}" method="POST">
             @csrf <!-- Laravel CSRF protection token -->
             <div class="form-group">
                 <label for="fullname">Full Name<span class="required">*</span>:</label>
-                <input type="text" id="fullname" name="fullname" required>
+                <input type="text" id="fullname" name="fullname" value="{{ $user->fullname}}" required>
             </div>
             <br>
             <div class="form-group">
-                <label for="username">Username<span class="required">*</span>:</label>
-                <input type="text" id="username" name="username" required>
+                <label for="username">Username<span class="required">*</span>:{{$user->name}}</label>
+                <input hidden type="text" id="username" name="username" value="{{$user->name}}" required>
             </div>
             <br>
-            <div class="form-group">
-                <label for="password">Password<span class="required">*</span>:</label>
-                <input type="password" id="password" name="password"  required>
-            </div>
-            <br>
+           
             <div class="form-group">
                 <label for="phone">Phone Number:</label>
-                <input type="tel" id="phone" name="phone" pattern="[0-9]{10}" title="Phone number must be 10 digit number">
+                <input type="tel" id="phone" name="phone" pattern="[0-9]{10}" title="Phone number must be 10 digit number" value="{{$user->phone}}">
             </div>
             <br>
             <div class="form-group">
                 <label for="address">Address:</label>
-                <textarea id="address" name="address"></textarea>
+                <textarea id="address" name="address" >{{$user->address}}</textarea>
             </div>
             <br>
             <div class="form-group">
@@ -50,7 +46,7 @@
                <label for="is_admin">Is Admin:</label>
                <input type="checkbox" id="is_admin" name="is_admin" value="1"><br><br>
            </div>    
-           <button type="submit">Create </button>
+           <button type="submit">Update </button>
        </form>
        
 </div>
