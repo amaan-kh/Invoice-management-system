@@ -32,7 +32,7 @@ ALL USERS
                    
                    
                    
-                      <form action="{{ route('user.delete') }}" method="POST">
+                      <form id="forms" action="{{ route('user.delete') }}" method="POST" id="deleteForm_{{$user->id}}"  onsubmit="return confirmDelete('{{ $user->id }}')">
                         @csrf
                         <label> {{ $user->name }} </label> &nbsp &nbsp
                         <input type="hidden" name="username" value="{{ $user->name }}">
@@ -55,20 +55,9 @@ ALL USERS
 @section('scripts')
     <script>
         function confirmDelete(userId) {
-            // Display confirmation dialog
-            var confirmation = alert("Are you sure you want to delete this user?");
-            if (confirmation) {
-                // If user confirms, submit the form
-                document.getElementById('deleteForm_' + userId).submit();
-            }
-            else{
-
-            }
+            var confirmation = confirm("Are you sure you want to delete this user?");
+            return confirmation;
         }
-         document.querySelectorAll('#forms').forEach(form => {
-            form.addEventListener('submit', function(event) {
-                event.preventDefault();
-            });
-        });
+         
     </script>
 @endsection

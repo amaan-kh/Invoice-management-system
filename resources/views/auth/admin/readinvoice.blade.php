@@ -6,7 +6,6 @@ ALL INVOICES
 
 @section('style')
     <link rel="stylesheet" type="text/css" href="{{ asset('css/readinvoice.css')}}">
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 
 @endsection
 
@@ -27,19 +26,24 @@ ALL INVOICES
                       <a href="{{ route('invoice.updateget', ['id' => $invoice->invoice_number]) }}">Update</a>&nbsp &nbsp
                        <a href="{{ route('invoice.addItem', ['id' => $invoice->invoice_number]) }}">Add-Items</a>&nbsp &nbsp
                       <a href="{{ route('allocatIndex', ['id' => $invoice->invoice_number]) }}">Allocate</a>&nbsp &nbsp
-                      <form action="{{ route('invoice.delete') }}" method="POST">
+                      <form id="deleteForm_{{ $invoice->invoice_number }}" action="{{ route('invoice.delete') }}" method="POST" onsubmit="return confirmDelete('{{ $invoice->invoice_number }}')">
                         @csrf
                         <input type="hidden" name="invoice_no" value="{{ $invoice->invoice_number }}">
-                        <button type="submit">Remove</button>
+                        <button type="submit" >Remove</button>
                         </form>
                     </div>
                 </li>
                 @endforeach
             </ol>
+    <a href="{{ route('admin.home') }}" class="back-link">BACK</a>
+@endsection
 
-
-    <!-- Display Pagination Links -->
-    {{ $invoices->links() }}
-
-        <a href="{{ route('admin.home') }}" class="back-link">BACK</a>
+@section('scripts')
+<script>
+    function confirmDelete(invoiceNumber) {
+        var confirmation = confirm("Are you sure you want to delete this invoice?");
+        return confirmation;
+    }
+    
+</script>
 @endsection

@@ -7,8 +7,10 @@
     <link rel="stylesheet" href="{{ asset('css/userhome.css') }}">
 </head>
 <body>
+    <nav>
+            <h1>User invoice account </h1>
 
-	<h1>User invoice account </h1>
+    </nav>
     <h3> Welcome {{$name}} </h3>
     @if($invoices->isNotEmpty())
     <h4>All Issued Invoices</h4>

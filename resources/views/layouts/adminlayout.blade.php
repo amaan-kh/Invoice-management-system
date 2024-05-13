@@ -31,6 +31,10 @@
     .main-panel .content-wrapper {
       background-color: white;
     }
+    #fixer{
+      position: fixed;
+    }
+ 
   </style>
   <link rel="stylesheet" type="text/css" href="{{ asset('css/adminpanel.css') }}">
 
@@ -44,7 +48,7 @@
   <div class="container-scroller">
 
     <!-- partial:partials/_navbar.html -->
-    <nav class=" navbar default-layout col-lg-12 col-12 p-0 fixed-top d-flex align-items-top flex-row">
+    <nav class="navbar default-layout col-lg-12 col-12 p-0 fixed-top d-flex align-items-top flex-row">
       <div class="text-center navbar-brand-wrapper d-flex align-items-center justify-content-start" id="bgBlueColor">
         <div class="me-3">
           <button class="navbar-toggler navbar-toggler align-self-center" type="button" data-bs-toggle="minimize">
@@ -79,8 +83,8 @@
       <!-- partial -->
       <div class="container-fluid page-body-wrapper">
         <!-- partial:partials/_sidebar.html -->
-        <nav class="sidebar sidebar-offcanvas" id="sidebar">
-          <ul class="nav">
+        <nav class="sidebar sidebar-offcanvas col-lg-3 col-md-4 col-sm-12 fixed" id="sidebar">
+          <ul class="nav" id="fixer">
             <li class="nav-item nav-category"></li>
             <li class="nav-item">
               <a class="nav-link" data-bs-toggle="collapse" href="#ui-basic" aria-expanded="false" aria-controls="ui-basic">
@@ -142,6 +146,7 @@
               </div>
             </div>
           </div>
+        
           
           <!-- content-wrapper ends ----------------------------------------------------------------------->
           <!-- partial:partials/_footer.html -->

@@ -13,7 +13,7 @@ INVOICE
 <div class="container">
 
 <div class="invoice-list">
-          
+          <h5 id="subhead">Invoice Details </h5>
                 <div class="invoice-item">
     <p><b>Invoice Number:</b> {{ $invoice->invoice_number }}</p>
     <p><b>Currency Type:</b> {{ $invoice->currency_type }}</p>
@@ -46,23 +46,23 @@ INVOICE
     @endif
 
     @if(isset($invoiceItems) && count($invoiceItems) > 0)
-    <h3>Invoice Items </h3>
+    <h5 id="subhead">Invoice Items </h5>
     @foreach ($invoiceItems as $item)
     <div>
       
-        <p>Asset Tag: {{ $item->asset_tag }}</p>
-        <p>Part Number: {{ $item->part_number }}</p>
-        <p>Serial Number: {{ $item->serial_number }}</p>
-        <p>HSN Code: {{ $item->hsn_code }}</p>
-        <p>SAC Code: {{ $item->sac_code }}</p>
-        <p>Description: {{ $item->description }}</p>
-        <p>GST Percent: {{ $item->gst_percent }}</p>
-        <p>Taxable Amount: {{ $item->taxable_amount }}</p>
-        <p>CGST: {{ $item->cgst }}</p>
-        <p>SGST: {{ $item->sgst }}</p>
-        <p>IGST: {{ $item->igst }}</p>
-        <p>Tax Amount: {{ $item->tax_amount }}</p>
-        <p>Total Amount: {{ $item->total_amount }}</p>
+        <p><b>Asset Tag:</b> {{ $item->asset_tag }}</p>
+        <p><b>Part Number:</b> {{ $item->part_number }}</p>
+        <p><b>Serial Number:</b> {{ $item->serial_number }}</p>
+        <p><b>HSN Code:</b> {{ $item->hsn_code }}</p>
+        <p><b>SAC Code:</b> {{ $item->sac_code }}</p>
+        <p><b>Description:</b> {{ $item->description }}</p>
+        <p><b>GST Percent:</b> {{ $item->gst_percent }}</p>
+        <p><b>Taxable Amount:</b> {{ $item->taxable_amount }}</p>
+        <p><b>CGST:</b> {{ $item->cgst }}</p>
+        <p><b>SGST:</b> {{ $item->sgst }}</p>
+        <p><b>IGST:</b> {{ $item->igst }}</p>
+        <p><b>Tax Amount:</b> {{ $item->tax_amount }}</p>
+        <p><b>Total Amount:</b> {{ $item->total_amount }}</p>
     </div>
     <hr> <!-- Optional: Add a horizontal line between items for clarity -->
 @endforeach

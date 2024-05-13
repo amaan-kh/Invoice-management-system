@@ -44,25 +44,25 @@ NEW INVOICE
     <label for="description">Description:</label><br>
     <textarea id="description" name="description"></textarea><br>
 
-    <label for="gst_percent">GST Percent:</label><br>
+    <label for="gst_percent">GST Percent<span class="required">*</span>:</label><br>
     <input type="number" id="gst_percent" name="gst_percent" required><br>
 
-    <label for="taxable_amount">Taxable Amount:</label><br>
+    <label for="taxable_amount">Taxable Amount<span class="required">*</span>:</label><br>
     <input type="number" id="taxable_amount" name="taxable_amount" required><br>
 
-    <label for="cgst">CGST:</label><br>
+    <label for="cgst">CGST<span class="required">*</span>:</label><br>
     <input type="number" id="cgst" name="cgst" max=99 step="0.01" required><br>
 
-    <label for="sgst">SGST:</label><br>
+    <label for="sgst">SGST<span class="required">*</span>:</label><br>
     <input type="number" id="sgst" name="sgst" max=99 step="0.01" required><br>
 
-    <label for="igst">IGST:</label><br>
+    <label for="igst">IGST<span class="required">*</span>:</label><br>
     <input type="number" id="igst" name="igst" max=99 step="0.01" required><br>
 
-    <label for="tax_amount">Tax Amount:</label><br>
+    <label for="tax_amount">Tax Amount<span class="required">*</span>:</label><br>
     <input type="number" id="tax_amount" name="tax_amount" step="0.01" required><br>
 
-    <label for="total_amount">Total Amount:</label><br>
+    <label for="total_amount">Total Amount<span class="required">*</span>:</label><br>
     <input type="number" id="total_amount" name="total_amount" step="0.01" required><br>
 
     <input type="submit" id="addBtn" value="Add">
