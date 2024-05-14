@@ -155,6 +155,9 @@ public function updateView($id){
     return redirect()->route('index');
 }
 $invoice = Invoice::where('invoice_number', $id)->first();
+if(!$invoice){
+    return redirect()->route('invoice.index');
+}
 return view('auth.admin.updateinvoice', compact('invoice'));
 }
 
