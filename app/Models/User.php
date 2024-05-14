@@ -6,6 +6,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Illuminate\Pagination\Paginator;
 
 
 class User extends Authenticatable
@@ -71,9 +72,11 @@ class User extends Authenticatable
 
     public static function getUsers() {
         $non_admin_users = User::where('is_admin', 0)->get();
+        return $non_admin_users;
+    }
+    public static function getAdUsers() {
         $admin_users = User::where('is_admin', 1)->get();
-         // dd($non_admin_users);
-        return [$non_admin_users, $admin_users];
+        return $admin_users;
     }
 
     public static function getAllocatedUsers() {

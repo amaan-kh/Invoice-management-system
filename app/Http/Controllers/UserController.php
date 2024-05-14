@@ -15,7 +15,8 @@ class UserController extends Controller
             // abort(403, 'Unauthorized');
             return redirect()->route('index');
         }
-        [$non_admin_users, $admin_users] = User::getUsers();
+        $non_admin_users = User::getUsers();
+        $admin_users = User::getAdUsers();
 
         return view('auth.admin.readuser', compact('non_admin_users', 'admin_users'));
     }
@@ -35,6 +36,9 @@ class UserController extends Controller
             return redirect()->route('index');
         }
         $user = User::where('name', $name)->first();
+        if(!$user || $user->is_admin == 1) {
+            return redirect()->back();
+        }
         return view('auth.admin.updateuser', compact('user'));
     }
     public function store(Request $request)
@@ -74,7 +78,8 @@ class UserController extends Controller
             $message =  "user updated successfully";
         }
 
-        [$non_admin_users, $admin_users] = User::getUsers();
+        $non_admin_users = User::getUsers();
+        $admin_users = User::getAdUsers();
 
         return view('auth.admin.readuser', compact('non_admin_users', 'admin_users'));
 

@@ -10,7 +10,7 @@ ALL INVOICES
 @endsection
 
 @section('maincontent')
-        <h3>All Issued Invoices</h3>
+        <h4>All Issued Invoices</h4>
         @if(session()->has('err_message'))
     <div class="alert alert-danger">
         {{ session('err_message') }}
@@ -19,8 +19,11 @@ ALL INVOICES
             <ol>
                 @foreach ($invoices as $invoice)
                 <li class="invoice-item">
+                    <div id="invoice-wrapper">
                     <div class="invoice-details">
                     <p><b>Invoice Number:</b> {{ $invoice->invoice_number }} &nbsp </p>
+                </div>
+                <div class="invoice-details">
                     <a href="{{ route('invoicePageView', ['id' => $invoice->invoice_number]) }}">View</a>
                      &nbsp &nbsp
                       <a href="{{ route('invoice.updateget', ['id' => $invoice->invoice_number]) }}">Update</a>&nbsp &nbsp
@@ -31,6 +34,7 @@ ALL INVOICES
                         <input type="hidden" name="invoice_no" value="{{ $invoice->invoice_number }}">
                         <button type="submit" >Remove</button>
                         </form>
+                    </div>
                     </div>
                 </li>
                 @endforeach
