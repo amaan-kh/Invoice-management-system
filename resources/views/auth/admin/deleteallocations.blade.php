@@ -56,7 +56,6 @@ Revoke Access
 
             let formData = $(this).serialize();
 
-            //console.log(data);
 
             $.ajax({
                 url: "{{ route('deallocate') }}",
