@@ -1,10 +1,11 @@
 
     
 /* Container styles */
-.create-user-container {
+.container {
 /*    width: 400px;*/
+width: 80%;
 margin: 0 auto;
-background-color: #fff;
+background-color: whitesmoke;
 border-radius: 5px;
 padding: 20px;
 box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
@@ -50,7 +51,7 @@ input[type="text"],
 input[type="date"],
 input[type="number"],
 textarea {
-    width: 40%;
+/*    width: 40%;*/
     padding: 10px;
     border: 1px solid #ccc;
     border-radius: 5px;
@@ -97,4 +98,13 @@ textarea {
 #addBtn {
     width: 10%;
     align-self: center;
+}
+
+#fsc {
+    display: flex;
+    justify-content: space-between;
+
+}
+.subcontainer {
+    width: 40%;
 }

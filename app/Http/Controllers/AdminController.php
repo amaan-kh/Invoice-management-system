@@ -90,7 +90,8 @@ class AdminController extends Controller
     $userCount = User::count();
     $invoiceCount = Invoice::count();
     $allocateCount = User_Invoice::count();
-    return view('auth.admin.admin_panel', compact('userCount', 'invoiceCount', 'allocateCount'));
+    // return view('auth.admin.admin_panel');
+     return view('auth.admin.admin_panel', compact('userCount', 'invoiceCount', 'allocateCount'));
 }
 
 public function getUserDash($name){
@@ -219,6 +220,12 @@ public function getDashData() {
     $userCount = User::count();
     $invoiceCount = Invoice::count();
     $allocateCount = User_Invoice::count();
+    $data = [
+        'userCount' => $userCount,
+        'invoiceCount' => $invoiceCount,
+        'allocateCount' => $allocateCount,
+    ];
+    return response()->json($data);
 
     return compact('userCount', 'invoiceCount', 'allocateCount');
 

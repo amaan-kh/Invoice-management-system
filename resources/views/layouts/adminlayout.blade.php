@@ -6,7 +6,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <title>@yield('title')</title>
   <!-- plugins:css -->
-  
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
   <link rel="stylesheet" href="{{ asset('assets/vendors/feather/feather.css') }}">
   <link rel="stylesheet" href="{{asset('assets/vendors/mdi/css/materialdesignicons.min.css')}}">
   <link rel="stylesheet" href="{{ asset('assets/vendors/ti-icons/css/themify-icons.css') }}">
@@ -34,6 +35,18 @@
     #fixer{
       position: fixed;
     }
+    .pagcol{
+      background-color: wheat;
+    }
+    .vertical-line {
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    width: 1px; /* Adjust the width of the vertical line as needed */
+    background-color: #black; /* Adjust the color of the vertical line */
+}
+
  
   </style>
   <link rel="stylesheet" type="text/css" href="{{ asset('css/adminpanel.css') }}">
@@ -81,7 +94,7 @@
 
 
       <!-- partial -->
-      <div class="container-fluid page-body-wrapper">
+      <div class="container-fluid page-body-wrapper pagcol">
         <!-- partial:partials/_sidebar.html -->
         <nav class="sidebar sidebar-offcanvas col-lg-3 col-md-4 col-sm-12 fixed" id="sidebar">
           <ul class="nav" id="fixer">
@@ -126,8 +139,11 @@
               </div>
             </li>
           </ul>
+
         </nav>
         <!-- partial ------------------------------------------------------------------------------------>
+        <div class="vertical-line"></div>
+
         <div class="main-panel">
           <div class="content-wrapper">
             <div class="row">

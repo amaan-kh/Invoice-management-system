@@ -6,7 +6,7 @@ UPDATE INVOICE
 <link rel="stylesheet" href="{{ asset('css/updateinvoice.css') }}">
 @endsection
 @section('maincontent')
-<h2>Update INVOICE</h2>
+<h4>Update INVOICE</h4>
 <div class="create-user-container">
 
     <span>
@@ -16,12 +16,13 @@ UPDATE INVOICE
     </div>
     @endif
 </span>
-<br>
-<br>
+
 <div class="container"> 
     <form action="{{ route('invoice.update') }}" method="POST">
         @csrf <!-- Laravel CSRF protection token -->
         <!-- Invoice Number -->
+        <div id="fsc">
+        <div class="subcontainer">
         <div class="form-group">
              <label for="invoice_number">Invoice Number: {{ $invoice->invoice_number }}</label>
              <input hidden type="number" id="invoice_no" name="invoice_no" value="{{ $invoice->invoice_number }}">
@@ -97,7 +98,8 @@ UPDATE INVOICE
             <label for="gstin">GSTIN</label>
             <input type="text" name="gstin" id="gstin" class="form-control" value="{{ old('gstin') }}"required>
         </div>
-
+</div>
+                    <div class="subcontainer">
         <!-- Description -->
         <div class="form-group">
             <label for="description">Description</label>
@@ -172,6 +174,9 @@ UPDATE INVOICE
                 <option value="pending" @if(old('status') == 'pending') selected @endif>Pending</option>
                 <option value="cancelled" @if(old('status') == 'cancelled') selected @endif>Cancelled</option>
             </select>
+        </div>
+
+        </div>
         </div>
 
         <button type="submit" class="btn btn-primary" id="updateBtn">Update </button>

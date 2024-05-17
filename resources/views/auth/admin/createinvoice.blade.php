@@ -24,7 +24,8 @@
 <div class="container"> 
     <form action="{{ route('invoice.create') }}" method="POST">
         @csrf <!-- Laravel CSRF protection token -->
-         <!-- Invoice Number -->
+         <!-- Invoice Number --><div id="fsc">
+                        <div class="subcontainer">
                         <div class="form-group">
                             <label for="invoice_number">Invoice Number<span class="required">*</span>:</label>
                             <input type="text" name="invoice_number" class="form-control" required>
@@ -71,7 +72,7 @@
                             <label for="bill_to_company_name">Bill To Company Name<span class="required">*</span>:</label>
                             <input type="text" name="bill_to_company_name" class="form-control" value="{{ old('bill_to_company_name') }}" required>
                         </div>
-
+                    
                         <div class="form-group">
                             <label for="bill_to_company_address">Bill To Company Address<span class="required">*</span>:</label>
                             <textarea name="bill_to_company_address" class="form-control" rows="3"  required>{{ old('bill_to_company_address') }}</textarea>
@@ -87,7 +88,7 @@
                             <label for="company_tax_number_id">Company Tax Number ID<span class="required">*</span>:</label>
                             <input type="number" name="company_tax_number_id" class="form-control" value="{{ old('company_tax_number_id') }}" min="0" required>
                         </div>
-
+                        
                         <!-- Address -->
                         <div class="form-group">
                             <label for="address">Address<span class="required">*</span>:</label>
@@ -99,7 +100,8 @@
                             <label for="gstin">GSTIN<span class="required">*</span>:</label>
                             <input type="text" name="gstin" class="form-control" value="{{ old('gstin') }}"required>
                         </div>
-
+</div>
+                    <div class="subcontainer">
                         <!-- Description -->
                         <div class="form-group">
                             <label for="description">Description:</label>
@@ -175,7 +177,8 @@
                                 <option value="cancelled" @if(old('status') == 'cancelled') selected @endif>Cancelled</option>
                             </select>
                         </div>
-
+                    </div>
+                    </div>
                         <button type="submit" id="createbtn" class="btn btn-primary">Create </button>
     </form>
     <br>

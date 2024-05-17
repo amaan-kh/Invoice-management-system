@@ -7,14 +7,15 @@ body {
 .container {
     max-width: 800px;
     margin: 0 auto;
-    padding: 15px;
+    padding: 25px;
 }
 h1 {    
     text-align: center;
     margin-bottom: 10px;
 }
 .user-list {
-    background-color: #ffffff; /* White background */
+    background-color: whitesmoke; /* White background */
+    width: 40%;
     padding: 15px ;
     border-radius: 5px;
     margin-bottom: 2px;
@@ -32,20 +33,43 @@ h3 {
 }
 
 #back {
+    position: fixed;
+    bottom: 0;
     padding: 10px 20px;
-    background-color: #007bff; /* Blue color for the button background */
-    color: #fff; /* White color for the button text */
+    background-color: #fff; /* Blue color for the button background */
+    color: #007bff; /* White color for the button text */
     text-decoration: none; /* Remove underline */
     border-radius: 5px; /* Rounded corners */
     transition: background-color 0.3s ease; /* Smooth transition for hover effect */
 }
 #back:hover {
-    background-color: #0056b3; /* Darker blue color on hover */
+    background-color: whitesmoke; /* Darker blue color on hover */
 }
 
 .userdetails{
     display: flex;
     justify-content: space-between;
+}
+.userdetails{
+  
+     background-color: #f1f1f1;
+    padding: 2px 5px;
+    border-radius: 5px;
+    margin-bottom: 3px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);   
+
+}
+
+.admindetails{
+    
+  
+     background-color: #f1f1f1;
+    padding: 2px 5px;
+    border-radius: 5px;
+    margin-bottom: 3px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);   
+
+
 }
 #seplinks{
     display: flex;
@@ -56,4 +80,8 @@ h3 {
 }
 #heading{
     text-align: center;
+}
+.usercontainer {
+    display: flex;
+    justify-content: space-between;
 }

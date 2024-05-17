@@ -18,7 +18,7 @@ IMS
                   <div class="card shadow">
                     <div class="card-body">
                       <p class="card-title statistics-title">Total Users Added</p>
-                      <h3 id="userCount" class="card-text rate-percentage">{{$userCount}}</h3>
+                      <h3 id="userCount" class="card-text rate-percentage"></h3>
                     </div>
                   </div>
                 </div>
@@ -26,7 +26,7 @@ IMS
                   <div class="card shadow">
                     <div class="card-body">
                       <p class="card-title statistics-title">Total Invoices Created</p>
-                      <h3 id="invoiceCount" class="card-text rate-percentage">{{$invoiceCount}}</h3>
+                      <h3 id="invoiceCount" class="card-text rate-percentage"></h3>
                     </div>
                   </div>
                 </div>
@@ -34,7 +34,7 @@ IMS
                   <div class="card shadow">
                     <div class="card-body">
                       <p class="card-title statistics-title">Total Invoices Shared</p>
-                      <h3 id="allocateCount" class="card-text rate-percentage">{{$allocateCount}}</h3>
+                      <h3 id="allocateCount" class="card-text rate-percentage"></h3>
                     </div>
                   </div>
                 </div>
@@ -46,4 +46,35 @@ IMS
     </div>
   </div>
 </div>
+<button id="bt"> click</button>
+<div id="result"></div>
+
 @endsection
+@section('scripts')
+<script type="text/javascript">
+  $(document).ready(function(){ 
+
+    $.ajax({
+                url: "{{ route('dashData') }}", // URL to your Laravel route
+                type: 'GET',
+                dataType: 'json', // Specify the expected data type
+                success: function(data) {
+                    // This function will be called if the request succeeds
+                  console.log(data);
+
+                  $('#userCount').text(data.userCount);
+                  $('#invoiceCount').text(data.invoiceCount);
+                  $('#allocateCount').text(data.allocateCount);
+                },
+                error: function(xhr, status, error) {
+                    // This function will be called if the request fails
+                    console.error('Error:', error); // Log the error to the console
+                  }
+    });
+    
+  });
+
+</script>
+
+@endsection
+

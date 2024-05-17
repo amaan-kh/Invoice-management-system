@@ -5,24 +5,22 @@ NEW INVOICE
 @endsection
 
 @section('style')
-    <link rel="stylesheet" href="{{ asset('css/createinvoice.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/updateinvoice.css') }}">
 @endsection
 
 @section('maincontent')
-   <h2>Add Invoice Item</h2>
-   <div class="create-user-container">
-
-
+   <h4>Add Invoice Item</h4>
+   <div class="container">
     @if(session()->has('err_message'))
     <div class="alert alert-danger">
         {{ session('err_message') }}
     </div>
-    @endif
-<br>
-<br>
-<div class="container"> 
-   <form action="{{ route('addItemPost') }}" method="POST" >
+    @endif   
+     <form action="{{ route('addItemPost') }}" method="POST" >
     @csrf
+    <div id="fsc">
+    <div class="subcontainer">
+    
     <label for="invoice_id">For Invoice Number: {{$invoice_number}}</label><br>
     <input hidden type="number" id="invoice_id" name="invoice_id" value="{{$invoice_id}}" required><br>
 
@@ -43,7 +41,8 @@ NEW INVOICE
 
     <label for="description">Description:</label><br>
     <textarea id="description" name="description"></textarea><br>
-
+    </div>
+    <div class="subcontainer">
     <label for="gst_percent">GST Percent<span class="required">*</span>:</label><br>
     <input type="number" id="gst_percent" name="gst_percent" required><br>
 
@@ -64,12 +63,10 @@ NEW INVOICE
 
     <label for="total_amount">Total Amount<span class="required">*</span>:</label><br>
     <input type="number" id="total_amount" name="total_amount" step="0.01" required><br>
-
+    </div>
+    </div>
     <input type="submit" id="addBtn" value="Add">
 </form>
-
-    <br>
-</div>
 </div>
 <a href="{{ route('invoice.index') }}">Back to panel</a>
 @endsection

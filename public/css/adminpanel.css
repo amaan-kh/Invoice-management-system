@@ -1,6 +1,11 @@
 #bgBlueColor {
-	background-color: #a9c6ff;
+
+	    background-color: #grey;
 }
 #blueColor {
-	background-color: #a9c6ff;
+		    background-color: #grey;
+
+}
+#sidebar{
+	background: white;
 }
