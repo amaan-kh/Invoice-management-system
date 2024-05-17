@@ -17,7 +17,7 @@ INVOICE
                 <div class="invoice-item">
     <p><b>Invoice Number:</b> {{ $invoice->invoice_number }}</p>
     <p><b>Currency Type:</b> {{ $invoice->currency_type }}</p>
-    <p><b>Conversion Rate:</b> {{ $invoice->conversions_rate }}</p>
+    <p><b>Conversion Rate:</b> {{ $invoice->conversion_rate }}</p>
     <p><b>Period From:</b> {{ $invoice->period_from }}</p>
     <p><b>Period To:</b> {{ $invoice->period_to }}</p>
     <p><b>Invoice Date:</b> {{ $invoice->invoice_date }}</p>

@@ -201,7 +201,6 @@ $invoice = Invoice::where('invoice_number', $request->invoice_no)->first();
 $message = "";   
 
 if (!$invoice) {
-        // Handle the error, such as returning an error message
     $message = 'Invoice not found';
 }
 else{
@@ -212,7 +211,8 @@ else{
 
 
 
-$invoices = Invoice::getInvoices();
+$invoices = Invoice::paginate(3);
+return redirect()->route('invoice.index');
 return view('auth.admin.readinvoice', compact('invoices'))->with('err_message', $message);
 }
 

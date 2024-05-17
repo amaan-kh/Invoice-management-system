@@ -207,7 +207,7 @@ document.addEventListener("DOMContentLoaded", function() {
         return response.json();
     })
     .then(data => {
-        console.log(data);
+        //console.log(data);
         // Return the fetched invoice data
         document.getElementById('currency_type').value = data.currency_type;
         document.getElementById('conversions_rate').value = data.conversion_rate;
