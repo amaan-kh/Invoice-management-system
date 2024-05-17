@@ -9,7 +9,7 @@ INVOICE SHARING
 @endsection
 
 @section('maincontent')
-<h3>Invoice Sharing</h3>
+<h4>Invoice Sharing</h4>
 <div class="container">
     <div class="data">
         <form action="{{ route('allocate') }}" method="POST">
@@ -42,3 +42,4 @@ INVOICE SHARING
 </div>
 <a href="{{ route('invoice.index') }}" id="back">Back to panel</a>
 @endsection
+

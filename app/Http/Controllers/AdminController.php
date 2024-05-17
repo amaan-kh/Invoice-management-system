@@ -192,24 +192,19 @@ public function deallocate(Request $request) {
     $invoice = Invoice::where('invoice_number', $request->invoice_number)->first();
     $err_message = "invoice revoked from user";
     if($user && $invoice){
-            //dd([$user->id, $invoice->id]);
         User_Invoice::deleteAllocation($user->id, $invoice->id);
-
     }
     else{
         $err_message = 'user or invoice does not exist'; 
-
     }
     session()->flash('err_message', $err_message);
     session()->flash('users', $users);
     session()->flash('invoices', $invoices);
-
 // Redirect back with flash data
-    return redirect()->back()->with([
+    return response()->json([
         'err_message' => $err_message,
-        'users' => $users,
-        'invoices' => $invoices,
     ]);
+    
 }
 
 public function getDashData() {

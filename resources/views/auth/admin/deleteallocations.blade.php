@@ -10,60 +10,71 @@ Revoke Access
 @endsection
 
 @section('maincontent')
-<h3>Revoking Access</h3>
+<h4>Revoking Access</h4>
 <div class="container">
     <div class="data">
-        <form action="{{ route('deallocate') }}" method="POST">
+        <form id="myForm">
             @csrf
             <div class="userdata">
-               <label for="name">Username<span class="required">*</span>:</label><br>
-               <!--   <input type="text" id="name" name="name" > -->
-               <select id="dropdown-select-name" onchange="updateInput1()" required>
+               <label for="dropdown-select-name">Username<span class="required">*</span>:</label><br>
+               <select id="dropdown-select-name"  name = "name" required autocomplete="off">
                 <option disabled selected>Select a username</option>
                 @foreach ($users as $user)
-                <option value="{{ $user->name }}">{{ $user->name }}</option>
+                <option  value="{{ $user->name }}">{{ $user->name }}</option>
                 @endforeach
-            </select>
+               </select>
             <br><br>
-            <!-- Hidden input field to store the selected value -->
-            <input type="hidden" id="selected-value-name" name="name" >
 
-            <label for="invoice_number">Invoice Number<span class="required">*</span>:</label><br>
-            <select id="dropdown-select-number" onchange="updateInput2()" required>
-                <option disabled selected>Select an invoice number</option>
+            <label for="dropdown-select-number" >Invoice Number<span class="required">*</span>:</label><br>
+            <select id="dropdown-select-number" name="invoice_number" required  autocomplete="off">
+                <option disabled selected >Select an invoice number</option>
                 @foreach ($invoices as $invoice)
-                <option value="{{ $invoice->invoice_number }}">{{ $invoice->invoice_number }}</option>
+                <option  value="{{ $invoice->invoice_number }}">{{ $invoice->invoice_number }}</option>
                 @endforeach
             </select>
-            <input type="hidden" id="selected-value-number" name="invoice_number" >
-            <!-- <input type="number" id="invoice_number" name="invoice_number" required> -->
             <br>
             
-            @if(session()->has('err_message'))
-    <div class="alert alert-danger">
-        {{ session('err_message') }}
-    </div>
-    @endif
+            
+            <div id="msg" class="alert alert-danger">
+            </div>
+     
             <br>    
             <button type="submit" id="revoke-button">Revoke</button>
         </div>
     </form>
 </div>
-<br>
-<br>
-<br>
-
 </div>
 <a href="{{ route('admin.home') }}" id="back">Back to panel</a>
-<script>
-    // Function to update the hidden input field with the selected value
-    function updateInput1() {
-        var selectedValue = document.getElementById('dropdown-select-name').value;
-        document.getElementById('selected-value-name').value = selectedValue;
-    }
-    function updateInput2() {
-        var selectedValue2 = document.getElementById('dropdown-select-number').value;
-        document.getElementById('selected-value-number').value = selectedValue2;
-    }
+@endsection
+
+@section('scripts')
+<script type="text/javascript">
+    $(document).ready(function(){
+
+        $("#myForm").submit(function(event){
+            event.preventDefault();
+
+            let formData = $(this).serialize();
+
+            //console.log(data);
+
+            $.ajax({
+                url: "{{ route('deallocate') }}",
+                method: "POST",
+                
+                data: formData,
+                success: function(response) {
+                $("#msg").text(response.err_message);
+                console.log(response.err_message);
+                },
+                error: function(xhr, status, error) {
+                    console.error(xhr.responseText);
+                }
+
+            });
+
+        });
+
+    }); 
 </script>
 @endsection
