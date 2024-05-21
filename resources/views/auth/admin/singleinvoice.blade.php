@@ -40,6 +40,8 @@ INVOICE
     <p><b>Bank IFSC Code:</b> {{ $invoice->bank_ifsc_code }}</p>
     <p><b>Note:</b> {{ $invoice->note }}</p>
     <p><b>Status:</b> {{ $invoice->status }}</p>
+    <p><b>TransactionID:</b> {{ $invoice->transactionId }}</p>
+
     <p><b>Created By:</b> {{ $invoice->created_by }}</p>
      @if ($invoice->updated_by)
         <p><b>Updated By:</b> {{ $invoice->updated_by }}</p>

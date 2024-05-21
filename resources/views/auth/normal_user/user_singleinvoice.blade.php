@@ -12,6 +12,16 @@
 <div class="invoice-list">
           <h4 id="subhead">Invoice Details </h4>
                 <div class="invoice-item">
+
+    @if (!isset($invoice->transactionId))
+        <form method="POST" action="{{ route('tId')}} ">
+            @csrf
+            <label for="transactionID">Upload Payment ID</label>
+            <input type="text" name="transactionId">
+            <input hidden type="text" name="invoice_no" value="{{ $invoice->invoice_number }}"> 
+            <button type="submit">upload</button>
+        </form>
+    @endif
     <p><b>Invoice Number:</b> {{ $invoice->invoice_number }}</p>
     <p><b>Currency Type:</b> {{ $invoice->currency_type }}</p>
     <p><b>Conversion Rate:</b> {{ $invoice->conversions_rate }}</p>
@@ -37,6 +47,7 @@
     <p><b>Bank IFSC Code:</b> {{ $invoice->bank_ifsc_code }}</p>
     <p><b>Note:</b> {{ $invoice->note }}</p>
     <p><b>Status:</b> {{ $invoice->status }}</p>
+    <p><b>TransactionID:</b> {{ $invoice->transactionId }}</p>    
     <p><b>Created By:</b> {{ $invoice->created_by }}</p>
      @if ($invoice->updated_by)
         <p><b>Updated By:</b> {{ $invoice->updated_by }}</p>

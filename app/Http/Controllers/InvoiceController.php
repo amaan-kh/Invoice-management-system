@@ -44,11 +44,13 @@ public function page($id) {
         return redirect()->route('index');
     }
     $invoice = Invoice::where('invoice_number', $id)->first();
+
     if (!$invoice) {
         return redirect()->back()->with('error', 'Invoice not found');
     }
     $invoiceItems = $invoice->invoiceItems()->get();
-    
+
+
     return view('auth.admin.singleinvoice', compact('invoice', 'invoiceItems'));
 }
 
@@ -80,7 +82,7 @@ public function store(Request $request)
         return redirect()->route('index');
     }
     // \Log::info(json_encode($request->all()));
-
+    
 
     // $message = Invoice::createInvoice(
     //     $request->invoice_no,
@@ -118,8 +120,9 @@ public function store(Request $request)
         'bank_account_number' => $request->bank_account_number,
         'bank_ifsc_code' => $request->bank_ifsc_code,
         'note' => $request->note,
+        'transactionId' => $request->transactionId,
         'status' => $request->status,
-    'created_by' => auth()->user()->id, // Assuming you have authentication
+        'created_by' => auth()->user()->id, // Assuming you have authentication
     // 'updated_by' => $request->updated_by, // Uncomment if needed
 ];
 
@@ -191,7 +194,9 @@ $data = [
     'bank_account_number' => $request->bank_account_number,
     'bank_ifsc_code' => $request->bank_ifsc_code,
     'note' => $request->note,
+    'transactionId' => $request->transactionId,
     'status' => $request->status,
+
     //'created_by' => auth()->user()->id, // Assuming you have authentication
     'updated_by' => auth()->user()->id, // Uncomment if needed
 ];
@@ -336,6 +341,29 @@ public function addItemPost(Request $request) {
     return redirect()->route('invoice.index');
 }
 
+public function upload(Request $request) {
+    // if (Gate::allows('isUserName', $name)) {
+    //     $user = User::where('name', $name)->first();
+    //     $invoices = $user->invoices()->get();
+    //     return view('auth.normal_user.user_home', compact('name', 'invoices'));
+    // } else {
+    //         // Unauthorized action
+    //     return redirect()->back()->with('error', 'You are not authorized to view that page.');
+    //     // return redirect()->route('index');
+    //          //abort(403); // Or handle the unauthorized access in another way
+    // }
+    $invoice = Invoice::where('invoice_number', $request->invoice_no)->first();
+    if ($invoice) {
+        $invoice->transactionId = $request->transactionId;
+        $invoice->save();
+        return redirect()->back()->with('success', 'Transaction ID updated successfully.');
+    } else {
+        // Optionally, handle the case where no invoice record is found
+        return redirect()->back()->with('error', 'Invoice not found.');
+
+    }
+
+}
 }
 
 

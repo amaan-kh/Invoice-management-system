@@ -176,6 +176,13 @@ UPDATE INVOICE
             </select>
         </div>
 
+        <!-- transactionId -->
+        <!-- <div>
+        <label for="transactionId">Transaction ID:</label>
+        <input type="text" name="transactionId" id="transactionId">
+        </div>
+ -->
+
         </div>
         </div>
 

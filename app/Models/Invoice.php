@@ -34,6 +34,7 @@ class Invoice extends Model
     'bank_ifsc_code',
     'note',
     'status',
+    'transactionId',
     'created_by',
     'updated_by',
 ];

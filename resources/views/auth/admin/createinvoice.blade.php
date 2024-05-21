@@ -177,6 +177,13 @@
                                 <option value="cancelled" @if(old('status') == 'cancelled') selected @endif>Cancelled</option>
                             </select>
                         </div>
+
+                        <!-- transactionId -->
+                        <!-- <div>
+                        <label for="transactionId">Transaction ID:</label>
+                        <input type="text" name="transactionId" id="transactionId">
+                        </div> -->
+
                     </div>
                     </div>
                         <button type="submit" id="createbtn" class="btn btn-primary">Create </button>
