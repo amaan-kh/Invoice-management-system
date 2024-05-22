@@ -25,7 +25,7 @@
             <li class="invoice-item">
                 <div class="invoice-details">
                     <p><b>Invoice Number:</b> {{ $invoice->invoice_number }} &nbsp </p>
-                    <a href="{{ route('invoicePageViewUser', ['id' => $invoice->invoice_number, 'name' => $name]) }}">View</a>
+                    <a href="{{ route('invoicePageViewUser', ['id' => $invoice->invoice_number, 'name' => $name]) }}">Payment</a>
 
                 </div>
             </li>

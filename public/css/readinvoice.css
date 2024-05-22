@@ -51,3 +51,25 @@
         display: flex;
         justify-content: space-between;
     }
+    .status-active {
+    background-color: #b7ffa8;
+    color: black; /* Optional: To make the text color white for better readability */
+}
+
+.status-pending {
+    background-color: #f6fab9;
+    color: black; /* Optional: To make the text color black for better readability */
+}
+
+.status-cancelled {
+    background-color: #ff949a;
+    color: black; /* Optional: To make the text color white for better readability */
+}
+
+/* Optional: Additional styling for the invoice item */
+.invoice-item {
+/*    padding: 10px;*/
+    margin-bottom: 10px;
+    border-radius: 5px;
+    list-style: none; /* Optional: To remove bullet points from list items */
+}

@@ -37,7 +37,7 @@ return new class extends Migration
             $table->string('bank_account_number')->nullable();
             $table->string('bank_ifsc_code')->nullable();
             $table->text('note')->nullable();
-            $table->set('status',['active','pending','cancelled'])->default('active');
+            $table->set('status',['active','pending','cancelled'])->default('pending');
             $table->string('transactionId')->nullable();
             $table->foreignId('created_by')->unsigned()->default(1)->constrained('users');
             $table->integer('updated_by')->unsigned()->nullable();

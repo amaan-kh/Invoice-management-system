@@ -13,15 +13,13 @@
           <h4 id="subhead">Invoice Details </h4>
                 <div class="invoice-item">
 
-    @if (!isset($invoice->transactionId))
         <form method="POST" action="{{ route('tId')}} ">
             @csrf
             <label for="transactionID">Upload Payment ID</label>
-            <input type="text" name="transactionId">
+            <input type="text" name="transactionId" value="{{ $invoice->transactionId }}">
             <input hidden type="text" name="invoice_no" value="{{ $invoice->invoice_number }}"> 
             <button type="submit">upload</button>
         </form>
-    @endif
     <p><b>Invoice Number:</b> {{ $invoice->invoice_number }}</p>
     <p><b>Currency Type:</b> {{ $invoice->currency_type }}</p>
     <p><b>Conversion Rate:</b> {{ $invoice->conversions_rate }}</p>
@@ -78,12 +76,8 @@
 
     
 </div>
-  <a href="{{ route('user.home',['name' => $name]) }}" class="back-link">BACK</a>
-
-          
+  <a href="{{ route('user.home',['name' => $name]) }}" class="back-link">BACK</a>    
 </div>
-
-
 
 </div>
 </body>

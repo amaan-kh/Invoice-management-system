@@ -180,8 +180,8 @@ UPDATE INVOICE
         <!-- <div>
         <label for="transactionId">Transaction ID:</label>
         <input type="text" name="transactionId" id="transactionId">
-        </div>
- -->
+        </div> -->
+
 
         </div>
         </div>
@@ -219,7 +219,7 @@ document.addEventListener("DOMContentLoaded", function() {
         return response.json();
     })
     .then(data => {
-        //console.log(data);
+        console.log(data);
         // Return the fetched invoice data
         document.getElementById('currency_type').value = data.currency_type;
         document.getElementById('conversions_rate').value = data.conversion_rate;
@@ -253,6 +253,7 @@ document.addEventListener("DOMContentLoaded", function() {
         document.getElementById('bank_ifsc_code').value = data.bank_ifsc_code;
         document.getElementById('note').value = data.note;
         document.getElementById('status').value = data.status;
+       // document.getElementById('transactionId').value = data.transactionId;
 
 
 
