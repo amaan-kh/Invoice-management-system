@@ -13,9 +13,9 @@ UPDATE INVOICE
      @if(isset($err_message))
      <div class="alert alert-danger">
         {{ $err_message }}
-    </div>
-    @endif
-</span>
+     </div>
+     @endif
+    </span>
 
 <div class="container"> 
     <form action="{{ route('invoice.update') }}" method="POST">
@@ -218,49 +218,28 @@ document.addEventListener("DOMContentLoaded", function() {
         document.getElementById('conversions_rate').value = data.conversion_rate;
         document.getElementById('period_from').value = data.period_from;
         document.getElementById('period_to').value = data.period_to;
-
         document.getElementById('invoice_date').value = data.invoice_date;
         document.getElementById('invoice_type').value = data.invoice_type;
-
         document.getElementById('bill_to_company_name').value = data.bill_to_company_name;
         document.getElementById('bill_to_company_gstin').value = data.bill_to_company_gstin;
         document.getElementById('bill_to_company_address').value = data.bill_to_company_address;
-
         document.getElementById('company_tax_number_id').value = data.company_tax_number_id;
-
         document.getElementById('address').value = data.address;
         document.getElementById('gstin').value = data.gstin;
         document.getElementById('description').value = data.description;
-
         document.getElementById('taxable_amount').value = data.taxable_amount;
         document.getElementById('gst_type').value = data.gst_type;
-
         document.getElementById('tax_amount').value = data.tax_amount;
         document.getElementById('roundup_amount').value = data.roundup_amount;
-
         document.getElementById('total_amount').value = data.total_amount;
         document.getElementById('bank_name').value = data.bank_name;
         document.getElementById('bank_branch_name').value = data.bank_branch_name;
-
         document.getElementById('bank_account_number').value = data.bank_account_number;
         document.getElementById('bank_ifsc_code').value = data.bank_ifsc_code;
         document.getElementById('note').value = data.note;
         document.getElementById('status').value = data.status;
-
-
-
-
-
-
-
-
-        console.log(data);
-
-
-
+        // console.log(data);
     })
-
-
     .catch(error => {
         // Handle errors
         console.error('Error fetching invoice data:', error);

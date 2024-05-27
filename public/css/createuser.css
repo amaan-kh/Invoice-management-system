@@ -94,3 +94,9 @@ textarea {
 #isadmin{
     size: 50%;
 }
+
+#msg {
+    color: forestgreen;
+    background-color: honeydew;
+    border: 2px solid darkolivegreen;
+}

@@ -186,8 +186,6 @@ public function deallocate(Request $request) {
             // abort(403, 'Unauthorized');
         return redirect()->route('index');
     }
-    $users = User::where('is_admin', 0)->get();
-    $invoices = Invoice::all();
     $user = User::where('name', $request->name)->first();
     $invoice = Invoice::where('invoice_number', $request->invoice_number)->first();
     $err_message = "invoice revoked from user";
@@ -197,10 +195,6 @@ public function deallocate(Request $request) {
     else{
         $err_message = 'user or invoice does not exist'; 
     }
-    session()->flash('err_message', $err_message);
-    session()->flash('users', $users);
-    session()->flash('invoices', $invoices);
-// Redirect back with flash data
     return response()->json([
         'err_message' => $err_message,
     ]);

@@ -37,7 +37,7 @@ Revoke Access
             
             <div id="msg" class="alert alert-danger">
             </div>
-     
+
             <br>    
             <button type="submit" id="revoke-button">Revoke</button>
         </div>
@@ -56,14 +56,14 @@ Revoke Access
 
             let formData = $(this).serialize();
 
+            //console.log(data);
 
             $.ajax({
                 url: "{{ route('deallocate') }}",
                 method: "POST",
-                
                 data: formData,
                 success: function(response) {
-                $("#msg").text(response.err_message);
+                $("#msg").text(response.err_message)
                 console.log(response.err_message);
                 },
                 error: function(xhr, status, error) {

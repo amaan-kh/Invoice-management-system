@@ -46,8 +46,7 @@ IMS
     </div>
   </div>
 </div>
-<button id="bt"> click</button>
-<div id="result"></div>
+
 
 @endsection
 @section('scripts')

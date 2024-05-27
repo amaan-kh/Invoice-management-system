@@ -67,16 +67,21 @@ class UserController extends Controller
             'address' => $request->address,
             'is_admin' => $request->is_admin,
          ];
+         $message = "";
          $user = User::where('name', $request->username)->first();
          if (!$user) {
         // Handle the error, such as returning an error message
-            $message = 'Invoice not found';
+            $message = 'User not found';
         }
         else{
             $user->fill($data);
             $user->save();
             $message =  "user updated successfully";
         }
+
+        return response()->json([
+            "err_message" => $message,
+        ]);
 
         $non_admin_users = User::getUsers();
         $admin_users = User::getAdUsers();

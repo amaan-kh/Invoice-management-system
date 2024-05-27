@@ -11,7 +11,7 @@ ALL USERS
 
 @section('maincontent')
 
-<div class="container">
+<div class="container ">
     <h4 id="heading">All Current Users</h4>
     <br>
     <div class="usercontainer">

@@ -9,16 +9,16 @@
 @endsection
 
 @section('maincontent')
-    <h2 id="heading">Update User</h2>
+    <h3 id="heading">Update User</h3>
     <div class="create-user-container">
         @if(isset($error_message))
        <div class="alert alert-danger">
         {{ $error_message }}
     </div>
     @endif
-    <br>
-        
-        <form id="upUForm" action=" {{ route('updateUser') }}" method="POST">
+    <div id="msg"> </div>
+    <br>      
+        <form id="upUForm" >
             @csrf <!-- Laravel CSRF protection token -->
             <div class="form-group">
                 <label for="fullname">Full Name<span class="required">*</span>:</label>
@@ -50,6 +50,43 @@
        </form>
        
 </div>
-<a id="backbtn" href="{{ route('admin.home') }}">Back to panel</a>
+<a id="backbtn" href="{{ route('user.index') }}">Back to panel</a>
+
+@endsection
+
+@section('scripts')
+<script>
+
+    $(document).ready(function() {
+        
+        // Select the message element
+        var msg = document.getElementById("msg");
+        setTimeout(function() {
+        msg.style.display = "none";
+        }, 5000); 
+        
+
+        $("#upUForm").submit(function(event){
+            event.preventDefault();
+            let formData = $(this).serialize();
+            //console.log(data);
+            $.ajax({
+                url: "{{ route('updateUser') }}",
+                method: "POST",       
+                data: formData,
+                success: function(response) {
+                $("#msg").text(response.err_message);
+                console.log(response.err_message);
+                },
+                error: function(xhr, status, error) {
+                    console.error(xhr.responseText);
+                }
+
+            });
+
+        });
+
+    });
+</script>
 
 @endsection
