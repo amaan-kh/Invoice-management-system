@@ -60,7 +60,7 @@
     $(document).ready(function() {
         
         // Select the message element
-        var msg = document.getElementById("msg");
+        let msg = document.getElementById("msg");
         setTimeout(function() {
         msg.style.display = "none";
         }, 5000); 
@@ -81,11 +81,8 @@
                 error: function(xhr, status, error) {
                     console.error(xhr.responseText);
                 }
-
             });
-
         });
-
     });
 </script>
 

@@ -209,6 +209,9 @@ else{
     $message =  "Invoice updated successfully";
 }
 
+return response()->json([
+    "err_message" => $message,
+]);
 
 
 $invoices = Invoice::paginate(3);

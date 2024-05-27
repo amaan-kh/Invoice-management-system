@@ -72,3 +72,8 @@
             color: #fff; /* White text color */
             margin-bottom: 10px;
         }
+#msg {
+    color: forestgreen;
+    background-color: honeydew;
+    border: 2px solid darkolivegreen;
+}

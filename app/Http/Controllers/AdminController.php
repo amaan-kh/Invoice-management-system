@@ -138,7 +138,7 @@ return view('auth.admin.readallocations', compact('dataArray'));
 }
 
 public function allocate(Request $request) {
-        //--------------------------------------    
+        
     if (!Gate::allows('isAdmin')) {
             // abort(403, 'Unauthorized');
         return redirect()->route('index');
@@ -153,22 +153,27 @@ public function allocate(Request $request) {
     $users = User::where('is_admin', 0)->get();
     $invoices = Invoice::all();
     
+    $err_message = "couldn't allocate";
+
     if($user and $invoice) {
         $userId = $user->id;
         $invoiceId = $invoice->id;
         User_Invoice::createAllocation($userId, $invoiceId);
+        $err_message = "allocation successfull";
     }
-    else{
+    // else{
         
-        $err_message = 'user or invoice does not exist'; 
-        session()->flash('err_message', $err_message);
-        return redirect()->back()->with('err_message', $err_message);
-    }
+    //     $err_message = 'user or invoice does not exist'; 
+    //     return response()->json([
+    //     "err_message" => "gg",
+    //     ]);
+    //     return redirect()->back()->with('err_message', $err_message);
+    // }
     
-
-    $err_message = "allocation successfull";
-    session()->flash('err_message', $err_message);
-    return redirect()->back()->with('err_message', 'Allocation was successfull');
+    return response()->json([
+        "err_message" => $err_message,
+    ]);
+   
 
 }
 public function revokeAllocationView(){

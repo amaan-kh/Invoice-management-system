@@ -134,3 +134,9 @@ textarea {
     width: 20%;
     align-self: center;
 }
+
+#msg {
+    color: forestgreen;
+    background-color: honeydew;
+    border: 2px solid darkolivegreen;
+}
