@@ -312,7 +312,7 @@ public function addItemPost(Request $request) {
         // abort(403, 'Unauthorized');
         return redirect()->route('index');
     }
-
+    
     // dd($request->all());
      // Create an associative array with the request data
     $data = [
@@ -336,7 +336,10 @@ public function addItemPost(Request $request) {
     InvoiceItem::create($data);
 
     // Redirect the user to a success page or wherever needed
-    return redirect()->route('invoice.index');
+    return response()->json([
+        "err_message" => "worked",
+    ]);
+
 }
 
 }

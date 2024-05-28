@@ -16,7 +16,7 @@ NEW INVOICE
         {{ session('err_message') }}
     </div>
     @endif   
-     <form action="{{ route('addItemPost') }}" method="POST" >
+     <form id="myForm" action="{{ route('addItemPost') }}" method="POST" >
     @csrf
     <div id="fsc">
     <div class="subcontainer">
@@ -69,5 +69,31 @@ NEW INVOICE
 </form>
 </div>
 <a href="{{ route('invoice.index') }}">Back to panel</a>
+@endsection
+
+@section('scripts')
+<script type="text/javascript">
+    $(document).ready(function() {
+
+        $("#myForm").submit(function(event){
+            event.preventDefault();
+
+            formData = $(this).serialize();
+            console.log(formData);
+            $.ajax({
+                url: "{{ route('addItemPost') }}",
+                method: "POST",
+                data: formData,
+                success: function(response){
+                    document.documentElement.scrollTop = 0;
+                    console.log(response.err_message);
+                },
+                error: function(xhr, status, error){
+                    console.error(xhr.responseText);
+                },
+            });
+        });
+    });
+</script>
 @endsection
 
