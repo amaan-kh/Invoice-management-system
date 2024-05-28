@@ -11,11 +11,7 @@ NEW INVOICE
 @section('maincontent')
    <h4>Add Invoice Item</h4>
    <div class="container">
-    @if(session()->has('err_message'))
-    <div class="alert alert-danger">
-        {{ session('err_message') }}
-    </div>
-    @endif   
+    <div id="msg"></div>
      <form id="myForm" action="{{ route('addItemPost') }}" method="POST" >
     @csrf
     <div id="fsc">
@@ -86,7 +82,7 @@ NEW INVOICE
                 data: formData,
                 success: function(response){
                     document.documentElement.scrollTop = 0;
-                    console.log(response.err_message);
+                    $("#msg").text(response.err_message);
                 },
                 error: function(xhr, status, error){
                     console.error(xhr.responseText);

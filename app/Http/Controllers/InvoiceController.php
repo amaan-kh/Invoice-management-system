@@ -333,17 +333,19 @@ public function addItemPost(Request $request) {
     ];
 
     // Insert data into your table using Eloquent
-    InvoiceItem::create($data);
-
-    // Redirect the user to a success page or wherever needed
+    if(InvoiceItem::create($data)){
+        // Redirect the user to a success page or wherever needed
     return response()->json([
-        "err_message" => "worked",
+        "err_message" => "invoice added successfully",
     ]);
+    }
 
+    else{
+        return response()->json([
+        "err_message" => "some error occurred",
+    ]);
+    }
+
+    }
 }
 
-}
-
-
-
-// auth.admin.readinvoice
