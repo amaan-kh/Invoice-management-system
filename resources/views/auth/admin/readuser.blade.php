@@ -9,6 +9,8 @@ ALL USERS
 <link rel="stylesheet" href="{{ asset('css/readuser.css') }}">
 @endsection
 
+
+
 @section('maincontent')
 
 <div class="container ">
@@ -35,12 +37,13 @@ ALL USERS
                     <div class="userdetails">
                         <p> {{ $user->name }} </p> 
                         <div id="seplinks">
-                            <a href="{{ route('user.update', ['name' => $user->name]) }}">Update</a>&nbsp &nbsp
+
+                            <a href="{{ route('user.update', ['name' => $user->name]) }}" class="btn btn-success" >Edit</a>
                             <form id="forms" action="{{ route('user.delete') }}" method="POST" id="deleteForm_{{$user->id}}"  onsubmit="return confirmDelete('{{ $user->id }}')">
                                 @csrf
 
                                 <input type="hidden" name="username" value="{{ $user->name }}">
-                                <button type="submit" onclick="confirmDelete('{{ $user->id }}')">Remove</button>
+                                <button type="submit" class="btn btn-danger" onclick="confirmDelete('{{ $user->id }}')">Remove</button>
                             </form>
                         </div>
                     </div>

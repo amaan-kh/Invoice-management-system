@@ -61,10 +61,7 @@
         
         // Select the message element
         let msg = document.getElementById("msg");
-        setTimeout(function() {
-        msg.style.display = "none";
-        }, 5000); 
-        
+       
 
         $("#upUForm").submit(function(event){
             event.preventDefault();
@@ -76,7 +73,6 @@
                 data: formData,
                 success: function(response) {
                 $("#msg").text(response.err_message);
-                console.log(response.err_message);
                 },
                 error: function(xhr, status, error) {
                     console.error(xhr.responseText);
