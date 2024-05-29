@@ -18,7 +18,8 @@ class AdminController extends Controller
         return view('welcome');
     }
 
-    //auth and routing to admin/user views
+
+    //routing to admin/user views after authentication
     public function login(Request $request){
 
         $credentials = $request->validate([
@@ -26,29 +27,25 @@ class AdminController extends Controller
             'password' => ['required'],
         ]);
 
+        //if authenticated then routed to admin/user views
         if (Auth::attempt($credentials)) {
-            $request->session()->regenerate();
-            
+            $request->session()->regenerate();            
             $user = User::where('name', $request->name)->first();
+            
             if($user->is_admin == 1) {
                 return redirect()->intended(route('admin.home'));
             }
 
             return redirect()->intended(route('user.home', ['name' => $request->name]));
-
-            $invoices = $user->invoices()->get();
-            // For debugging purposes
-            // dd($invoices);
-            return view('auth.normal_user.user_home', compact('invoices'));
         }
         
         return back()->withErrors([
             'name' => 'The provided credentials do not match our records.',
         ])->onlyInput('name');
-
-        // \Log::info(json_encode($request->all()));
     }
 
+
+    //logout from app
     public function logout(Request $request) {
         Auth::logout();
         $request->session()->invalidate();
@@ -56,172 +53,155 @@ class AdminController extends Controller
         return redirect('/');
     }
 
-    // public function allocateView($id) {
-    //     if (!Gate::allows('isAdmin')) {
-    //         // abort(403, 'Unauthorized');
-    //         return redirect()->route('index');
-    //     }
-    //     $users = User::where('is_admin', 0)->get();
-    //     $invoices = Invoice::all();
-    //     return view('auth.admin.allocate_invoice', compact('users', 'invoices'));
-    // }
 
+    //view for allocating particular invoice to all users listed
     public function allocateView($id) {
+        
         if (!Gate::allows('isAdmin')) {
-            // abort(403, 'Unauthorized');
             return redirect()->route('index');
         }
+        
         $users = User::where('is_admin', 0)->get();
         $invoice = Invoice::where('invoice_number', $id)->first();
+        
         if (is_null($users) || is_null($invoice)) {
             return redirect()->back()->with('error_message', 'Invoice or user not found.');
         }
-
         return view('auth.admin.allocate_invoice', compact('users', 'invoice'));
     }
 
 
+    //admin dashboard view
     public function getDash(){
-       if (!Gate::allows('isAdmin')) {
-            // abort(403, 'Unauthorized');
+        if (!Gate::allows('isAdmin')) {
         return redirect()->back()->with('error', 'You are not authorized to view that page.');
-        //return redirect()->route('index');
+        }
+        return view('auth.admin.admin_panel');
     }
-    $userCount = User::count();
-    $invoiceCount = Invoice::count();
-    $allocateCount = User_Invoice::count();
-    // return view('auth.admin.admin_panel');
-     return view('auth.admin.admin_panel', compact('userCount', 'invoiceCount', 'allocateCount'));
-}
 
-public function getUserDash($name){
-    //TODO: add protection here
-    if (Gate::allows('isUserName', $name)) {
-        $user = User::where('name', $name)->first();
-        $invoices = $user->invoices()->get();
-        return view('auth.normal_user.user_home', compact('name', 'invoices'));
-    } else {
-            // Unauthorized action
-        return redirect()->back()->with('error', 'You are not authorized to view that page.');
-        // return redirect()->route('index');
-             //abort(403); // Or handle the unauthorized access in another way
-    }
-    
-}
 
-public function taskView() {
-   if (!Gate::allows('isAdmin')) {
-            // abort(403, 'Unauthorized');
-    return redirect()->route('index');
-}
-$dataArray = [];
-[$users] = User::getAllocatedUsers();
-
-foreach($users as $user){
-    $ivarray = [];
-    $invoices = $user->invoices()->get();
-            // \Log::info(json_encode($invoices));
-    foreach($invoices as $invoice){
-        $ivarray[] = $invoice->invoice_number;
+    //user dashboard view
+    public function getUserDash($name){
         
+        if (Gate::allows('isUserName', $name)) {
+            $user = User::where('name', $name)->first();
+            $invoices = $user->invoices()->get();
+            return view('auth.normal_user.user_home', compact('name', 'invoices'));
+        } 
+        else {
+            return redirect()->back()->with('error', 'You are not authorized to view that page.');
+        }    
     }
-    if (empty($ivarray)) {
-        continue;
+
+
+    //view all allocated invoices to all users
+    public function taskView() {
+        if (!Gate::allows('isAdmin')) {
+            return redirect()->route('index');
+        }
+
+        $dataArray = [];
+        $users = User::where('is_admin', 0)->get();     
+
+        foreach($users as $user){
+            $ivarray = [];
+            $invoices = $user->invoices()->get();
+
+            foreach($invoices as $invoice){
+                $ivarray[] = $invoice->invoice_number;
+            }
+            if (empty($ivarray)) {
+                continue;
+            }
+
+            $dataArray[$user->name] = $ivarray;
+        }   
+        return view('auth.admin.readallocations', compact('dataArray'));
     }
+
     
-    $dataArray[$user->name] = $ivarray;
-}
-
-        //\Log::info(json_encode($dataArray));
-
-return view('auth.admin.readallocations', compact('dataArray'));
-}
-
-public function allocate(Request $request) {
+    //allocating invoice to user
+    public function allocate(Request $request) {
+    
+        if (!Gate::allows('isAdmin')) {
+            return redirect()->route('index');
+        }
         
-    if (!Gate::allows('isAdmin')) {
-            // abort(403, 'Unauthorized');
-        return redirect()->route('index');
-    }
+        $username = $request->name;
+        $invoice_no = $request->invoice_number;
     
-    $username = $request->name;
-    $invoice_no = $request->invoice_number;
-
-    $user = User::where('name', $username)->first();
-    $invoice = Invoice::where('invoice_number', $invoice_no)->first();
-
-    $users = User::where('is_admin', 0)->get();
-    $invoices = Invoice::all();
+        $user = User::where('name', $username)->first();
+        $invoice = Invoice::where('invoice_number', $invoice_no)->first();
     
-    $err_message = "couldn't allocate";
-
-    if($user and $invoice) {
-        $userId = $user->id;
-        $invoiceId = $invoice->id;
-        User_Invoice::createAllocation($userId, $invoiceId);
-        $err_message = "allocation successfull";
-    }
-    // else{
+        $users = User::where('is_admin', 0)->get();
+        $invoices = Invoice::all();
         
-    //     $err_message = 'user or invoice does not exist'; 
-    //     return response()->json([
-    //     "err_message" => "gg",
-    //     ]);
-    //     return redirect()->back()->with('err_message', $err_message);
-    // }
+        $err_message = "couldn't allocate";
     
-    return response()->json([
-        "err_message" => $err_message,
-    ]);
-   
+        if($user and $invoice) {
+            $userId = $user->id;
+            $invoiceId = $invoice->id;
+            User_Invoice::createAllocation($userId, $invoiceId);
+            $err_message = "allocation successfull";
+        }
 
-}
-public function revokeAllocationView(){
-   if (!Gate::allows('isAdmin')) {
-            // abort(403, 'Unauthorized');
-    return redirect()->route('index');
-}
-$users = User::where('is_admin', 0)->get();
-$invoices = Invoice::all();
-return view('auth.admin.deleteallocations', compact('users', 'invoices'));
-}
+        return response()->json([
+            "err_message" => $err_message,
+        ]);
+    }
 
-public function deallocate(Request $request) {
-    if (!Gate::allows('isAdmin')) {
-            // abort(403, 'Unauthorized');
-        return redirect()->route('index');
+
+    // view page for revoking invoice allocated to a user
+    public function revokeAllocationView(){
+        
+        if (!Gate::allows('isAdmin')) {
+            return redirect()->route('index');
+        }  
+
+        $users = User::where('is_admin', 0)->get();
+        $invoices = Invoice::all();
+        
+        return view('auth.admin.deleteallocations', compact('users', 'invoices'));
     }
-    $user = User::where('name', $request->name)->first();
-    $invoice = Invoice::where('invoice_number', $request->invoice_number)->first();
-    $err_message = "invoice revoked from user";
-    if($user && $invoice){
-        User_Invoice::deleteAllocation($user->id, $invoice->id);
-    }
-    else{
-        $err_message = 'user or invoice does not exist'; 
-    }
-    return response()->json([
-        'err_message' => $err_message,
-    ]);
     
-}
 
-public function getDashData() {
-    if (!Gate::allows('isAdmin')) {
-            // abort(403, 'Unauthorized');
-        return redirect()->route('index');
+    // revoking invoice from user
+    public function deallocate(Request $request) {
+        
+        if (!Gate::allows('isAdmin')) {
+            return redirect()->route('index');
+        }
+        
+        $user = User::where('name', $request->name)->first();
+        $invoice = Invoice::where('invoice_number', $request->invoice_number)->first();
+        $err_message = "invoice revoked from user";
+        
+        if($user && $invoice){
+            User_Invoice::deleteAllocation($user->id, $invoice->id);
+        }
+        else{
+            $err_message = 'user or invoice does not exist'; 
+        }
+        
+        return response()->json([
+            'err_message' => $err_message,
+        ]);  
     }
-    $userCount = User::count();
-    $invoiceCount = Invoice::count();
-    $allocateCount = User_Invoice::count();
-    $data = [
-        'userCount' => $userCount,
-        'invoiceCount' => $invoiceCount,
-        'allocateCount' => $allocateCount,
-    ];
-    return response()->json($data);
-
-    return compact('userCount', 'invoiceCount', 'allocateCount');
-
-}
+    
+    //Admin dashboard data for ajax calls 
+    public function getDashData() {
+        
+        if (!Gate::allows('isAdmin')) {
+            return redirect()->route('index');
+        }
+        $userCount = User::count();
+        $invoiceCount = Invoice::count();
+        $allocateCount = User_Invoice::count();
+        $data = [
+            'userCount' => $userCount,
+            'invoiceCount' => $invoiceCount,
+            'allocateCount' => $allocateCount,
+        ];
+        return response()->json($data);
+    }
 }
