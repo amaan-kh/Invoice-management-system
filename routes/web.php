@@ -21,7 +21,7 @@ Route::get('/viewUsers', [UserController::class, 'index'])->name('user.index');
 Route::get('/updateUser/{name}', [UserController::class, 'updateGet'])->name('user.update');
 Route::post('/updateUser', [UserController::class, 'update'])->name('updateUser');
 
-Route::get('/deleteUser', [UserController::class, 'deleteUserView'])->name('user.delete');
+// Route::get('/deleteUser', [UserController::class, 'deleteUserView'])->name('user.delete');
 Route::post('/deleteUser', [UserController::class, 'deleteUser'])->name('user.delete');
 
 
@@ -38,7 +38,6 @@ Route::post('/addItemPost', [InvoiceController::class, 'addItemPost'])->name('ad
 
 Route::get('/viewInvoices', [InvoiceController::class, 'index'])->name('invoice.index');
 Route::get('/Invoice', [InvoiceController::class, 'pageView'])->name('invoicePage');
-// Route::post('/Invoice', [InvoiceController::class, 'page'])->name('invoicePageView');
 Route::get('/Invoice/{id}', [InvoiceController::class, 'page'])->name('invoicePageView');
 Route::get('/InvoiceUser/{id}/{name}', [InvoiceController::class, 'pageUser'])->name('invoicePageViewUser');
 
